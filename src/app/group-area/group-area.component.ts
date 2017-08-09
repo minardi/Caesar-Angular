@@ -5,11 +5,14 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './group-area.component.html',
   styleUrls: ['./group-area.component.css']
 })
+
 export class GroupAreaComponent implements OnInit {
+	activeTab = 'info';
 
-  constructor() { }
+	onTabChange (tabName: string) {
+		this.activeTab = tabName;
+	}
 
-  ngOnInit() {
-  }
-
+	ngOnInit () {
+	}
 }
