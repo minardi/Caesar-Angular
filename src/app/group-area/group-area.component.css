@@ -1,0 +1,11 @@
+.group-wrapper {
+	height: 100%;
+}
+
+.group-area {
+	min-height: calc(100% - 200px);
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding:  20px;
+}
+
