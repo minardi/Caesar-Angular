@@ -1,16 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { CaesarPortalComponent } from './caesar-portal.component';
+import { GroupAreaModule } from './group-area/group-area.module';
 
 @NgModule({
-  declarations: [
+  imports: [
+    CommonModule,
+    GroupAreaModule
+  ],
+  exports: [
     CaesarPortalComponent
   ],
-  imports: [
-    BrowserModule
-  ],
-  providers: [],
-  bootstrap: [CaesarPortalComponent]
+  declarations: [
+    CaesarPortalComponent
+  ]
 })
 export class CaesarPortalModule { }
