@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './group-info.component.html',
   styleUrls: ['./group-info.component.scss']
 })
+
 export class GroupInfoComponent implements OnInit {
 
   constructor() { }

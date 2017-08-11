@@ -7,12 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class GroupAreaComponent implements OnInit {
-	activeTab = 'info';
 
-	onTabChange (tabName: string) {
-		this.activeTab = tabName;
-	}
+  constructor() { }
 
-	ngOnInit () {
-	}
+  ngOnInit() {
+  }
+
 }
