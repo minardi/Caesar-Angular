@@ -16,25 +16,25 @@
             </div>
             <div class="col-md-10 text-right">
                 <div class="btn-group" role="group" aria-label="...">
-                    <button (click)="onTabChange('info')" type="button" class="btn btn-default" [ngClass]="{active: activeTab === 'info'}">
+                    <button type="button" class="btn btn-default">
                         <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                     </button>
-                    <button (click)="onTabChange('students')" type="button" class="btn btn-default" [ngClass]="{active: activeTab === 'students'}">
+                    <button type="button" class="btn btn-default">
                         <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
                     </button>
-                    <button (click)="onTabChange('schedule')" type="button" class="btn btn-default" [ngClass]="{active: activeTab === 'schedule'}">
+                    <button type="button" class="btn btn-default">
                         <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                     </button>
-                    <button (click)="onTabChange('notifications')" type="button" class="btn btn-default" [ngClass]="{active: activeTab === 'notifications'}">
+                    <button type="button" class="btn btn-default">
                         <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                     </button>
                 </div>
             </div>
         </div>
-        <group-info *ngIf="activeTab === 'info'"></group-info>
-        <group-students *ngIf="activeTab === 'students'"></group-students>
-        <group-schedule *ngIf="activeTab === 'schedule'"></group-schedule>
-        <group-notifications *ngIf="activeTab === 'notifications'"></group-notifications>
+        <group-info></group-info>
+        <group-students></group-students>
+        <group-schedule></group-schedule>
+        <group-notifications></group-notifications>
     </div>
     <div class="row">
         <div class="col-md-6">
