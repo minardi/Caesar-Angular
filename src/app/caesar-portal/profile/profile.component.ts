@@ -12,9 +12,9 @@ import { ProfileService } from './profile.service';
 })
 export class ProfileComponent implements OnInit {
     currentUser: User;
-    defaultPhoto: string = "http://www.thirann.com/assets/img/newuser.jpeg";
-    popupVisibility: boolean = true;
-    photoVisibility: boolean = false;
+    defaultPhoto = 'http://www.thirann.com/assets/img/newuser.jpeg';
+    popupVisibility = true;
+    photoVisibility = false;
 
     constructor(private profileService: ProfileService) { }
 
