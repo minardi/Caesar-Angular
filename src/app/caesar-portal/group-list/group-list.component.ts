@@ -1,15 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import { Group} from "../common/models/group";
+import { GroupService } from "../common/services/group.service";
+import { Response} from '@angular/http';
+import { GroupItemComponent } from './group-item/group-item.component';
 
 @Component({
-  selector: 'caesar-group-list',
+  selector: 'group-list',
   templateUrl: './group-list.component.html',
-  styleUrls: ['./group-list.component.scss']
-})
-export class GroupListComponent implements OnInit {
+  styleUrls: ['./group-list.component.scss'],
+  providers: [GroupService]
 
-  constructor() { }
+})
+
+export class GroupListComponent implements OnInit {
+  groups: Group[];
+
+  constructor(private groupService: GroupService) {}
 
   ngOnInit() {
+    this.groupService.getAll().subscribe((data: Response) => {
+      this.groups = data.json();
+    });
   }
-
 }
+
