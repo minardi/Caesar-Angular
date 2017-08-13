@@ -3,17 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { CaesarPortalComponent } from './caesar-portal.component';
 import { GroupAreaModule } from './group-area/group-area.module';
+import { GroupListComponent } from './group-list/group-list.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    GroupAreaModule
+    GroupAreaModule,
   ],
   exports: [
     CaesarPortalComponent
   ],
   declarations: [
-    CaesarPortalComponent
+    CaesarPortalComponent,
+    GroupListComponent
   ]
 })
 export class CaesarPortalModule { }
