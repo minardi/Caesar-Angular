@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { GroupAreaComponent } from './group-area/group-area.component';
-import { GroupsComponent } from './groups/groups.component';
 
 @Component({
   selector: 'caesar-portal',
