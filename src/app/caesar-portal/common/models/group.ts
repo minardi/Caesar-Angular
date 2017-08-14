@@ -3,5 +3,5 @@ export class Group {
   name: string;
   startDate: string;
   finishDate: string;
-  experts : string[];
+  experts: string[];
 }

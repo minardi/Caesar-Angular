@@ -1,16 +1,18 @@
+@import '~variables.scss';
+
 .group-list-container {
   padding: 25px;
-  border: 1px solid #ccc;
+  border: 1px solid $silver;
   border-radius: 5px;
-  margin-top: 20px;
+  margin: 20px 20px 0px 20px;
   min-height: calc(100% - 100px);
-  margin-right: 20px;
-  margin-left: 20px;
+
   .search-btn {
     height: 40px;
     font-size: 30px;
     margin-left: 23px;
   }
+  
   .my-groups {
     margin-left: 10px;
   }

@@ -1,16 +1,18 @@
-:host{
-    height: 100px;
-    display: inline-block;
-    text-align: center;
-    margin: 10px;
-    background-color: #337ab7;
-    color: #fff;
-    font-weight: bold;
-    width: 100%;
-    font-size: 20px;
-    cursor: pointer;
-}
+@import '~variables.scss';
 
-:host:hover{
-    background-color: #7aacd7;
+:host {
+  height: 100px;
+  display: inline-block;
+  text-align: center;
+  margin: 10px;
+  background-color: $astral;
+  color: $white-solid;
+  font-weight: bold;
+  width: 100%;
+  font-size: 20px;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: $danube;
+  }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
 
 @Component({
@@ -6,22 +6,24 @@ import {Http, Headers, RequestOptions} from '@angular/http';
   templateUrl: './app.component.html',
 })
 
-export class AppComponent {
-  constructor(private http: Http) {
-    //TODO: remove when auth logic is done 
-    const body = JSON.stringify({
-      username: "OlegShvets",
-      password: "ghd22df"
-    });
+export class AppComponent implements OnInit {
+  constructor(private http: Http) {}
+  //TODO: remove when auth logic is done
+  ngOnInit() {
+      const body = JSON.stringify({
+        username: 'OlegShvets',
+        password: 'ghd22df'
+      });
 
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.http.post('/login', body, {
-      headers: headers
-    }).subscribe();
-
+      let headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+      this.http.post('/login', body, {
+        headers: headers
+      }).subscribe();
   }
 }
+
+
 
 
