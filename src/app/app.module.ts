@@ -4,6 +4,8 @@ import { NgModule }      from '@angular/core';
 import { AppComponent }       from './app.component';
 import { CaesarPortalModule } from './caesar-portal/caesar-portal.module';
 
+import { HttpModule } from '@angular/http';
+
 
 @NgModule({
   declarations: [
@@ -11,7 +13,8 @@ import { CaesarPortalModule } from './caesar-portal/caesar-portal.module';
   ],
   imports: [
     BrowserModule,
-    CaesarPortalModule
+    CaesarPortalModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

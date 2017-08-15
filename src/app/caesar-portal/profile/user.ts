@@ -1,10 +1,11 @@
+import { Role } from './role';
+
 export class User {
-    constructor(
-        public id: number,
-        public firstName: string,
-        public lastName: string,
-        public role,
-        public image: any,
-        public nickName: string,
-        public location) {}
+    id: number;
+    firstName: string;
+    lastName: string;
+    role: Role;
+    nickName: string;
+    image: any;
+    location: Location;
 }
