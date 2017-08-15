@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Response }          from '@angular/http';
 
-import { User }           from './user';
+import { User }           from '../common/models/user';
 import { ProfileService } from './profile.service';
 
 
@@ -18,20 +19,14 @@ export class ProfileComponent implements OnInit {
 
     constructor(private profileService: ProfileService) { }
 
-    getCurrentUser(): void {
-        this.profileService.getCurrentUser().then(currentUser => this.currentUser = currentUser);
-    }
-
     ngOnInit(): void {
-        this.getCurrentUser();
+        this.profileService.getCurrentUser().subscribe((data: Response) => {
+            this.currentUser = data.json();
+        });
     }
 
     toggle(): void {
         this.popupVisibility = !this.popupVisibility;
         this.photoVisibility = !this.photoVisibility;
-    }
-
-    getUserPhoto(): string {
-        return this.currentUser.image;
     }
 }

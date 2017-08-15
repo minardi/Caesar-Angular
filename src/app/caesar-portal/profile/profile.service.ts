@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
+import {Http}         from '@angular/http';
 
+import { environment } from '../../../environments/environment';
 import { User }        from './user';
-import { currentUser } from './mock-user';
+
 
 @Injectable()
 export class ProfileService {
-    getCurrentUser(): Promise<User> {
-        return Promise.resolve(currentUser);
+
+    constructor(private http: Http) {}
+
+    getCurrentUser() {
+        return this.http.get(environment.serviceApi.profileUrl);
     }
 }
