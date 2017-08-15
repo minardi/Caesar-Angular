@@ -6,6 +6,6 @@
 export const environment = {
   production: false,
   serviceApi : {
-    groupsUrl : "/groups"
+    groupsUrl : '/groups'
   }
 };
