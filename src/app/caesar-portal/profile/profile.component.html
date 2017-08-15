@@ -1,7 +1,7 @@
-<div class="icon" [ngClass]="{invisible: photoVisibility}" (click)="toggle()">
+<div class="icon" [ngClass]="{invisible: !visibility}" (click)="toggleVisibility()">
     <img [src]="currentUser.image || defaultPhoto" alt="photo">
 </div>
-<aside class="sidebar" [ngClass]="{invisible: popupVisibility}" (mouseleave)="toggle()">
+<aside class="sidebar" [ngClass]="{invisible: visibility}" (mouseleave)="toggleVisibility()">
     <button class="settings-btn"><span class="glyphicon glyphicon-cog"></span></button>
     <section class="content">
         <div class="user-photo">

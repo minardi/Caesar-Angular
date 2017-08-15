@@ -13,20 +13,24 @@ import { ProfileService } from './profile.service';
 })
 export class ProfileComponent implements OnInit {
     currentUser: User;
+    error: any;
     defaultPhoto = 'http://www.thirann.com/assets/img/newuser.jpeg';
-    popupVisibility = true;
-    photoVisibility = false;
+    visibility = true;
 
     constructor(private profileService: ProfileService) { }
 
     ngOnInit(): void {
-        this.profileService.getCurrentUser().subscribe((data: Response) => {
-            this.currentUser = data.json();
-        });
+        this.profileService.getCurrentUser()
+            .subscribe(
+                (data: Response) => this.currentUser = data.json(),
+                (error) => {
+                    this.error = error;
+                    console.error(error);
+                }
+            );
     }
 
-    toggle(): void {
-        this.popupVisibility = !this.popupVisibility;
-        this.photoVisibility = !this.photoVisibility;
+    toggleVisibility(): void {
+        this.visibility = !this.visibility;
     }
 }
