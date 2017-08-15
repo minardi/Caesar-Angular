@@ -7,7 +7,7 @@ import { CaesarPortalModule } from './caesar-portal/caesar-portal.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
