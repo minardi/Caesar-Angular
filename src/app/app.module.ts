@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { CaesarHomeModule } from './caesar-portal/caesar-home/caesar-home.module';
+import { CaesarPortalModule } from './caesar-portal/caesar-portal.module';
 
 
 @NgModule({
@@ -11,7 +11,7 @@ import { CaesarHomeModule } from './caesar-portal/caesar-home/caesar-home.module
   ],
     imports: [
     	BrowserModule,
-    	CaesarHomeModule
+    	CaesarPortalModule
   ],
   providers: [],
   bootstrap: [AppComponent]
