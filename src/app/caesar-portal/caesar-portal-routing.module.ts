@@ -7,9 +7,8 @@ import { LoginGuard } from './caesar-login/guard/caesar-login.guard';
 const appRoutes: Routes = [
     { path: '', component: CaesarHomeComponent, canActivate: [LoginGuard] },
     { path: 'log', component: CaesarLoginComponent },
- 
-    // otherwise redirect to home
-    { path: '**', redirectTo: '' }
+
+    { path: '**', redirectTo: '' } 
 ];
  
-export const routing = RouterModule.forRoot(appRoutes);
+export const routing = RouterModule.forRoot(appRoutes); 

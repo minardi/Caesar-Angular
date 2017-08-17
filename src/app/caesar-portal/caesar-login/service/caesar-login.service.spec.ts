@@ -1,44 +1,28 @@
-import { inject, TestBed } from '@angular/core/testing';
+import { Injectable, ReflectiveInjector } from '@angular/core';
+import { async, fakeAsync, tick } from '@angular/core/testing';
+import { BaseRequestOptions, ConnectionBackend, Http, RequestOptions } from '@angular/http';
+import { Response, ResponseOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
-import { BaseRequestOptions, Http, RequestMethod, Response, ResponseOptions } from '@angular/http';
 import { CaesarLoginService } from './caesar-login.service';
 
-
-describe("CaesarLoginService", () => {
-
-    let subject: CaesarLoginService;
-    let backend: MockBackend;
-
+describe('CaesarLoginService', () => {
     beforeEach(() => {
+        this.injector = ReflectiveInjector.resolveAndCreate([
+        { provide: ConnectionBackend, useClass: MockBackend },
+        { provide: RequestOptions, useClass: BaseRequestOptions },
+            Http,
+            CaesarLoginService,
+        ]);
 
-        TestBed.configureTestingModule({
-            providers: [
-                MockBackend,
-                BaseRequestOptions,
-                {
-                    provide: Http,
-                    useFactory: (backendInstance: MockBackend, defaultOptions: BaseRequestOptions) => {
-                        return new Http(backendInstance, defaultOptions);
-                    },
-                    deps: [MockBackend, BaseRequestOptions]
-                },
-                CaesarLoginService
-            ]
-        });
+        this.caesarLoginService = this.injector.get(CaesarLoginService);
+        this.backend = this.injector.get(ConnectionBackend) as MockBackend;
+        this.backend.connections.subscribe((connection: any) => this.lastConnection = connection);
     });
-
-    beforeEach(inject([CaesarLoginService, MockBackend], (caesarLoginService: CaesarLoginService, mockBackend: MockBackend) => {
-        subject = caesarLoginService;
-        backend = mockBackend;
-    }));
-
-    it("#login should be defined",
-        inject([CaesarLoginService], (service: CaesarLoginService) => {
-            expect(service.login('Vasya', '1234')).toBeDefined();
-    }));
-
-    //in process
+ 
+    it('should url to consist of login', () => {
+        this.caesarLoginService.login();
+            expect(this.lastConnection.request.url).toMatch(/login/);
+    });
 });
-
 

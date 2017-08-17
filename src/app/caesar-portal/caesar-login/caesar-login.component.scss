@@ -1,26 +1,21 @@
-$background: #00008B;
-$white: #FFFFFF;
-$black: #000000;
-$font: 1.3em;
+@import '~variables.scss';
 
-@mixin border ($radius, $color, $width: 3px, $style: solid) {
-	border: $color $width $style;
-	border-radius: $radius;
-}
+$background: #00008B;
+$font: 1.3em;
 
 html, body {
 	height: 100%; 
 	margin: 0;
 	padding: 0;
 }
- 
+  
  /* background */
 
  .header {
     width: 100%;
     height: 50px;
     background-color: $background;
-    color: $white;
+    color: $white-solid;
     font-size: $font;
     line-height: 2.5em;
     padding-left: 16px;
@@ -64,12 +59,12 @@ html, body {
 }
 
 .control-label {
-	color: $white;
+	color: $white-solid;
 }
 
 .message {
 	font-size: $font;
-	color: $white;
+	color: $white-solid;
 	padding-left: 30px;
 	padding-bottom: 5px;
 }
@@ -83,9 +78,9 @@ html, body {
 	padding: 7px 8px;
 	font-size: $font;
 	line-height: 1.33em;
-	@include border(25px, $white);
+	@include border(25px, $white-solid);
 }
 
 .glyphicon-ok {
-	color: $white;
+	color: $white-solid;
 }

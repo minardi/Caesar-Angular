@@ -4,3 +4,10 @@ $astral: #337ab7;
 $white-solid: #fff;
 $danube: #7aacd7;
 $silver: #ccc;
+$black: #000000;
+
+@mixin border ($radius, $color, $width: 3px, $style: solid) {
+	border: $color $width $style;
+	border-radius: $radius;
+}
+

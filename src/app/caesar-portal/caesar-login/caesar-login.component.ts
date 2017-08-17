@@ -11,8 +11,10 @@ import { Router } from '@angular/router';
 export class CaesarLoginComponent implements OnInit {
 	data: any = {};
 
-    constructor (private router: Router,
-        private caesarLoginService: CaesarLoginService) { }
+    constructor (
+        private router: Router,
+        private caesarLoginService: CaesarLoginService) {
+    }
 
     ngOnInit () {
     }
@@ -34,8 +36,8 @@ export class CaesarLoginComponent implements OnInit {
         this.caesarLoginService.login(this.data.login, this.data.password)
             .subscribe(
                 data => {
-                    //waiting for token
-                    localStorage.setItem('loginSuccess2', 'authorized');
+                    //TODO: change with response when token will be 
+                    localStorage.setItem('loginSuccess9', 'authorized');
                     this.router.navigate(['/']);
                 },
                 error => {
