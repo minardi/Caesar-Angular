@@ -12,5 +12,5 @@ export class GroupAreaComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  
 }
