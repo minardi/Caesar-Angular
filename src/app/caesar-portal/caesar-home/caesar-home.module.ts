@@ -20,6 +20,5 @@ import { HttpModule } from '@angular/http';
       CaesarHomeComponent    
   ]
 })
-
 export class CaesarHomeModule { }
 

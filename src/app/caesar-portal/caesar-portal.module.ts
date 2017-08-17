@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { CaesarHomeModule } from './caesar-home/caesar-home.module';
 import { CaesarPortalComponent } from './caesar-portal.component';
 
-
 @NgModule({
   imports: [
     CommonModule,

@@ -5,6 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './caesar-portal.component.html',
   styleUrls: ['./caesar-portal.component.scss']
 })
-
 export class CaesarPortalComponent {
 }

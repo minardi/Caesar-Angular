@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
     templateUrl: './caesar-home.component.html',
     styleUrls: ['./caesar-home.component.scss']
 })
-
 export class CaesarHomeComponent {
 }
 
