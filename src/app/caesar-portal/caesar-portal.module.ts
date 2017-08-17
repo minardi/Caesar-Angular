@@ -6,14 +6,13 @@ import { CaesarPortalComponent } from './caesar-portal.component';
 
 @NgModule({
   imports: [
-    CommonModule,
     CaesarHomeModule
   ],
   exports: [
     CaesarPortalComponent
   ],
   declarations: [
-    CaesarPortalComponent  
+    CaesarPortalComponent
   ]
 })
 export class CaesarPortalModule { }
