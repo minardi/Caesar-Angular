@@ -9,18 +9,30 @@ import { GroupItemComponent } from './group-item/group-item.component';
   templateUrl: './group-list.component.html',
   styleUrls: ['./group-list.component.scss'],
   providers: [GroupService]
-
 })
 
 export class GroupListComponent implements OnInit {
   groups: Group[];
+  firstItem = 0;
+  lastItem = 9;
+  itemsPerPage = 10;
+  currentPage = 1;
+  groupsQuantity: number;
 
   constructor(private groupService: GroupService) {}
 
   ngOnInit() {
+    this.groups = [];
+
     this.groupService.getAll().subscribe((data: Response) => {
       this.groups = data.json();
+      this.groupsQuantity = this.groups.length;
+      this.onPageChange(1);
     });
   }
-}
 
+  onPageChange(page: number) {
+    this.firstItem = this.itemsPerPage * page - this.itemsPerPage;
+    this.lastItem = this.itemsPerPage * page - 1;
+  }
+}
