@@ -18,7 +18,7 @@ import { CaesarPortalComponent } from './caesar-portal.component';
     CaesarPortalComponent
   ],
   declarations: [
-    CaesarPortalComponent  
+    CaesarPortalComponent
   ]
 })
 export class CaesarPortalModule { }

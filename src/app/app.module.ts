@@ -1,16 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
+import { NgModule }      from '@angular/core';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { AppComponent }       from './app.component';
 import { CaesarPortalModule } from './caesar-portal/caesar-portal.module';
 
 @NgModule({
-  	declarations: [
-    	AppComponent,
+  declarations: [
+    AppComponent
   ],
-    imports: [
-    	BrowserModule,
-    	CaesarPortalModule
+  imports: [
+    BrowserModule,
+    CaesarPortalModule,
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

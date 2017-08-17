@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpModule } from '@angular/http';
 
 import { GroupListComponent } from './group-list.component';
+import { GroupItemComponent } from './group-item/group-item.component';
 
 describe('GroupListComponent', () => {
   let component: GroupListComponent;
@@ -8,7 +10,11 @@ describe('GroupListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GroupListComponent ]
+      declarations: [
+        GroupListComponent,
+        GroupItemComponent
+      ],
+      imports: [HttpModule]
     })
     .compileComponents();
   }));
