@@ -1,13 +1,21 @@
 <div class="col-md-3 group-list-container">
   <div class="row">
     <div class="col-md-6">
-      <a href='#'><span class='glyphicon glyphicon-plus search-btn'></span></a>
+      <i class="glyphicon glyphicon-search"></i>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 text-right" *ngIf="groupsQuantity > itemsPerPage">
+      <caesar-pagination [itemsQuantity]="groupsQuantity" [itemsPerPage]="itemsPerPage" (pageChange)="onPageChange($event)"></caesar-pagination>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-5 " *ngFor="let item of groups">
+  <div class="col-md-6">
+    <a href='#'><span class='glyphicon glyphicon-plus search-btn'></span></a>
+  </div>
+  <div class="col-md-6">
+  </div>
+</div>
+  <div class="row">
+    <div class="col-md-5 " *ngFor="let item of (groups | limitTo : firstItem : lastItem)">
       <group-item [group]="item">Group</group-item>
     </div>
   </div>
