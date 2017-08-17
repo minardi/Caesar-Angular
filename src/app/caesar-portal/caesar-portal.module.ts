@@ -5,6 +5,7 @@ import { CaesarPortalComponent } from './caesar-portal.component';
 import { GroupAreaModule } from './group-area/group-area.module';
 import { GroupListModule } from './group-list/group-list.module';
 import { HttpModule } from '@angular/http';
+import { GroupService } from './common/services/group.service';
 
 @NgModule({
   imports: [
@@ -16,8 +17,11 @@ import { HttpModule } from '@angular/http';
   exports: [
     CaesarPortalComponent
   ],
+  providers: [GroupService],
   declarations: [
-    CaesarPortalComponent    
+    CaesarPortalComponent
   ]
 })
-export class CaesarPortalModule { }
+
+export class CaesarPortalModule {
+ }

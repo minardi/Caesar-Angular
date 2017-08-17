@@ -9,8 +9,8 @@ import { Group } from '../../common/models/group';
 
 export class GroupItemComponent implements OnInit {
   @Input() group: Group;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }
 
