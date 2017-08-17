@@ -1,16 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpModule } from '@angular/http';
 
 import { ProfileComponent } from './profile.component';
 import { ProfileService } from './profile.service';
-import { User } from '../common/models/user';
 
 
 describe('ProfileComponent', () => {
     let component: ProfileComponent;
     let fixture: ComponentFixture<ProfileComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(() => {
+        // stub ProfileService for test purposes
         const profileServiceStub = {
             currentUser: {
                 id: 3,
@@ -33,24 +32,24 @@ describe('ProfileComponent', () => {
                     id: 2,
                     name: 'Sofia'
                 }
+            },
+            getCurrentUser: () => {
+                return this.currentUser;
             }
         };
 
         TestBed.configureTestingModule({
-            declarations: [ ProfileComponent ],
-            imports: [ HttpModule ],
-            providers: [ { provide: ProfileService, useValue: profileServiceStub } ]
-        })
-      .compileComponents();
-    }));
+             declarations: [ ProfileComponent ],
+             providers: [ {provide: ProfileService, useValue: profileServiceStub } ]
+        });
 
-    beforeEach(() => {
         fixture = TestBed.createComponent(ProfileComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
-    });
+            // UserService from the root injector
+            const profileService = TestBed.get(ProfileService);
+        });
 
-    xit('should be created', () => {
-        expect(component).toBeTruthy();
-    });
+        it('should be created', () => {
+            expect(component).toBeTruthy();
+        });
   });
