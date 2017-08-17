@@ -14,10 +14,6 @@ $btn-placing: 5%;
     position: absolute;
 }
 
-.invisible {
-    display: none;
-}
-
 .icon img{
     position: absolute;
     top: 10px;
@@ -39,40 +35,42 @@ $btn-placing: 5%;
     right: 0;
     z-index: 9999;
     background-color: $grey;
+
+    .settings-btn {
+        @extend %btn-size;
+        top: $btn-placing;
+        right: $btn-placing;
+    }
+
+    .logout-btn {
+        @extend %btn-size;
+        bottom: $btn-placing;
+        right: $btn-placing;
+    }
+
+    .content {
+        position: absolute;
+        top: 20%;
+        right: 15%;
+        color: $white-solid;   
+        text-align: center;
+    }
+
+    .user-photo img {
+        max-width: $photo-size;
+        max-height: $photo-size;
+        margin-bottom: 20px;
+        border-radius: 50%;
+    }
+
+    .user-name {
+        font-size: 20px;
+        font-family: $serif;
+    }
+
+    .user-role {
+        font-size: 16px;
+        font-family: $sans-serif;
+    }
 }
 
-.settings-btn {
-    @extend %btn-size;
-    top: $btn-placing;
-    right: $btn-placing;
-}
-.logout-btn {
-    @extend %btn-size;
-    bottom: $btn-placing;
-    right: $btn-placing;
-}
-
-.content {
-    position: absolute;
-    top: 20%;
-    right: 15%;
-    color: $white-solid;   
-    text-align: center;
-}
-
-.user-photo img {
-    width: $photo-size;
-    height: $photo-size;
-    margin-bottom: 20px;
-    border-radius: 50%;
-}
-
-.user-name {
-    font-size: 20px;
-    font-family: $serif;
-}
-
-.user-role {
-    font-size: 16px;
-    font-family: $sans-serif;
-}

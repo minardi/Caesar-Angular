@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { Response }          from '@angular/http';
+import { Response } from '@angular/http';
 
-import { User }           from '../common/models/user';
+import { User } from '../common/models/user';
 import { ProfileService } from './profile.service';
 
 
 @Component({
     selector: 'caesar-profile',
     templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.scss'],
-    providers: [ProfileService]
+    styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
     currentUser: User;
     error: any;
     defaultPhoto = 'http://www.thirann.com/assets/img/newuser.jpeg';
-    visibility = true;
+    isHidden = true;
 
     constructor(private profileService: ProfileService) { }
 
@@ -31,6 +30,6 @@ export class ProfileComponent implements OnInit {
     }
 
     toggleVisibility(): void {
-        this.visibility = !this.visibility;
+        this.isHidden = !this.isHidden;
     }
 }
