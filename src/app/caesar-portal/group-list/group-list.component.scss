@@ -10,14 +10,35 @@
   .search-btn {
     height: 40px;
     font-size: 30px;
-    margin-left: 23px;
   }
 
   .my-groups {
-    margin-left: 10px;
+    position: absolute;
+    left: 25px;
+    bottom: 25px;
+  }
+
+  .filter-group-btn {
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
   }
 
   .glyphicon {
     color: $astral;
+  }
+
+  .round-btn {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: $astral;
+    border: none;
+  }
+
+  .group-filters {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
   }
 }

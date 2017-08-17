@@ -16,6 +16,7 @@ export class GroupListComponent implements OnInit {
   firstItem = 0;
   lastItem = 9;
   itemsPerPage = 10;
+  currentPage = 1;
   groupsQuantity: number;
 
   constructor(private groupService: GroupService) {}
@@ -30,7 +31,7 @@ export class GroupListComponent implements OnInit {
     });
   }
 
-  onPageChange(page) {
+  onPageChange(page: number) {
     this.firstItem = this.itemsPerPage * page - this.itemsPerPage;
     this.lastItem = this.itemsPerPage * page - 1;
   }

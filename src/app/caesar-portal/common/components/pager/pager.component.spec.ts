@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PaginationComponent } from './pagination.component';
+import {PagerComponent} from './pager.component';
 
-describe('PaginationComponent', () => {
-  let component: PaginationComponent;
-  let fixture: ComponentFixture<PaginationComponent>;
+describe('PagerComponent', () => {
+  let component: PagerComponent;
+  let fixture: ComponentFixture<PagerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PaginationComponent ]
+      declarations: [ PagerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PaginationComponent);
+    fixture = TestBed.createComponent(PagerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -25,14 +25,14 @@ describe('PaginationComponent', () => {
 
   it('currentPage should be decremented by 1', () => {
     component.currentPage = 3;
-    component.pageDecrement();
+    component.pagePrevious();
     expect(component.currentPage).toBe(2);
   });
 
   it('currentPage should be incremented by 1', () => {
     component.currentPage = 3;
     component.pagesQuantity = 6;
-    component.pageIncrement();
+    component.pageNext();
     expect(component.currentPage).toBe(4);
   });
 

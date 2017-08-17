@@ -1,16 +1,16 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 
 @Component({
-  selector: 'caesar-pagination',
-  templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.scss']
+  selector: 'caesar-pager',
+  templateUrl: './pager.component.html',
+  styleUrls: ['./pager.component.scss']
 })
-export class PaginationComponent implements OnInit, OnChanges {
+export class PagerComponent implements OnInit, OnChanges {
 
   constructor() { }
 
-  currentPage = 1;
   pagesQuantity: number;
+  @Input() currentPage: number;
   @Input() itemsPerPage: number;
   @Input() itemsQuantity: number;
   @Output() pageChange: EventEmitter<number> = new EventEmitter();
@@ -27,17 +27,18 @@ export class PaginationComponent implements OnInit, OnChanges {
     } else {
       this.pagesQuantity = 1;
     }
+
     return this.pagesQuantity;
   }
 
-  pageIncrement() {
+  pageNext() {
     if (this.currentPage < this.pagesQuantity) {
       this.currentPage++;
       this.pageChange.emit(this.currentPage);
     }
   }
 
-  pageDecrement() {
+  pagePrevious() {
     if (this.currentPage > 1) {
       this.currentPage--;
       this.pageChange.emit(this.currentPage);
