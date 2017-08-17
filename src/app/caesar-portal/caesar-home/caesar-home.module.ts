@@ -7,17 +7,17 @@ import { GroupListModule } from '../group-list/group-list.module';
 import { HttpModule } from '@angular/http';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    GroupListModule,
-    GroupAreaModule,
-    HttpModule
+   imports: [
+      CommonModule,
+      GroupListModule,
+      GroupAreaModule,
+      HttpModule
   ],
   exports: [
-    CaesarHomeComponent
+      CaesarHomeComponent
   ],
   declarations: [
-    CaesarHomeComponent    
+      CaesarHomeComponent    
   ]
 })
 
