@@ -1,19 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { CaesarHomeModule } from './caesar-home/caesar-home.module';
 import { CaesarPortalComponent } from './caesar-portal.component';
-import { GroupAreaModule } from './group-area/group-area.module';
-import { ProfileModule } from './profile/profile.module';
-import { GroupListModule } from './group-list/group-list.module';
-import { HttpModule } from '@angular/http';
 
 @NgModule({
   imports: [
-    CommonModule,
-    ProfileModule,
-    GroupListModule,
-    GroupAreaModule,
-    HttpModule
+    CaesarHomeModule
   ],
   exports: [
     CaesarPortalComponent
