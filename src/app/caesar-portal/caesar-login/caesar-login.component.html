@@ -1,0 +1,64 @@
+<div class="col-sm-12">
+    <div class='header'>SoftServe</div>
+</div>
+<div class="col-sm-4">
+    <div class="container-background"></div>
+</div>
+<div class="col-sm-6">
+    <div class="container-background"></div>
+</div>
+<div class="col-sm-2">
+    <div class="container-background"></div>
+</div>
+<div class="modal-backdrop fade in"></div>
+
+<div class="modal fade display in">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="center-vertical-block centering login-container">
+
+                <form class="form-horizontal" (keydown)="keyPress($event)">
+                    <div class="col-md-offset-4  message" 
+                        [hidden]="(login.valid || login.untouched) &&
+                        (password.valid || password.untouched)">
+                        Incorrect login or password. Please, try again.
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login" class="col-md-offset-4 col-sm-1 control-label login-ex">
+                            Login
+                        </label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="login" 
+                            [(ngModel)]="data.login" #login="ngModel" 
+                            required pattern="^[a-zA-Z]{4,15}$">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="col-md-offset-4 col-sm-1 control-label">
+                            Password
+                        </label>  
+                        <div class="col-sm-2">
+                            <input type="password" class="form-control" name="password" 
+                                #password="ngModel" [(ngModel)]="data.password" 
+                                required pattern="^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{4,10}$">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-6 col-sm-2">
+                            <button class="button-login"
+                                [disabled]="(login.invalid || login.untouched) &&
+                                (password.invalid || password.untouched)"    
+                                (click)="logIn()">
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

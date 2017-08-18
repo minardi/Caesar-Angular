@@ -6,21 +6,9 @@ import {Http, Headers, RequestOptions} from '@angular/http';
     templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-    constructor(private http: Http) {}
+    constructor() {}
     //TODO: remove when auth logic is done
     ngOnInit() {
-        const body = JSON.stringify({
-            username: 'OlegShvets',
-            password: 'ghd22df'
-        });
-
-        let headers = new Headers({
-            'Content-Type': 'application/json'
-        });
-
-        this.http.post('/login', body, {
-            headers: headers
-        }).subscribe();
     }
 }
 
