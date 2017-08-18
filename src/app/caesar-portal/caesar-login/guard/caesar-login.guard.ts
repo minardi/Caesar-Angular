@@ -6,7 +6,7 @@ export class LoginGuard implements CanActivate {
     constructor (private router: Router) { }
  
     canActivate () {
-        if (localStorage.getItem('loginSuccess9')) {
+        if (localStorage.getItem('loginSuccess11')) {
             // logged in:
             return true;
         }

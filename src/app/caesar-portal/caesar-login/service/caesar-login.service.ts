@@ -12,8 +12,9 @@ export class CaesarLoginService {
             'Content-Type': 'application/json'
         });
 
-        return this.http.post('/login', JSON.stringify({username: username, password: password}), 
-        	{headers: headers});
+        return this.http.post('/login', JSON.stringify({ username: username, password: password }), 
+        	{ headers: headers });
     }
 }
+
 

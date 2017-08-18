@@ -37,7 +37,7 @@ export class CaesarLoginComponent implements OnInit {
             .subscribe(
                 data => {
                     //TODO: change with response when token will be 
-                    localStorage.setItem('loginSuccess9', 'authorized');
+                    localStorage.setItem('loginSuccess11', 'authorized');
                     this.router.navigate(['/']);
                 },
                 error => {
