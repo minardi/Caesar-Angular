@@ -16,12 +16,23 @@ import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 export class GroupListComponent implements OnInit {
   groups: Group[];
   bsModalRef: BsModalRef;
+  firstItem = 0;
+  lastItem = 9;
+  itemsPerPage = 10;
+  currentPage = 1;
+  groupsQuantity: number;
 
   constructor(private groupService: GroupService, private modalService: BsModalService) { }
 
   ngOnInit() {
+    this.groups = [];
+
     this.groupService.getAll().subscribe(
-      data => this.groups = data.json(),
+      (data: Response) => {
+        this.groups = data.json();
+        this.groupsQuantity = this.groups.length;
+        this.onPageChange(1);
+      },
       error => console.log(error));
   }
 
@@ -39,6 +50,9 @@ export class GroupListComponent implements OnInit {
       return currentGroup.groupId !== groupId;
     });
   }
+
+  onPageChange(page: number) {
+    this.firstItem = this.itemsPerPage * page - this.itemsPerPage;
+    this.lastItem = this.itemsPerPage * page - 1;
+  }
 }
-
-
