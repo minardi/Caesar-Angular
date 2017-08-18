@@ -1,6 +1,6 @@
 import { CaesarPortalComponent } from './caesar-portal.component';
 import { CaesarPortalModule } from './caesar-portal.module';
-import { routing } from './caesar-portal-routing.module';
+import { routing } from './caesar-portal.routing.module';
 
 import { CaesarHomeComponent } from './caesar-home/caesar-home.component';
 import { CaesarLoginComponent } from './caesar-login/caesar-login.component';
@@ -14,11 +14,13 @@ import {
     TestBed
 } from '@angular/core/testing';
 
-class MockRouter {
-    navigateByUrl (url: string) { return url; }
+let MockRouter = {
+    navigateByUrl: function (url: string) {
+        return url; 
+    }
 }
 
-describe('Component: HomeComponentComponent ', () => {
+describe('Guard: LoginGuard ', () => {
     let component: LoginGuard ;
 
     beforeEach(async(() => {
@@ -36,8 +38,8 @@ describe('Component: HomeComponentComponent ', () => {
         });
     }));
 
-    describe('#displayForm', () => {
-        it('should call Router.navigateByUrl("forms/:id") with the ID of the form',
+    describe('LoginGuard', () => {
+        it('should call Router.navigateByUr',
             inject([Router], (router: Router) => {
 
             const spy = spyOn(router, 'navigateByUrl');

@@ -6,13 +6,13 @@ export class LoginGuard implements CanActivate {
     constructor (private router: Router) { }
  
     canActivate () {
-        if (localStorage.getItem('loginSuccess11')) {
-            // logged in:
+        if (localStorage.getItem('loginSuccess13')) {
+
             return true;
         }
 
-        // not logged in so redirect to login page with the return url
         this.router.navigate(['/log']);
+        
         return false;
     }
 }
