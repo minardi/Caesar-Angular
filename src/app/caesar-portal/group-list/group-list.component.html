@@ -8,8 +8,9 @@
     </div>
   </div>
   <div class="row">
-  <div class="col-md-6">
-    <a href='#'><span class='glyphicon glyphicon-plus search-btn'></span></a>
+    <div class="col-md-5 " *ngFor="let item of groups">
+      <group-item [group]="item" (contextmenu)="openDeleteDialog($event, item.groupId, item.name)">Group</group-item>
+    </div>
   </div>
   <div class="col-md-6">
   </div>
