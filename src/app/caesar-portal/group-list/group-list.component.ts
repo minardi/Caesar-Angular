@@ -22,5 +22,9 @@ export class GroupListComponent implements OnInit {
       this.groups = data.json();
     });
   }
+
+  onGroupItem(item: string) {
+    console.log(item);
+  }
 }
 

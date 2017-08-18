@@ -7,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class GroupInfoComponent implements OnInit {
+    // @Input() group: Group;
+    constructor() { }
 
-  constructor() { }
-
-  ngOnInit() {
+    ngOnInit() {
   }
 
 }

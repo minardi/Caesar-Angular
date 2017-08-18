@@ -14,27 +14,40 @@
                     <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                 </a>
             </div>
-            <div class="col-md-10 text-right">
-                <div class="btn-group" role="group" aria-label="...">
-                    <button type="button" class="btn btn-default">
-                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                    </button>
-                    <button type="button" class="btn btn-default">
-                        <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
-                    </button>
-                    <button type="button" class="btn btn-default">
-                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                    </button>
-                    <button type="button" class="btn btn-default">
-                        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                    </button>
+            <nav class="col-md-10 text-right">
+                <div class="btn-group" role="group" aria-label="group">
+                    <a routerLink="/info" routerLinkActive="active">
+                        <button type="button" 
+                                class="btn btn-default"
+                                [ngClass]="{active: activeTab === '/info' || activeTab === '/'}">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </button>
+                    </a>
+                    <a routerLink="/students" routerLinkActive="active">
+                        <button type="button" 
+                                class="btn btn-default"
+                                [ngClass]="{active: activeTab === '/students'}">
+                            <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+                        </button>
+                    </a>
+                    <a routerLink="/schedule" routerLinkActive="active">
+                        <button type="button" 
+                                class="btn btn-default"
+                                [ngClass]="{active: activeTab === '/schedule'}">
+                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                        </button>
+                    </a>
+                    <a routerLink="/notifications" routerLinkActive="active">
+                        <button type="button" 
+                                class="btn btn-default"
+                                [ngClass]="{active: activeTab === '/notifications'}">
+                            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                        </button>
+                    </a>
                 </div>
-            </div>
+            </nav>
         </div>
-        <group-info></group-info>
-        <group-students></group-students>
-        <group-schedule></group-schedule>
-        <group-notifications></group-notifications>
+        <router-outlet></router-outlet>
     </div>
     <div class="row">
         <div class="col-md-6">
