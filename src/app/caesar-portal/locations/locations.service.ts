@@ -8,12 +8,12 @@ import 'rxjs/add/observable/throw';
 import { environment } from '../../../environments/environment';
 
 @Injectable()
-export class ProfileService {
+export class LocationsService {
 
     constructor(private http: Http) {}
 
-    getCurrentUser() {
-        return this.http.get(environment.serviceApi.profileUrl)
+    getLocations() {
+        return this.http.get(environment.serviceApi.locationsUrl)
                         .catch((error: any) => Observable.throw(error));
     }
 }
