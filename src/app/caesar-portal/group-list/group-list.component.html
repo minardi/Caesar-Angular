@@ -1,21 +1,31 @@
 <div class="col-md-3 group-list-container">
   <div class="row">
     <div class="col-md-6">
-      <a href='#'><span class='glyphicon glyphicon-plus search-btn'></span></a>
+      <i class="glyphicon glyphicon-search"></i>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" *ngIf="groupsQuantity > itemsPerPage">
+      <caesar-pager [currentPage]="currentPage" [itemsQuantity]="groupsQuantity" [itemsPerPage]="itemsPerPage" (pageChange)="onPageChange($event)"></caesar-pager>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-5 " *ngFor="let item of groups">
+  <div class="col-md-6">
+    <a href='#'><span class='glyphicon glyphicon-plus search-btn'></span></a>
+  </div>
+  <div class="col-md-6">
+  </div>
+</div>
+  <div class="row">
+    <div class="col-md-5 " *ngFor="let item of (groups | limitTo : firstItem : lastItem)">
       <group-item [group]="item">Group</group-item>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-6">
-      <button type="button" class="btn btn-primary my-groups"> My groups</button>
-    </div>
-    <div class="col-md-6">
-    </div>
+  <!--<div class="row">-->
+    <!---->
+  <!--</div>-->
+  <button type="button" class="btn btn-primary my-groups"> My groups</button>
+  <div class="filter-group-btn">
+    <button type="button" class="round-btn"></button>
+    <button type="button" class="round-btn"></button>
+    <button type="button" class="round-btn"></button>
   </div>
 </div>
