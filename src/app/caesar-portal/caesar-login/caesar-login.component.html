@@ -17,11 +17,11 @@
         <div class="row-fluid">
             <div class="center-vertical-block centering login-container">
 
-                <form class="form-horizontal" (keydown)="keyPress($event)">
+                <form class="form-horizontal" (keydown)="keyPress($event)" #f="ngForm" novalidate>
                     <div class="col-md-offset-4  message" 
                         [hidden]="(login.valid || login.untouched) &&
                         (password.valid || password.untouched)">
-                        Incorrect login or password. Please, try again.
+                        {{errorMessage}}
                     </div>
                     
                     <div class="form-group">
@@ -48,12 +48,10 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-6 col-sm-2">
-                            <button class="button-login"
-                                [disabled]="(login.invalid || login.untouched) &&
-                                (password.invalid || password.untouched)"    
-                                (click)="logIn()">
+                            <div class="button-login"   
+                                (click)="f.form.valid && logIn()">
                                 <i class="glyphicon glyphicon-ok"></i>
-                            </button>
+                            </div>
                         </div>
                     </div>
                 </form>
