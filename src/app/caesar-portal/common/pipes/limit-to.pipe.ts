@@ -5,6 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class LimitToPipe implements PipeTransform {
   transform(source: any[], from: number, to: number): any {
-    return source.filter((item, index) => index >= from && index <= to);
+    if (source) {
+      return source.filter((item, index) => index >= from && index <= to);
+    }
   }
 }

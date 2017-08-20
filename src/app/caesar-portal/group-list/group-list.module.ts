@@ -5,6 +5,7 @@ import { GroupItemComponent } from './group-item/group-item.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { HttpModule } from '@angular/http';
 import { LimitToPipe } from '../../caesar-portal/common/pipes/limit-to.pipe';
+import { MathcesProgressPipe } from '../../caesar-portal/common/pipes/mathces-progress.pipe';
 import { PagerComponent } from '../common/components/pager/pager.component';
 
 @NgModule({
@@ -17,7 +18,7 @@ import { PagerComponent } from '../common/components/pager/pager.component';
     GroupItemComponent,
     DeleteDialogComponent
   ],
-  declarations: [GroupListComponent, GroupItemComponent, PagerComponent, LimitToPipe, DeleteDialogComponent],
+  declarations: [GroupListComponent, GroupItemComponent, PagerComponent, LimitToPipe, MathcesProgressPipe, DeleteDialogComponent],
   entryComponents: [DeleteDialogComponent]
 })
 export class GroupListModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Group } from '../common/models/group';
+import { GroupStatus } from '../common/models/group-status';
 import { GroupService } from '../common/services/group.service';
 import { Response } from '@angular/http';
 import { GroupItemComponent } from './group-item/group-item.component';
@@ -21,19 +22,43 @@ export class GroupListComponent implements OnInit {
   itemsPerPage = 10;
   currentPage = 1;
   groupsQuantity: number;
-
+  myGroupsFilter: boolean = false;
+  GroupProgressStatus : typeof GroupStatus = GroupStatus;
+  groupStatus : GroupStatus = GroupStatus.Current;
+ 
   constructor(private groupService: GroupService, private modalService: BsModalService) { }
 
   ngOnInit() {
-    this.groups = [];
+    this.showAllGroups();
+  }
 
+  private showAllGroups() {
     this.groupService.getAll().subscribe(
-      (data: Response) => {
-        this.groups = data.json();
+      (data: Group[]) => {
+        this.groups = data;
         this.groupsQuantity = this.groups.length;
         this.onPageChange(1);
       },
       error => console.log(error));
+  }
+
+  private showUserGroups() {
+    this.groupService.getUserGroups().subscribe(
+      (data: Group[]) => {
+        this.groups = data;
+        this.groupsQuantity = this.groups.length;
+        this.onPageChange(1);
+      },
+      error => console.log(error));
+  }
+
+  public showMyGroups() {
+    this.myGroupsFilter ? this.showAllGroups() : this.showUserGroups();
+    this.myGroupsFilter = !this.myGroupsFilter;
+  }
+
+  changeProgressStatus(status) {
+    this.groupStatus = status;
   }
 
   public openDeleteDialog(event: Event, groupId: number, groupName: string) {
