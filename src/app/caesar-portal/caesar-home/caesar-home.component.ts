@@ -15,9 +15,20 @@ export class CaesarHomeComponent implements OnInit {
 	}
 
 	ngOnInit () {
-		
+		this.checkEndingSession();
     }
 
-    
+    checkEndingSession () {
+    	if (localStorage.getItem('loggedUser')) {
+    		this.http.get(environment.serviceApi.groupsUrl)
+                .subscribe(data => console.log('ok'),
+                    error => {
+                        if (error.status === 401) {
+                            this.router.navigate(['/log']);
+                        }
+                    }
+                );
+    	}
+    }
 }
 

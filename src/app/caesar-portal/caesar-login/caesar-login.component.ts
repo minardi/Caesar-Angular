@@ -18,10 +18,14 @@ export class CaesarLoginComponent implements OnInit {
     }
 
     ngOnInit () {
-        
+        this.deleteSession();
     }
 
-  
+    deleteSession (): void {
+        if (localStorage.getItem('loggedUser')) {
+                localStorage.removeItem('loggedUser');
+        }
+    }
 
     keyPress (event: any): void {
         this.errorMessage = 'Incorrect login or password. Please, try again.';
