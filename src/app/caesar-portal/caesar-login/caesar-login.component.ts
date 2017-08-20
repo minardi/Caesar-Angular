@@ -12,19 +12,16 @@ export class CaesarLoginComponent implements OnInit {
 	data: any = {};
     errorMessage: string;
 
-    constructor (private router: Router,
+    constructor (
+        private router: Router,
         private caesarLoginService: CaesarLoginService) {
     }
 
     ngOnInit () {
-        this.deleteSession();
+        
     }
 
-    deleteSession (): void {
-        if (localStorage.getItem('loggedUser')) {
-            localStorage.removeItem('loggedUser');
-        }
-    }
+  
 
     keyPress (event: any): void {
         this.errorMessage = 'Incorrect login or password. Please, try again.';
