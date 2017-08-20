@@ -48,10 +48,9 @@ describe('Guard: LoginGuard ', () => {
         });
     }));
 
-    describe('LoginGuard', () => {
-        xit('should call Router.navigateByUr',
-            inject([Router, CaesarLoginService], (router: Router, 
-                caesarLoginService: CaesarLoginService) => {
+    xit('should call Router.navigateByUr',
+        inject([Router, CaesarLoginService], (router: Router, 
+            caesarLoginService: CaesarLoginService) => {
 
             const spy = spyOn(router, 'navigateByUrl');
 
@@ -59,6 +58,6 @@ describe('Guard: LoginGuard ', () => {
             const url = spy.calls.first().args[0];
 
             expect(url).toBe('/');
-        }));
-    });
+        })
+    );
 });

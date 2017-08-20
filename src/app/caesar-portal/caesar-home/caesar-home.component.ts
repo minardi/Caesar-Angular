@@ -15,10 +15,10 @@ export class CaesarHomeComponent implements OnInit {
 	}
 
 	ngOnInit () {
-		this.checkSession();
+		this.checkEndingSession();
     }
 
-    checkSession () {
+    checkEndingSession () {
     	if (localStorage.getItem('loggedUser')) {
     		this.http.get(environment.serviceApi.groupsUrl)
                 .subscribe(data => console.log('ok'),

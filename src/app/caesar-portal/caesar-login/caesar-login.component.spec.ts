@@ -14,7 +14,7 @@ let mockRouter = {
 
 class loginServiceStub {
     private route: string = '';
-    
+
     login () {
          return Promise.resolve(this.route);
     }
@@ -59,13 +59,11 @@ describe('CaesarLoginComponent', () => {
 
     it('stub object and injected UserService should not be the same', () => {
         component.clearForm();
-
         expect(component.data.password).toBe('');
     });
 
     xit('Should get quote', fakeAsync(() => {
         component.logIn();
-        
         tick();
         fixture.detectChanges();
     }));

@@ -22,7 +22,6 @@ describe('CaesarLoginService', () => {
  
     it('should url to consist of login', () => {
         this.caesarLoginService.login();
-
         expect(this.lastConnection).toBeDefined('no http service connection at all?');
         expect(this.lastConnection.request.url).toMatch(/login/);
     });
