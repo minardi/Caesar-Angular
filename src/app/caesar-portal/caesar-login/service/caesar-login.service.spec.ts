@@ -9,8 +9,8 @@ import { CaesarLoginService } from './caesar-login.service';
 describe('CaesarLoginService', () => {
     beforeEach(() => {
         this.injector = ReflectiveInjector.resolveAndCreate([
-        { provide: ConnectionBackend, useClass: MockBackend },
-        { provide: RequestOptions, useClass: BaseRequestOptions },
+            { provide: ConnectionBackend, useClass: MockBackend },
+            { provide: RequestOptions, useClass: BaseRequestOptions },
             Http,
             CaesarLoginService,
         ]);
@@ -22,7 +22,9 @@ describe('CaesarLoginService', () => {
  
     it('should url to consist of login', () => {
         this.caesarLoginService.login();
-            expect(this.lastConnection.request.url).toMatch(/login/);
+
+        expect(this.lastConnection).toBeDefined('no http service connection at all?');
+        expect(this.lastConnection.request.url).toMatch(/login/);
     });
 });
 

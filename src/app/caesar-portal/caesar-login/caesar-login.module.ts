@@ -11,8 +11,12 @@ import { CaesarLoginService } from './service/caesar-login.service';
     	BrowserModule, 
     	FormsModule 
     ],
-    exports: [ CaesarLoginComponent ],
-    declarations: [ CaesarLoginComponent ],
+    exports: [ 
+        CaesarLoginComponent
+    ],
+    declarations: [ 
+        CaesarLoginComponent
+    ],
     providers: [
         CaesarLoginService,
         LoginGuard
