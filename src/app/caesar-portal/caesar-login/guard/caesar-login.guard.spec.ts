@@ -8,17 +8,21 @@ describe('LoginGuard', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [LoginGuard],
-            imports: [RouterTestingModule]
+            providers: [
+                LoginGuard
+            ],
+            imports: [
+                RouterTestingModule
+            ]
         });
     });
 
-    it('checks if a user is valid',
+    it('should call router',
         async(inject([LoginGuard, Router], (auth, router) => {
             spyOn(router, 'navigate');
 
             expect(auth.canActivate()).toBeFalsy();
-            expect(router.navigate).toHaveBeenCalled();
+            expect(router.navigate).toHaveBeenCalled(); 
         })
     ));
 });
