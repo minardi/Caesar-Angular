@@ -23,9 +23,9 @@ export class GroupListComponent implements OnInit {
   currentPage = 1;
   groupsQuantity: number;
   myGroupsFilter: boolean = false;
-  GroupProgressStatus : typeof GroupStatus = GroupStatus;
-  groupStatus : GroupStatus = GroupStatus.Current;
- 
+  GroupProgressStatus: typeof GroupStatus = GroupStatus;
+  groupStatus: GroupStatus = GroupStatus.Current;
+
   constructor(private groupService: GroupService, private modalService: BsModalService) { }
 
   ngOnInit() {
@@ -53,8 +53,8 @@ export class GroupListComponent implements OnInit {
   }
 
   public showMyGroups() {
-    this.myGroupsFilter ? this.showAllGroups() : this.showUserGroups();
     this.myGroupsFilter = !this.myGroupsFilter;
+    this.myGroupsFilter ? this.showUserGroups() : this.showAllGroups();
   }
 
   changeProgressStatus(status) {

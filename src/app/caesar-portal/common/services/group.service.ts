@@ -3,10 +3,8 @@ import { Http, Response } from '@angular/http';
 import { environment } from '../../../../environments/environment';
 import { Group } from '../../common/models/group';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
-
-
 @Injectable()
+
 export class GroupService {
   constructor(private http: Http) { }
 

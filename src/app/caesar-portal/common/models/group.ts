@@ -1,10 +1,7 @@
 import { GroupStatus } from '../models/group-status'
 
 export class Group {
-  constructor(public groupId: number, public name: string,
-    public startDate: string,
-    public finishDate: string,
-    public experts: string[]) { }
+  constructor(public groupId: number, public name: string, public startDate: string, public finishDate: string, public experts: string[]) { }
 
   get status(): GroupStatus {
     let currentDate = new Date(),
@@ -13,15 +10,12 @@ export class Group {
       result;
 
     if (currentDate < startDate) {
-      result = GroupStatus['Finished'];
+      return GroupStatus.Finished;
+    } else if (startDate < currentDate && currentDate < finishDate) {
+      return GroupStatus.Current;
+    } else {
+      return GroupStatus.Future;
     }
-    else if (startDate < currentDate && currentDate < finishDate) {
-      result = GroupStatus['Current'];
-    }
-    else {
-      result = GroupStatus['Future'];
-    }
-
-    return result;
   }
 }
+
