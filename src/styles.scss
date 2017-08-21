@@ -1,5 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
-html, body {
-	height: 100%;
+
+@import '~variables.scss';
+html,
+body {
+  height: 100%;
 }
 
+/* delete dialog custom styles */
+.modal .modal-dialog {
+  &.delete-dialog {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 25%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.delete-dialog {
+  .modal-content {
+    color: $white-solid;
+    background-color: $navy-blue;
+    font-size: 32px;
+    .modal-body {
+      width: 600px;
+      margin: 0 auto;
+    }
+    .dialog-controls {
+      font-size: 32px;
+      text-align: right;
+    }
+    .glyphicon {
+      &:hover {
+        color: $danube;
+      }
+    }
+  }
+}
+
+/* end delete dialog custom styles */

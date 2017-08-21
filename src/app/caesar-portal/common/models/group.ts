@@ -1,7 +1,12 @@
 import { GroupStatus } from '../models/group-status'
 
 export class Group {
-  constructor(public groupId: number, public name: string, public startDate: string, public finishDate: string, public experts: string[]) { }
+  constructor(
+    public groupId: number, 
+    public name: string,
+    public startDate: string, 
+    public finishDate: string, 
+    public experts: string[]) { }
 
   get status(): GroupStatus {
     let currentDate = new Date(),

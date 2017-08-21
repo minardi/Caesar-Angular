@@ -1,7 +1,8 @@
 <div class="col-md-3 group-list-container">
   <div class="row">
-    <div class="col-md-12" *ngIf="groupsQuantity > itemsPerPage">
-      <caesar-pager [currentPage]="currentPage" [itemsQuantity]="groupsQuantity" [itemsPerPage]="itemsPerPage" (pageChange)="onPageChange($event)"></caesar-pager>
+  
+    <div class="col-md-12" *ngIf="filteredGroups?.length > itemsPerPage">
+      <caesar-pager [currentPage]="currentPage" [itemsQuantity]="filteredGroups.length" [itemsPerPage]="itemsPerPage" (pageChange)="onPageChange($event)"></caesar-pager>
     </div>
   </div>
   <div class="row">
@@ -9,8 +10,9 @@
       <a href='#'><span class='glyphicon glyphicon-plus search-btn'></span></a>
     </div>
   </div>
+  
   <div class="row">
-    <div class="col-md-6" *ngFor="let item of (groups | mathcesProgress : groupStatus | limitTo : firstItem : lastItem)">
+    <div class="col-md-6" *ngFor="let item of (filteredGroups | limitTo : firstItem : lastItem )">
       <group-item [group]="item" (contextmenu)="openDeleteDialog($event, item.groupId, item.name)">Group</group-item>
     </div>
   </div>

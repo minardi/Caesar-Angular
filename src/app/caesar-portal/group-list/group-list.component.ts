@@ -16,16 +16,16 @@ import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 
 export class GroupListComponent implements OnInit {
   groups: Group[];
+  filteredGroups: Group[];
   bsModalRef: BsModalRef;
   firstItem = 0;
   lastItem = 9;
   itemsPerPage = 10;
   currentPage = 1;
-  groupsQuantity: number;
   myGroupsFilter: boolean = false;
   GroupProgressStatus: typeof GroupStatus = GroupStatus;
   groupStatus: GroupStatus = GroupStatus.Current;
-
+  
   constructor(private groupService: GroupService, private modalService: BsModalService) { }
 
   ngOnInit() {
@@ -36,7 +36,6 @@ export class GroupListComponent implements OnInit {
     this.groupService.getAll().subscribe(
       (data: Group[]) => {
         this.groups = data;
-        this.groupsQuantity = this.groups.length;
         this.onPageChange(1);
       },
       error => console.log(error));
@@ -46,7 +45,6 @@ export class GroupListComponent implements OnInit {
     this.groupService.getUserGroups().subscribe(
       (data: Group[]) => {
         this.groups = data;
-        this.groupsQuantity = this.groups.length;
         this.onPageChange(1);
       },
       error => console.log(error));
@@ -59,12 +57,13 @@ export class GroupListComponent implements OnInit {
 
   changeProgressStatus(status) {
     this.groupStatus = status;
+    this.onPageChange(1);
   }
 
   public openDeleteDialog(event: Event, groupId: number, groupName: string) {
     event.preventDefault();
 
-    this.bsModalRef = this.modalService.show(DeleteDialogComponent);
+    this.bsModalRef = this.modalService.show(DeleteDialogComponent,{class: 'delete-dialog'});
     this.bsModalRef.content.groupId = groupId;
     this.bsModalRef.content.groupName = groupName;
     this.bsModalRef.content.onGroupDeleted.subscribe((groupId) => this.deleteGroupItem(groupId));
@@ -74,9 +73,11 @@ export class GroupListComponent implements OnInit {
     this.groups = this.groups.filter((currentGroup) => {
       return currentGroup.groupId !== groupId;
     });
+    this.onPageChange(1);
   }
 
   onPageChange(page: number) {
+    this.filteredGroups = this.groups.filter((item: Group) => item.status === this.groupStatus);
     this.firstItem = this.itemsPerPage * page - this.itemsPerPage;
     this.lastItem = this.itemsPerPage * page - 1;
   }

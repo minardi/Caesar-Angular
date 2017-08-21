@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { GroupService } from '../../common/services/group.service';
 import { HostListener } from '@angular/core';
 
 @Component({
-  selector: 'caesar-delete-dialog',
+  selector: 'delete-dialog',
   templateUrl: './delete-dialog.component.html',
   styleUrls: ['./delete-dialog.component.scss'],
 })
