@@ -17,20 +17,21 @@
         <div class="row-fluid">
             <div class="center-vertical-block centering login-container">
 
-                <form class="form-horizontal" (keydown)="keyPress($event)" #f="ngForm" novalidate>
+                <form class="form-horizontal" (keydown)="keyPress($event)" #f="ngForm"
+                    (ngSubmit)="f.form.valid && login()" novalidate>
                     <div class="col-md-offset-4  message" 
-                        [hidden]="(login.valid || login.untouched) &&
+                        [hidden]="(username.valid || username.untouched) &&
                         (password.valid || password.untouched)">
-                            {{errorMessage}}
+                        Incorrect login or password. Please, try again.
                     </div>
         
                     <div class="form-group">
-                        <label for="login" class="col-md-offset-4 col-sm-1 control-label login-ex">
+                        <label for="username" class="col-md-offset-4 col-sm-1 control-label login-ex">
                             Login
                         </label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" name="login" 
-                            [(ngModel)]="data.login" #login="ngModel" 
+                            <input type="text" class="form-control" name="username" 
+                            [(ngModel)]="data.username" #username="ngModel" 
                             required pattern="^[a-zA-Z]{4,15}$">
                         </div>
                     </div>
@@ -48,10 +49,9 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-6 col-sm-2">
-                            <div class="button-login"   
-                                (click)="f.form.valid && logIn()">
+                            <button class="button-login">
                                 <i class="glyphicon glyphicon-ok"></i>
-                            </div>
+                            </button>
                         </div>
                     </div>
                 </form>

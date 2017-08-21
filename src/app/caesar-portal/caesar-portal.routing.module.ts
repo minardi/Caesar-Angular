@@ -6,6 +6,8 @@ import { LoginGuard } from './caesar-login/guard/caesar-login.guard';
  
 export const appRoutes: Routes = [
     { path: '', component: CaesarHomeComponent, canActivate: [LoginGuard] },
+    /*if path '/login' - after reloading the page error: 'This application has
+    no explicit mapping for /error, so you are seeing this as a fallback'*/
     { path: 'log', component: CaesarLoginComponent },
     { path: '**', redirectTo: '' } 
 ];

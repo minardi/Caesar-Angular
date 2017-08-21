@@ -54,10 +54,10 @@ describe('Guard: LoginGuard ', () => {
 
             const spy = spyOn(router, 'navigateByUrl');
 
-            caesarLoginService.login('DmytroPetin', 'fgdfg24sd');
+            caesarLoginService.login('Vasya', '1234');
             const url = spy.calls.first().args[0];
 
-            expect(url).toBe('/');
+            expect(url).toBe('/log');
         })
     );
 });

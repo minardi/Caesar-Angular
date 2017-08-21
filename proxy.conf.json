@@ -1,20 +1,20 @@
 {
   "/login": {
-    "target": "http://caeser-api.com:8080",
+    "target": "http://192.168.210.132:8080",
     "changeOrigin": true,
     "secure": false,
     "logLevel": "debug"
   },
 
   "/groups": {
-    "target": "http://caeser-api.com:8080",
+    "target": "http://192.168.210.132:8080",
     "changeOrigin": true,
     "secure": false,
     "logLevel": "debug"
   },
 
   "/user/profile": {
-    "target": "http://caeser-api.com:8080",
+    "target": "http://192.168.210.132:8080",
     "changeOrigin": true,
     "secure": false,
     "logLevel": "debug"

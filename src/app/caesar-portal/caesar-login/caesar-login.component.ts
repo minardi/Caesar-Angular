@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class CaesarLoginComponent implements OnInit {
 	data: any = {};
-    errorMessage: string;
 
     constructor (
         private router: Router,
@@ -28,22 +27,15 @@ export class CaesarLoginComponent implements OnInit {
     }
 
     keyPress (event: any): void {
-        this.errorMessage = 'Incorrect login or password. Please, try again.';
- 
-        let enterButton: number = 13,
-            escButton: number = 27;
-
-        if (event.keyCode === enterButton) {
-            this.logIn();
-        }
+        let escButton: number = 27;
 
         if (event.keyCode === escButton) {
             this.clearForm();
         } 
     }
 
-    logIn (): void {
-        this.caesarLoginService.login(this.data.login, this.data.password)
+    login (): void {
+        this.caesarLoginService.login(this.data.username, this.data.password)
             .subscribe(
                 data => {
                     localStorage.setItem('loggedUser', 'success');
@@ -56,9 +48,8 @@ export class CaesarLoginComponent implements OnInit {
     } 
 
     clearForm (): void {
-        this.data.login = '';
+        this.data.username = '';
         this.data.password = '';
-        this.errorMessage = '';
     } 
 }
 

@@ -63,7 +63,7 @@ describe('CaesarLoginComponent', () => {
     });
 
     xit('Should get quote', fakeAsync(() => {
-        component.logIn();
+        component.login();
         tick();
         fixture.detectChanges();
     }));
