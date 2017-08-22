@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { Router } from '@angular/router';
 import { Http, Headers } from '@angular/http';
+import { ErrorHandlingService } from '../common/services/error-handling.service';
 
 @Component({
     selector: 'caesar-home',
@@ -10,22 +10,20 @@ import { Http, Headers } from '@angular/http';
 })
 export class CaesarHomeComponent implements OnInit {
 
-	constructor (private router: Router,
+	constructor (private errorHandlingService: ErrorHandlingService,
 		private http: Http) {
 	}
 
 	ngOnInit () {
 		this.checkEndingSession();
     }
-
+ 
     checkEndingSession () {
     	if (localStorage.getItem('loggedUser')) {
     		this.http.get(environment.serviceApi.groupsUrl)
-                .subscribe(data => console.log('ok'),
+                .subscribe(data => {},
                     error => {
-                        if (error.status === 401) {
-                            this.router.navigate(['/log']);
-                        }
+                        this.errorHandlingService.check(error.status);
                     }
                 );
     	}

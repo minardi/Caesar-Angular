@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { DebugElement } from '@angular/core';
 import { Http, Headers } from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 
 import { CaesarLoginComponent } from './caesar-login.component';
 import { CaesarLoginService } from './service/caesar-login.service';
@@ -12,13 +13,7 @@ let mockRouter = {
     navigate: jasmine.createSpy('navigate')
 }
 
-class loginServiceStub {
-    private route: string = '';
-
-    login () {
-         return Promise.resolve(this.route);
-    }
-}
+let loginSpy = jasmine.createSpy('login').and.returnValue(Observable.of(true));
 
 describe('CaesarLoginComponent', () => {
     let component: CaesarLoginComponent;
@@ -43,7 +38,7 @@ describe('CaesarLoginComponent', () => {
         fixture = TestBed.overrideComponent(CaesarLoginComponent, {
             set: {
                 providers: [
-                    { provide: CaesarLoginService, useValue: loginServiceStub }
+                    { provide: CaesarLoginService, useValue: loginSpy }
                 ]
       }})
         .createComponent(CaesarLoginComponent);
@@ -66,6 +61,8 @@ describe('CaesarLoginComponent', () => {
         component.login();
         tick();
         fixture.detectChanges();
+
+        expect(loginSpy).toHaveBeenCalled();
     }));
 });
 
