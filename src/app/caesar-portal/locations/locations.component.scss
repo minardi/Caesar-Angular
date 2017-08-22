@@ -1,0 +1,22 @@
+@import '~variables.scss';
+
+.location {
+    height: 100px;
+    width: 200px;
+    display: inline-block;
+    text-align: center;
+    margin: 10px;
+    background-color: $astral;
+    color: $white-solid;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    
+    &:hover {
+        background-color: $danube;
+    }
+}
+
+.modal-controls {
+    text-align: right;
+}

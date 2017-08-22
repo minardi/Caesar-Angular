@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Response } from '@angular/http';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { Response} from '@angular/http';
 
 import { Location } from '../common/models/location';
 import { LocationsService } from './locations.service';
@@ -12,8 +14,13 @@ import { LocationsService } from './locations.service';
 export class LocationsComponent implements OnInit {
     locations: Location[];
     error: any;
+    modalRef: BsModalRef;
 
-    constructor(private locationsService: LocationsService) { }
+    constructor(private modalService: BsModalService, private locationsService: LocationsService) {}
+
+    openModal(template: TemplateRef<any>) {
+        this.modalRef = this.modalService.show(template);
+    }
 
     ngOnInit() {
         this.locationsService.getLocations()

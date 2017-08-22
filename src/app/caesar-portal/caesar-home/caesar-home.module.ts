@@ -17,10 +17,10 @@ import { LocationsModule } from '../locations/locations.module';
         ProfileModule,
         LocationsModule,
         HttpModule
-  ],
+    ],
     exports: [
         CaesarHomeComponent
-  ],
+    ],
     declarations: [
         CaesarHomeComponent
     ]

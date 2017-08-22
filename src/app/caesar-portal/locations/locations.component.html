@@ -1,3 +1,15 @@
-<p>
-  locations works!
-</p>
+<button type="button" class="btn btn-primary" (click)="openModal(template)">Locations</button>
+ 
+<template #template>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-5 " *ngFor="let item of locations">
+                <div class="location">{{item.name}}</div>
+            </div>
+        </div>
+        <div class="modal-controls">
+            <span class="glyphicon glyphicon-ok-circle" (click)="selectLocation()"></span>
+            <span class="glyphicon glyphicon-remove-circle" (click)="modalRef.hide()"></span>
+        </div>
+    </div>
+</template>
