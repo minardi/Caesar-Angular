@@ -18,6 +18,12 @@
     "changeOrigin": true,
     "secure": false,
     "logLevel": "debug"
-  }
+  },
 
+  "/locations": {
+    "target": "http://caeser-api.com:8080",
+    "changeOrigin": true,
+    "secure": false,
+    "logLevel": "debug"
+  }
 }

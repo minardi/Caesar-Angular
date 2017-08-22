@@ -6,6 +6,7 @@ import { CaesarHomeComponent } from './caesar-home.component';
 import { GroupAreaModule } from '../group-area/group-area.module';
 import { GroupListModule } from '../group-list/group-list.module';
 import { ProfileModule } from '../profile/profile.module';
+import { UpdateGroupService } from '../common/services/update-group.service';
 
 @NgModule({
     imports: [
@@ -18,7 +19,7 @@ import { ProfileModule } from '../profile/profile.module';
     exports: [
         CaesarHomeComponent
     ],
-    providers: [GroupService],
+    providers: [GroupService, UpdateGroupService],
     declarations: [
         CaesarHomeComponent
     ]
