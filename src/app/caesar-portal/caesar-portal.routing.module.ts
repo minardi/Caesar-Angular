@@ -5,9 +5,9 @@ import { CaesarLoginComponent } from './caesar-login/caesar-login.component';
 import { LoginGuard } from './caesar-login/guard/caesar-login.guard';
  
 const appRoutes: Routes = [
-    { path: '', component: CaesarHomeComponent, canActivate: [LoginGuard] },
+    { path: 'location/:location', component: CaesarHomeComponent, canActivate: [LoginGuard] },
     { path: 'log', component: CaesarLoginComponent },
-
+    { path: '', component: CaesarHomeComponent, canActivate: [LoginGuard], pathMatch: "full" },
     { path: '**', redirectTo: '' } 
 ];
   

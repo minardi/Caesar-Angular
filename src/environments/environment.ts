@@ -6,8 +6,11 @@
 export const environment = {
   production: false,
   serviceApi : {
-    groupsUrl : '/groups',
-    profileUrl : '/user/profile',
-    myGroupsUrl: '/groups/my'
+    groupsUrl : '/api/groups',
+    profileUrl : '/api/user/profile',
+    myGroupsUrl: '/api/groups/my',
+    groupsMyLocationUrl: '/api/groups/mylocation',
+    filterGroupsUrl : '/api/groups/filter',
+    locationsUrl : '/api/locations'
   }
 };
