@@ -30,3 +30,11 @@ input{
 .dropdown-menu>li>a {
   color: $astral;
 }
+.budget-owner-list {
+  margin: 0;
+  padding-left: 0;
+}
+.budget-owner-list li {
+  list-style: none;
+  display: inline;
+}

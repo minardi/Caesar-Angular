@@ -8,14 +8,14 @@ import { LimitToPipe } from '../../caesar-portal/common/pipes/limit-to.pipe';
 import { MatchesProgressPipe } from '../../caesar-portal/common/pipes/mathces-progress.pipe';
 import { PagerComponent } from '../common/components/pager/pager.component';
 import { CreateEditDialogComponent } from './create-edit-dialog/create-edit-dialog.component';
-import {BsDropdownModule} from 'ngx-bootstrap';
-
+import { BsDropdownModule, DatepickerModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    DatepickerModule.forRoot()
   ],
   exports: [
     GroupListComponent,

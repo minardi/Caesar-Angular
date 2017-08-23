@@ -6,6 +6,7 @@ import { ProfileService } from '../../profile/profile.service';
 import { User } from '../../common/models/user';
 import { Response } from '@angular/http';
 import { Direction } from '../../common/models/direction';
+import { BudgetOwner } from '../../common/models/budgetOwner';
 
 @Component({
   selector: 'caesar-create-edit-dialog',
@@ -17,15 +18,19 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
   currentUser: User;
   locations: Location[];
   directions: Direction[];
+  budgetOwners: BudgetOwner[];
   selectedLocation: any;
   selectedDirection: any;
+  selectedBudgetOwner: any;
   error: any;
+  bsValue: any;
 
   constructor(public bsModalRef: BsModalRef, private profileService: ProfileService,  private updateGroupService: UpdateGroupService) { }
 
   ngOnInit() {
     this.getCurrentUserInfo();
     this.showAllDirections();
+    this.showAllBudgetOwners();
   }
 
   ngOnChanges() {
@@ -63,12 +68,29 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
       error => console.log(error));
   }
 
+  private showAllBudgetOwners() {
+    this.updateGroupService.getBudgetOwners().subscribe(
+      (data: BudgetOwner[]) => {
+        this.budgetOwners = data;
+        this.selectedBudgetOwner = this.budgetOwners[0];
+      },
+      error => console.log(error));
+  }
+
   public changeSelectedLocation(location) {
     this.selectedLocation = location;
   }
 
   public changeSelectedDirection(direction) {
     this.selectedDirection = direction;
+  }
+
+  public changeSelectedBudgetOwner(budgetOwner) {
+    this.selectedBudgetOwner = budgetOwner;
+  }
+
+  isActive(budgetOwner) {
+    return this.selectedBudgetOwner === budgetOwner;
   }
 
   public updateGroup() {

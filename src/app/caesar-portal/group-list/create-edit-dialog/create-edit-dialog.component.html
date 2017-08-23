@@ -17,8 +17,11 @@
              Budget Owner
            </div>
            <div class="col-md-8">
-             <button>SoftServe</button>
-             <button>Open group</button>
+             <ul class="budget-owner-list">
+               <li *ngFor="let budgetOwner of budgetOwners">
+                 <button class="btn btn-primary" (click)="changeSelectedBudgetOwner(budgetOwner)" [ngClass]="{active: isActive(budgetOwner)}">{{budgetOwner.name}}</button>
+               </li>
+             </ul>
            </div>
          </div>
        </div>
@@ -78,7 +81,12 @@
                   Start date:
                 </div>
                 <div class="col-md-8">
-                  <input type="date">
+                  <!--<pre>{{bsValue}}</pre>-->
+                  <!--<input type="text" value="{{ bsValue | date:'yMd'}}" bsDatepicker [(bsValue)]="bsValue">-->
+                  <!--<span style="display: inline-block">-->
+                   <!--<button class="btn btn-success" (click)="dp.toggle()">Date Picker popup</button>-->
+                   <!--<bs-datepicker #dp [(bsValue)]="bsValue" style="display: block"></bs-datepicker>-->
+                  <!--</span>-->
                 </div>
               </div>
             </div>

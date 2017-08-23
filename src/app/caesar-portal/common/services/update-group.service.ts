@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { Location } from '../models/location';
 import { environment } from '../../../../environments/environment';
 import { Direction } from '../models/direction';
+import { BudgetOwner } from '../models/budgetOwner';
 
 @Injectable()
 export class UpdateGroupService {
@@ -27,6 +28,17 @@ export class UpdateGroupService {
     }
   ];
 
+  private mockBudgetOwner = [
+    {
+      id: 1,
+      name: 'SoftServe'
+    },
+    {
+      id: 2,
+      name: 'Open Group'
+    }
+  ]
+
   constructor(private http: Http) { }
 
   public getLocations(): Observable<Location[]> {
@@ -42,5 +54,9 @@ export class UpdateGroupService {
 
   public getDirections(): Observable<Direction[]> {
     return Observable.of(this.mockDirection);
+  }
+
+  public getBudgetOwners(): Observable<BudgetOwner[]> {
+    return Observable.of(this.mockBudgetOwner);
   }
 }
