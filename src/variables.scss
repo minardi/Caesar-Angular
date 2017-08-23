@@ -1,8 +1,16 @@
 /* global color table */
-
 $astral: #337ab7;
 $white-solid: #fff;
 $danube: #7aacd7;
 $silver: #ccc;
+$black: #000000;
 $grey: #555;
+$navy-blue : #00008B;
+
+/*mixins */
+@mixin border ($radius, $color, $width: 3px, $style: solid) {
+	border: $color $width $style;
+	border-radius: $radius;
+}
+
 

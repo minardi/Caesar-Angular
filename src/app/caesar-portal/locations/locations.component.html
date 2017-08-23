@@ -4,12 +4,14 @@
     <div class="modal-body">
         <div class="row">
             <div class="col-md-5 " *ngFor="let item of locations">
-                <div class="location">{{item.name}}</div>
+                <div class="location" (keydown)="pressEnter($event)" (click)="addLocation($event, item.name.toLowerCase())" (dblclick)="addAndConfirmLocation(item.name.toLowerCase())">
+                    {{item.name}}
+                </div>
             </div>
         </div>
         <div class="modal-controls">
-            <span class="glyphicon glyphicon-ok-circle" (click)="selectLocation()"></span>
-            <span class="glyphicon glyphicon-remove-circle" (click)="modalRef.hide()"></span>
+            <span class="glyphicon glyphicon-ok-circle" (click)="confirmLocations()"></span>
+            <span class="glyphicon glyphicon-remove-circle" (click)="closeModal()"></span>
         </div>
     </div>
 </template>
