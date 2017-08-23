@@ -4,7 +4,7 @@
     <div class="modal-body">
         <div class="row">
             <div class="col-md-5 " *ngFor="let item of locations">
-                <div class="location" (keydown)="pressEnter($event)" (click)="addLocation($event, item.name.toLowerCase())" (dblclick)="addAndConfirmLocation(item.name.toLowerCase())">
+                <div class="location" (click)="addLocation($event, item.name.toLowerCase())" (dblclick)="addAndConfirmLocation(item.name.toLowerCase())">
                     {{item.name}}
                 </div>
             </div>
