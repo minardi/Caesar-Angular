@@ -1,0 +1,15 @@
+<div class="icon" [hidden]="!isHidden" (click)="toggleVisibility()">
+    <img [src]="currentUser.image || defaultPhoto" alt="photo">
+</div>
+<aside class="sidebar" [hidden]="isHidden" (mouseleave)="toggleVisibility()">
+    <button class="settings-btn"><span class="glyphicon glyphicon-cog"></span></button>
+    <section class="content">
+        <div class="user-photo">
+            <img [src]="currentUser.image || defaultPhoto" alt="photo">
+        </div>
+        <p class="user-name">{{currentUser.firstName}}<br>
+        {{currentUser.lastName}}</p>
+        <p class="user-role">ITA {{currentUser.role.name}}</p>
+    </section>
+    <button class="logout-btn"><span class="glyphicon glyphicon-log-out"></span></button>
+</aside>
