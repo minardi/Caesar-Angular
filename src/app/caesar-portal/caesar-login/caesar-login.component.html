@@ -21,9 +21,11 @@
                     [formGroup]="loginForm"
                     (ngSubmit)="loginForm.valid && login()" novalidate>
                     <div class="col-md-offset-4  message" 
-                        [hidden]="(loginForm.controls['username'].valid || loginForm.controls['username'].untouched) &&
-                        (loginForm.controls['password'].valid || loginForm.controls['password'].untouched)">
-                        Incorrect login or password. Please, try again.
+                        [hidden]="(loginForm.controls['username'].valid ||
+                        loginForm.controls['username'].untouched) &&
+                        (loginForm.controls['password'].valid ||
+                        loginForm.controls['password'].untouched)">
+                            Incorrect login or password. Please, try again.
                     </div>
         
                     <div class="form-group">

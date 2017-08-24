@@ -12,7 +12,7 @@ export class CaesarHomeComponent implements OnInit {
 
 	constructor (
         private errorHandlingService: ErrorHandlingService,
-		private http: Http) {
+        private http: Http) {
 	}
 
 	ngOnInit () {
