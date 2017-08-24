@@ -17,11 +17,11 @@ export class LocationsComponent implements OnInit {
     modalRef: BsModalRef;
     error: any;
 
-    constructor (
+    constructor(
         private modalService: BsModalService,
         private locationsService: LocationsService) {}
 
-    ngOnInit () {
+    ngOnInit() {
         this.locationsService.getLocations()
               .subscribe(
                   (data: Response) => this.locations = data.json(),
@@ -32,23 +32,23 @@ export class LocationsComponent implements OnInit {
               );
     }
 
-    private confirmLocations (): void {
+    private confirmLocations(): void {
         const result = this.selectedLocatins.join('+');
         this.closeModal();
         alert(`${result} will be confirmed`);
         // this.router.navigate([`locations/${result}`]);
     }
 
-    private openModal (template: TemplateRef<any>): void {
+    private openModal(template: TemplateRef<any>): void {
         this.modalRef = this.modalService.show(template, {class: 'delete-dialog'});
     }
 
-    private closeModal (): void {
+    private closeModal(): void {
         this.modalRef.hide();
         this.selectedLocatins = [];
     }
 
-    private addLocation ($event, location): void {
+    private addLocation($event, location): void {
         const index = this.selectedLocatins.indexOf(location);
 
         if (index === -1) {
@@ -60,7 +60,7 @@ export class LocationsComponent implements OnInit {
         }
     }
 
-    private addAndConfirmLocation (location) {
+    private addAndConfirmLocation(location) {
         this.selectedLocatins = [];
         this.selectedLocatins.push(location);
         this.confirmLocations();
