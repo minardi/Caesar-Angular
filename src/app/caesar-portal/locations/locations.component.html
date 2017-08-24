@@ -1,6 +1,6 @@
 <button type="button" class="btn btn-primary" (click)="openModal(template)">Locations</button>
  
-<template #template>
+<ng-template #template>
     <div class="modal-body">
         <div class="row">
             <div class="col-md-4 " *ngFor="let item of locations">
@@ -14,4 +14,4 @@
             <span class="glyphicon glyphicon-remove-circle" (click)="closeModal()"></span>
         </div>
     </div>
-</template>
+</ng-template>
