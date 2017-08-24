@@ -26,4 +26,6 @@ import { GroupScheduleComponent } from './group-schedule/group-schedule.componen
     GroupScheduleComponent
   ]
 })
-export class GroupAreaModule { }
+export class GroupAreaModule {
+
+}

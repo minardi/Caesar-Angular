@@ -14,3 +14,11 @@ $navy-blue : #00008B;
 }
 
 
+@mixin border ($radius, $color, $width: 3px, $style: solid) {
+	border: $color $width $style;
+	border-radius: $radius;
+}
+
+
+
+
