@@ -1,0 +1,12 @@
+.left {
+    float: left;
+}
+
+.teacher {
+    padding-right: 20px;
+}
+
+.add-teacher {
+    cursor: pointer;
+}
+

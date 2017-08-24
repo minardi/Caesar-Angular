@@ -7,6 +7,7 @@ import { GroupItemComponent } from './group-item/group-item.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { CreateEditDialogComponent } from './create-edit-dialog/create-edit-dialog.component';
 
 @Component({
   selector: 'group-list',
@@ -68,6 +69,10 @@ export class GroupListComponent implements OnInit {
     this.bsModalRef.content.groupId = groupId;
     this.bsModalRef.content.groupName = groupName;
     this.bsModalRef.content.onGroupDeleted.subscribe((groupId) => this.deleteGroupItem(groupId));
+  }
+
+  public openCreateEditDialog(event: Event) {
+    this.bsModalRef = this.modalService.show(CreateEditDialogComponent);
   }
 
   private deleteGroupItem(groupId: number) {

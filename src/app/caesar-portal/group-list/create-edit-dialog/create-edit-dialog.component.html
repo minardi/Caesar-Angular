@@ -1,0 +1,116 @@
+  <div class="modal-body">
+    <div class="row items-row">
+      <div class="col-md-12">
+       <div class="col-md-6">
+         <div class="row">
+           <div class="col-md-4">
+             Group name:
+           </div>
+           <div class="col-md-8">
+             <input type="text" name="groupname">
+           </div>
+         </div>
+       </div>
+       <div class="col-md-6">
+         <div class="row">
+           <div class="col-md-4">
+             Budget Owner
+           </div>
+           <div class="col-md-8">
+             <button>SoftServe</button>
+             <button>Open group</button>
+           </div>
+         </div>
+       </div>
+     </div>
+    </div>
+    <div class="row items-row">
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4">
+                  Direction:
+                </div>
+                <div class="col-md-8">
+                  <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Example
+                      <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">HTML</a></li>
+                      <li><a href="#">CSS</a></li>
+                      <li><a href="#">JavaScript</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4">
+                  Location:
+                </div>
+                <div class="col-md-8">
+                  <div dropdown>
+                    <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" >Example
+                      <span class="caret"></span></button>
+                    <ul *dropdownMenu class="dropdown-menu" role="menu">
+                      <li role="menuitem" *ngFor="let location of locations"><a class="dropdown-item" href="#">{{location.name}}</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4">
+                  Start date:
+                </div>
+                <div class="col-md-8">
+                  <input type="date">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4">
+                  Finish date:
+                </div>
+                <div class="col-md-8">
+                  <input type="date">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row items-row">
+      <div class="col-md-12">
+       <teacher-list></teacher-list> 
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4">
+              Experts:
+            </div>
+            <div class="col-md-8">
+              <input type="text" name="expertname"><br>
+              <button type="button" class="add-btn">+ one more expert</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <button type="button" class="btn btn-primary" (click)="bsModalRef.hide()">confirm</button>
+        <button type="button" class="btn btn-primary" (click)="bsModalRef.hide()">cancel</button>
+      </div>
+    </div>
+  </div>
+

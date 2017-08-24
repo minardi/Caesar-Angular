@@ -1,12 +1,10 @@
 <div class="col-md-3 group-list-container">
   <div class="row">
-    <div class="col-md-12" *ngIf="groupsQuantity > itemsPerPage">
-      <caesar-pager [currentPage]="currentPage" [itemsQuantity]="groupsQuantity" [itemsPerPage]="itemsPerPage" (pageChange)="onPageChange($event)"></caesar-pager>
+    <div class="col-md-6">
+      <button type="button" class="add-group-btn" (click)="openCreateEditDialog($event)"><i class='glyphicon glyphicon-plus'></i></button>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <a href='#'><span class='glyphicon glyphicon-plus search-btn'></span></a>
+    <div class="col-md-6" *ngIf="groupsQuantity > itemsPerPage">
+      <caesar-pager [currentPage]="currentPage" [itemsQuantity]="groupsQuantity" [itemsPerPage]="itemsPerPage" (pageChange)="onPageChange($event)"></caesar-pager>
     </div>
   </div>
   <div class="row">
