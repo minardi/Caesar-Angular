@@ -10,7 +10,8 @@ import { ErrorHandlingService } from '../common/services/error-handling.service'
 })
 export class CaesarHomeComponent implements OnInit {
 
-	constructor (private errorHandlingService: ErrorHandlingService,
+	constructor (
+        private errorHandlingService: ErrorHandlingService,
 		private http: Http) {
 	}
 

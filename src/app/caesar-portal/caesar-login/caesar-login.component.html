@@ -17,11 +17,12 @@
         <div class="row-fluid">
             <div class="center-vertical-block centering login-container">
 
-                <form class="form-horizontal" (keydown)="keyPress($event)" #f="ngForm"
-                    (ngSubmit)="f.form.valid && login()" novalidate>
+                <form class="form-horizontal" (keydown)="keyPress($event)"
+                    [formGroup]="loginForm"
+                    (ngSubmit)="loginForm.valid && login()" novalidate>
                     <div class="col-md-offset-4  message" 
-                        [hidden]="(username.valid || username.untouched) &&
-                        (password.valid || password.untouched)">
+                        [hidden]="(loginForm.controls['username'].valid || loginForm.controls['username'].untouched) &&
+                        (loginForm.controls['password'].valid || loginForm.controls['password'].untouched)">
                         Incorrect login or password. Please, try again.
                     </div>
         
@@ -31,8 +32,8 @@
                         </label>
                         <div class="col-sm-2">
                             <input type="text" class="form-control" name="username" 
-                            [(ngModel)]="data.username" #username="ngModel" 
-                            required pattern="^[a-zA-Z]{4,15}$">
+                            [(ngModel)]="data.username" 
+                            formControlName="username">
                         </div>
                     </div>
 
@@ -42,8 +43,8 @@
                         </label>  
                         <div class="col-sm-2">
                             <input type="password" class="form-control" name="password" 
-                                #password="ngModel" [(ngModel)]="data.password" 
-                                required pattern="^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{4,10}$">
+                                 [(ngModel)]="data.password"
+                                formControlName="password">
                         </div>
                     </div>
 
