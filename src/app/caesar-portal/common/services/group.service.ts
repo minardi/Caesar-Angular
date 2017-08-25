@@ -3,6 +3,7 @@ import { Http, Response } from '@angular/http';
 import { environment } from '../../../../environments/environment';
 import { Group } from '../../common/models/group';
 import { Observable } from 'rxjs/Observable';
+
 @Injectable()
 
 export class GroupService {
@@ -13,7 +14,11 @@ export class GroupService {
       map(result => result.json().map(obj => this.extractGroupsData(obj)));
   }
 
-  delete(id: number) {
+  get (id: number) {
+    return this.http.get(`${environment.serviceApi.groupsUrl}/${id}`);
+  }
+
+  delete (id: number) {
     return this.http.delete(`${environment.serviceApi.groupsUrl}/${id}`);
   }
 
@@ -26,5 +31,3 @@ export class GroupService {
     return new Group(obj.groupId, obj.name, obj.startDate, obj.finishDate, obj.experts);
   }
 }
-
-

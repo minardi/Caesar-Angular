@@ -7,6 +7,7 @@ import { GroupItemComponent } from './group-item/group-item.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'group-list',
@@ -26,7 +27,7 @@ export class GroupListComponent implements OnInit {
   GroupProgressStatus: typeof GroupStatus = GroupStatus;
   groupStatus: GroupStatus = GroupStatus.Current;
 
-  constructor(private groupService: GroupService, private modalService: BsModalService) { }
+  constructor(private router: Router, private groupService: GroupService, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.showAllGroups();
@@ -38,8 +39,13 @@ export class GroupListComponent implements OnInit {
         this.groups = data;
         this.groupsQuantity = this.groups.length;
         this.onPageChange(1);
+
+        if (this.router.url === '/' && this.groups.length > 0) {
+          this.router.navigate(['/group', this.groups[0].groupId, this.groups[0].name, 'info']);
+        }
       },
       error => console.log(error));
+
   }
 
   private showUserGroups() {

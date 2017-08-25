@@ -8,6 +8,7 @@ import { Http, Headers } from '@angular/http';
     templateUrl: './caesar-home.component.html',
     styleUrls: ['./caesar-home.component.scss']
 })
+
 export class CaesarHomeComponent implements OnInit {
 
 	constructor (private router: Router,
@@ -31,4 +32,3 @@ export class CaesarHomeComponent implements OnInit {
     	}
     }
 }
-
