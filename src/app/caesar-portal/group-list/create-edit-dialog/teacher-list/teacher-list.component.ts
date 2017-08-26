@@ -15,11 +15,13 @@ import { UsersInfo } from './model-users';
 export class TeacherListComponent implements OnInit {
     private toggleDropdownAndButton: boolean = true;
     private hiddenSelectedTeachers: boolean = true;
+    private hiddenButton: boolean = false;
     private users: UsersInfo[];
     private teachers: UsersInfo[];
     private location: string;
     private selectedTeachers: string[] = [];
     private listRemovedTeachers: UsersInfo[] = [];
+    private quantityOfTeachers: number;
 
     constructor (private usersService: usersService) {
     }
@@ -40,6 +42,8 @@ export class TeacherListComponent implements OnInit {
         this.teachers = this.users.filter((user) => {
             return user.location === location && user.role !== 'admin';
         });
+
+        this.quantityOfTeachers = this.teachers.length;
     }
 
     private toggleListAndButton(): void {
@@ -53,27 +57,47 @@ export class TeacherListComponent implements OnInit {
         this.toggleDropdownAndButton = !this.toggleDropdownAndButton;
 
         this.deleteTeacherFromList(teacher);
+
+        this.checkQuantity();
+    }
+
+    private checkQuantity() {
+        if (this.selectedTeachers.length === this.quantityOfTeachers) {
+            this.hiddenButton = true;
+        } else {
+            this.hiddenButton = false;
+        }
     }
 
     private deleteTeacherFromList(teacher: string) {
         const teacherName = teacher.split(' ')[0];
 
-        this.listRemovedTeachers.push(this.teachers.find((user) => {
+        const deletedTeacher = this.teachers.find((user) => {
             return user.firstName === teacherName;
-        }));
+        })
 
-        this.teachers = this.teachers.filter((user) => {
+        this.listRemovedTeachers.push(deletedTeacher);
+
+        const indexOfList = this.teachers.indexOf(deletedTeacher);
+
+        this.teachers.splice(indexOfList, 1);
+
+        /*this.teachers = this.teachers.filter((user) => {
             return user.firstName !== teacherName;
-        });
+        });*/
     }
 
 
     private deleteTeacher(removedTeacher: string): void {
         const teacherName = removedTeacher.split(' ')[0];
 
-        this.selectedTeachers = this.selectedTeachers.filter((teacher) => {
+        /*this.selectedTeachers = this.selectedTeachers.filter((teacher) => {
             return teacher !== removedTeacher;
-        });
+        });*/
+
+        const indexOfTeacher = this.selectedTeachers.indexOf(removedTeacher);
+
+        this.selectedTeachers.splice(indexOfTeacher, 1);
 
         if (!this.selectedTeachers.length) {
             this.hiddenSelectedTeachers = true;
@@ -82,6 +106,8 @@ export class TeacherListComponent implements OnInit {
         this.teachers.push(this.listRemovedTeachers.find((teacher) => {
             return teacher.firstName === teacherName;
         }));
+
+        this.checkQuantity();
     }
 
 }

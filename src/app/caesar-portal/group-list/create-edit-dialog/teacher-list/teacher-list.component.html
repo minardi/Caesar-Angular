@@ -50,7 +50,7 @@
       </div>
 
       <div class="add-teacher"
-        [hidden]=!toggleDropdownAndButton (click)="toggleListAndButton()">
+        [hidden]="(!toggleDropdownAndButton || hiddenButton)"  (click)="toggleListAndButton()">
           + one more teacher
       </div>
     </div>
