@@ -17,37 +17,38 @@ export class CaesarLoginComponent implements OnInit {
     }
 
     ngOnInit () {
+        this.deleteSession();
+    }
+
+    deleteSession (): void {
+        if (localStorage.getItem('loggedUser')) {
+                localStorage.removeItem('loggedUser');
+        }
     }
 
     keyPress (event: any): void {
-        let enterButton: number = 13,
-            escButton: number = 27;
-
-        if (event.keyCode === enterButton) {
-            this.logIn();
-        }
+        let escButton: number = 27;
 
         if (event.keyCode === escButton) {
             this.clearForm();
         } 
     }
 
-    logIn (): void {
-        this.caesarLoginService.login(this.data.login, this.data.password)
+    login (): void {
+        this.caesarLoginService.login(this.data.username, this.data.password)
             .subscribe(
                 data => {
-                    //TODO: change with response when token will be 
-                    localStorage.setItem('loginSuccess13', 'authorized');
+                    localStorage.setItem('loggedUser', 'success');
                     this.router.navigate(['/']);
                 },
                 error => {
                     this.data.password = '';
                 }
             ); 
-    }
+    } 
 
     clearForm (): void {
-        this.data.login = '';
+        this.data.username = '';
         this.data.password = '';
     } 
 }
