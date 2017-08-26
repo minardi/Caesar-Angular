@@ -9,7 +9,7 @@ export class LocationService {
 
   constructor(private http: Http) { }
 
-  getLocations() :  Observable<Location[]> {
+  getLocations(): Observable<Location[]> {
     return this.http.get(environment.serviceApi.locationsUrl).
       map((res: Response) => res.json());
   }

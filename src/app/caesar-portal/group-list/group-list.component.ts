@@ -44,12 +44,13 @@ export class GroupListComponent implements OnInit {
       if (params['location']) {
         this.locations = params['location'].split('+');
       }
+      this.locations.length > 0
+        ? this.getGroupsByLocation(this.locations)
+        : this.getCurrentLocationGroups();
     });
-
-    this.locations.length > 0
-      ? this.getGroupsByLocation(this.locations)
-      : this.getCurrentLocationGroups();
   }
+
+ 
 
   private getCurrentLocationGroups() {
     this.groupService.getCurrentLocationGroups().subscribe(
@@ -63,7 +64,7 @@ export class GroupListComponent implements OnInit {
   private getGroupsByLocation(locations: string[]) {
     //since rest api does not work with location names we need to find ids by names manually 
     let allLocations = this.locationService.getLocations();
-    
+
     allLocations.flatMap((data) => {
       let locationsIds = this.getLocationIdsByNames(this.locations, data);
       return this.groupService.getGroupsByLocations(locationsIds)
@@ -79,7 +80,7 @@ export class GroupListComponent implements OnInit {
     let result: number[] = [];
 
     locationNames.forEach((value) => {
-      let obj = locations.find((location) => location.name === value);
+      let obj = locations.find((location) => location.name.toLowerCase() === value.toLowerCase());
       if (obj) result.push(obj.id)
     })
 

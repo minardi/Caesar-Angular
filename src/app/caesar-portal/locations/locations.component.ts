@@ -2,9 +2,9 @@ import { Component, OnInit, TemplateRef, EventEmitter, Output } from '@angular/c
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { Response } from '@angular/http';
-
+import { Router } from '@angular/router';
 import { Location } from '../common/models/location';
-import { LocationsService } from './locations.service';
+import { LocationService } from '../../caesar-portal/common/services/location.service';
 
 @Component({
     selector: 'caesar-locations',
@@ -16,10 +16,11 @@ export class LocationsComponent implements OnInit {
     locations: Location[];
     modalRef: BsModalRef;
     error: any;
-
+    
     constructor(
         private modalService: BsModalService,
-        private locationsService: LocationsService) {}
+        private locationsService: LocationService,
+        private router : Router ) {}
 
     @Output() onOpenModal = new EventEmitter();
     private openModal(template: TemplateRef<any>): void {
@@ -29,7 +30,7 @@ export class LocationsComponent implements OnInit {
     ngOnInit() {
         this.locationsService.getLocations()
               .subscribe(
-                  (data: Response) => this.locations = data.json(),
+                  data => this.locations = data,
                   (error) => {
                       this.error = error;
                       console.error(error);
@@ -45,7 +46,8 @@ export class LocationsComponent implements OnInit {
     private confirmLocations(): void {
         const result = this.selectedLocatins.join('+');
         this.closeModal();
-        alert(`${result} will be confirmed`);
+        this.router.navigateByUrl(`${result}/groups`);
+    
         // this.router.navigate([`locations/${result}`]);
     }
 
