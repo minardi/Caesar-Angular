@@ -1,27 +1,27 @@
 {
   "/login": {
-    "target": "http://192.168.210.132:8080",
+    "target": "http://192.168.210.133:8080",
     "changeOrigin": true,
     "secure": false,
     "logLevel": "debug"
   },
 
   "/groups": {
-    "target": "http://192.168.210.132:8080",
+    "target": "http://192.168.210.133:8080",
     "changeOrigin": true,
     "secure": false,
     "logLevel": "debug"
   },
 
   "/user/profile": {
-    "target": "http://192.168.210.132:8080",
+    "target": "http://192.168.210.133:8080",
     "changeOrigin": true,
     "secure": false,
     "logLevel": "debug"
   },
 
   "/locations": {
-    "target": "http://192.168.210.132:8080",
+    "target": "http://192.168.210.133:8080",
     "changeOrigin": true,
     "secure": false,
     "logLevel": "debug"

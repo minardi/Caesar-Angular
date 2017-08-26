@@ -13,7 +13,7 @@ export class usersService {
 
     constructor (private http: Http) {}
 
-    getUsers () {
-        return this.http.get('/users');
+    getUser () {
+        return this.http.get('/user/profile');
     }
 }

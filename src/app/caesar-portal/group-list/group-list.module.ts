@@ -17,7 +17,7 @@ import { usersService } from './create-edit-dialog/teacher-list/users.service';
 import {BsDropdownModule} from 'ngx-bootstrap'; 
 
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -26,7 +26,8 @@ import { FormsModule } from '@angular/forms';
     HttpModule,
     BsDropdownModule.forRoot(),
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     GroupListComponent,

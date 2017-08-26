@@ -13,6 +13,8 @@ export const appRoutes: Routes = [
     { path: '**', redirectTo: '' } 
 ];
 
+
+
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule],

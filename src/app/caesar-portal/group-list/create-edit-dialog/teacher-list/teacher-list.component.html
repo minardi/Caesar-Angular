@@ -4,36 +4,55 @@
       Teachers:
     </div>
     <div class="col-md-8">
-      <div class="dropdown" [hidden]=hiddenListTeachers>
+      
         <div class="row">
-
-          <div class="col-md-7">
-            <select class="form-control" name="company" [(ngModel)]="selectedTeacher">
-              <option  *ngFor="let teacher of teachers" [value]="teacher">
+          <ul class="list-of-selected-teachers" [hidden]=hiddenSelectedTeachers>
+            <li class="selected-teacher" *ngFor="let teacher of selectedTeachers">
+              <div class="col-md-7">
                 {{teacher}}
+              </div>
+
+              <div class="col-md-2">
+                <span class="glyphicon glyphicon-remove-circle remove-teacher"
+                  aria-hidden="true" (click)="deleteTeacher(teacher)">
+                </span>
+              </div>
+            </li>
+          </ul>
+
+        <div class="dropdown" [hidden]=toggleDropdownAndButton>
+          <div class="col-md-7">
+            <select class="form-control" name="teachers" #selectElement>
+              <option  *ngFor="let teacher of teachers" [ngValue]="teacher"
+                [selected]="teacher.role === 'coordinator'">
+                  {{teacher.firstName}} {{teacher.lastName}}
               </option>
             </select>
           </div>
 
-          <div class="col-md-2">
-            <button type="button" class="btn btn-default btn-sm button-ok" aria-label="Left Align" (click)="showSelectedTeachers()">
-              <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
-            </button>
+          <div class="col-md-1">
+            <div (click)="saveSelectedTeacher(selectElement.value)">
+                <span class="glyphicon glyphicon-ok-circle save-teacher"
+                  aria-hidden="true">
+                </span>
+            </div>
           </div>
 
-          <div class="col-md-2">
-            <button type="button" class="btn btn-default btn-sm button-cancel" aria-label="Left Align">
-              <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-            </button>
+          <div class="col-md-1">
+            <div class="cancel-teacher"
+              (click)="toggleListAndButton()">
+                <span class="glyphicon glyphicon-remove-circle remove-dropdown"
+                  aria-hidden="true">
+                </span>
+            </div>
           </div>
         </div>    
       </div>
-      <div class="selected-teacher" [hidden]=hiddenTeacher>
-        {{selectedTeacher}}
-      </div>               
-      <button type="button" class="add-btn" [hidden]=!hiddenListTeachers (click)="addTeacher()" >
-        + one more teacher
-      </button>
+
+      <div class="add-teacher"
+        [hidden]=!toggleDropdownAndButton (click)="toggleListAndButton()">
+          + one more teacher
+      </div>
     </div>
   </div>
 </div>

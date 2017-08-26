@@ -1,12 +1,21 @@
 .left {
-    float: left;
+   float: left;
 }
 
 .teacher {
-    padding-right: 20px;
+   padding-right: 20px;
 }
 
 .add-teacher {
-    cursor: pointer;
+   cursor: pointer;
 }
 
+.list-of-selected-teachers {
+	list-style: none;
+	padding: 0;
+}
+
+.save-teacher, .remove-teacher, .remove-dropdown {
+   font-size: 1.8em;
+   cursor: pointer;
+}
