@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
- 
+import { environment } from '../../../../environments/environment';
+
 @Injectable()
 export class CaesarLoginService {
     constructor (private http: Http) { 
@@ -12,7 +13,7 @@ export class CaesarLoginService {
             'Content-Type': 'application/json'
         });
 
-        return this.http.post('/login', JSON.stringify({ username: username, password: password }), 
+        return this.http.post(environment.serviceApi.loginUrl, JSON.stringify({ username: username, password: password }), 
         	{ headers: headers });
     }
 }

@@ -11,6 +11,7 @@ export const environment = {
     myGroupsUrl: '/api/groups/my',
     groupsMyLocationUrl: '/api/groups/mylocation',
     filterGroupsUrl : '/api/groups/filter',
-    locationsUrl : '/api/locations'
+    locationsUrl : '/api/locations',
+    loginUrl : '/api/login'
   }
 };
