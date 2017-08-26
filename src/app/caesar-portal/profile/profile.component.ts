@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
             );
     }
 
-    toggleVisibility(): void {
+    private toggleVisibility(): void {
         this.isHidden = !this.isHidden;
     }
 }

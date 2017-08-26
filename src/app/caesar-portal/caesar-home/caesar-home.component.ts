@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import { Http, Headers } from '@angular/http';
+import { MenuComponent } from '../menu/menu.component';
 
 @Component({
     selector: 'caesar-home',
@@ -9,18 +10,23 @@ import { Http, Headers } from '@angular/http';
     styleUrls: ['./caesar-home.component.scss']
 })
 export class CaesarHomeComponent implements OnInit {
+    distanceX = 5;
 
-	constructor (private router: Router,
-		private http: Http) {
-	}
+    @ViewChild(MenuComponent)
+    private menuComponent: MenuComponent;
 
-	ngOnInit () {
-		this.checkEndingSession();
+    constructor (
+        private router: Router,
+        private http: Http) {
+    }
+
+    ngOnInit () {
+        this.checkEndingSession();
     }
 
     checkEndingSession () {
-    	if (localStorage.getItem('loggedUser')) {
-    		this.http.get(environment.serviceApi.groupsUrl)
+        if (localStorage.getItem('loggedUser')) {
+            this.http.get(environment.serviceApi.groupsUrl)
                 .subscribe(data => console.log('ok'),
                     error => {
                         if (error.status === 401) {
@@ -28,7 +34,13 @@ export class CaesarHomeComponent implements OnInit {
                         }
                     }
                 );
-    	}
+        }
+    }
+
+    private showMenu($event) {
+        if ($event.clientX < this.distanceX) {
+            this.menuComponent.isHidden = false;
+        }
     }
 }
 

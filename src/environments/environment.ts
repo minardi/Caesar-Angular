@@ -8,6 +8,7 @@ export const environment = {
   serviceApi : {
     groupsUrl : '/groups',
     profileUrl : '/user/profile',
+    locationsUrl : '/locations',
     myGroupsUrl: '/groups/my'
   }
 };

@@ -1,6 +1,7 @@
 <div class="bg-primary">Caesar</div>
 <caesar-profile></caesar-profile>
-<div class="app-wrapper">
+<div class="app-wrapper" (mousemove)="showMenu($event)">
+  <caesar-menu></caesar-menu>
   <group-list></group-list>
   <group-area></group-area>
   <div class="col-md-2">
