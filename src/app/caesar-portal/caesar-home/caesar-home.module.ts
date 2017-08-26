@@ -6,7 +6,8 @@ import { CaesarHomeComponent } from './caesar-home.component';
 import { GroupAreaModule } from '../group-area/group-area.module';
 import { GroupListModule } from '../group-list/group-list.module';
 import { ProfileModule } from '../profile/profile.module';
-import { LocationsModule } from '../locations/locations.module';
+import { MenuModule } from '../menu/menu.module';
+
 
 @NgModule({
     imports: [
@@ -14,13 +15,15 @@ import { LocationsModule } from '../locations/locations.module';
         GroupListModule,
         GroupAreaModule,
         ProfileModule,
-        LocationsModule,
-        HttpModule
+        HttpModule,
+        MenuModule
     ],
     exports: [
         CaesarHomeComponent
     ],
-    providers: [GroupService],
+    providers: [
+        GroupService
+    ],
     declarations: [
         CaesarHomeComponent
     ]

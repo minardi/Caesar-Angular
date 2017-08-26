@@ -41,3 +41,12 @@ body {
 }
 
 /* end delete dialog custom styles */
+
+%sidebar {
+    width: 15%;
+    height: 100vh;
+    position: fixed;
+    z-index: 9999;
+    background-color: $grey;
+    top: 0;
+}

@@ -1,0 +1,18 @@
+<!-- <button type="button" class="btn btn-primary" (mousemove)="showMenu($event)">Menu</button> -->
+<aside class="sidebar" [hidden]="isHidden" (mouseleave)="hideMenu()">
+    <div>
+        <caesar-locations (click)="onOpenModal()"></caesar-locations>
+    </div>
+    <div>
+        <p>Groups</p>
+        <span class="pull-right glyphicon glyphicon-link"></span>
+    </div>
+    <div>
+        <p>Students</p>
+        <span class="pull-right glyphicon glyphicon-user"></span>
+    </div>
+    <div>
+        <p>Schedule<p>
+            <span class="pull-right glyphicon glyphicon-list-alt"></span>
+        </div>
+</aside>

@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, EventEmitter, Output } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { Response } from '@angular/http';
@@ -21,6 +21,11 @@ export class LocationsComponent implements OnInit {
         private modalService: BsModalService,
         private locationsService: LocationsService) {}
 
+    @Output() onOpenModal = new EventEmitter();
+    private openModal(template: TemplateRef<any>): void {
+        this.modalRef = this.modalService.show(template, {class: 'delete-dialog'});
+    }
+
     ngOnInit() {
         this.locationsService.getLocations()
               .subscribe(
@@ -32,20 +37,16 @@ export class LocationsComponent implements OnInit {
               );
     }
 
+    private closeModal(): void {
+        this.modalRef.hide();
+        this.selectedLocatins = [];
+    }
+
     private confirmLocations(): void {
         const result = this.selectedLocatins.join('+');
         this.closeModal();
         alert(`${result} will be confirmed`);
         // this.router.navigate([`locations/${result}`]);
-    }
-
-    private openModal(template: TemplateRef<any>): void {
-        this.modalRef = this.modalService.show(template, {class: 'delete-dialog'});
-    }
-
-    private closeModal(): void {
-        this.modalRef.hide();
-        this.selectedLocatins = [];
     }
 
     private addLocation($event, location): void {
