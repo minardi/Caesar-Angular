@@ -47,8 +47,6 @@ export class LocationsComponent implements OnInit {
         const result = this.selectedLocatins.join('+');
         this.closeModal();
         this.router.navigateByUrl(`${result}/groups`);
-    
-        // this.router.navigate([`locations/${result}`]);
     }
 
     private addLocation($event, location): void {
