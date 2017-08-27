@@ -9,7 +9,7 @@ import { GroupItemComponent } from './group-item/group-item.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/mergeMap';
 
@@ -37,7 +37,8 @@ export class GroupListComponent implements OnInit {
     private groupService: GroupService,
     private modalService: BsModalService,
     private activateRoute: ActivatedRoute,
-    private locationService: LocationService
+    private locationService: LocationService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -52,13 +53,18 @@ export class GroupListComponent implements OnInit {
     });
   }
 
-  private getCurrentLocationGroups() {
+  getCurrentLocationGroups() {
     this.groupService.getCurrentLocationGroups().subscribe(
       (data: Group[]) => {
         this.groups = data;
         this.onPageChange(1);
+
+        if (this.router.url === '/' && this.groups.length > 0) {
+          this.router.navigate(['/group', this.groups[0].groupId, this.groups[0].name, 'info']);
+        }
       },
       error => console.log(error));
+
   }
 
   private getGroupsByLocation(locations: string[]) {

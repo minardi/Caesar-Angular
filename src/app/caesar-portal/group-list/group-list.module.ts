@@ -7,10 +7,13 @@ import { HttpModule } from '@angular/http';
 import { LimitToPipe } from '../../caesar-portal/common/pipes/limit-to.pipe';
 import { PagerComponent } from '../common/components/pager/pager.component';
 
+import { AppRoutingModule } from '../caesar-portal.routing.module';
+
 @NgModule({
   imports: [
     CommonModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
   exports: [
     GroupListComponent,

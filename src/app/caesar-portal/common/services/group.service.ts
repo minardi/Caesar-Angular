@@ -15,6 +15,10 @@ export class GroupService {
     this.options = new RequestOptions({ headers: this.headers });
   }
 
+  get(id: number) {
+    return this.http.get(`${environment.serviceApi.groupsUrl}/${id}`);
+  }
+
   getUserGroups(): Observable<Group[]> {
     return this.http.get(environment.serviceApi.myGroupsUrl).
       map(result => result.json().map(obj => this.extractGroupsData(obj)));
@@ -40,5 +44,3 @@ export class GroupService {
     return new Group(obj.groupId, obj.name, obj.startDate, obj.finishDate, obj.experts);
   }
 }
-
-

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
+
+import { ErrorHandlingService } from '../common/services/error-handling.service';
 import { GroupService } from './../common/services/group.service';
 import { LocationService } from './../common/services/location.service';
 import { CaesarHomeComponent } from './caesar-home.component';
@@ -22,7 +24,7 @@ import { MenuModule } from '../menu/menu.module';
     exports: [
         CaesarHomeComponent
     ],
-    providers: [GroupService, LocationService],
+    providers: [GroupService, LocationService, ErrorHandlingService],
     declarations: [
         CaesarHomeComponent
     ]
