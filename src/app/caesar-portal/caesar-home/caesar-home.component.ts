@@ -8,6 +8,7 @@ import { ErrorHandlingService } from '../common/services/error-handling.service'
     templateUrl: './caesar-home.component.html',
     styleUrls: ['./caesar-home.component.scss']
 })
+
 export class CaesarHomeComponent implements OnInit {
 
 	constructor (
@@ -30,4 +31,3 @@ export class CaesarHomeComponent implements OnInit {
     	}
     }
 }
-
