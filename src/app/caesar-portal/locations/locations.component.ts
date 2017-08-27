@@ -3,8 +3,9 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
+
 import { Location } from '../common/models/location';
-import { LocationService } from '../../caesar-portal/common/services/location.service';
+import { LocationService } from '../common/services/location.service';
 
 @Component({
     selector: 'caesar-locations',
@@ -16,14 +17,14 @@ export class LocationsComponent implements OnInit {
     locations: Location[];
     modalRef: BsModalRef;
     error: any;
-    
+
     constructor(
         private modalService: BsModalService,
         private locationsService: LocationService,
-        private router : Router ) {}
+        private router: Router ) {}
 
     @Output() onOpenModal = new EventEmitter();
-    private openModal(template: TemplateRef<any>): void {
+    public openModal(template: TemplateRef<any>): void {
         this.modalRef = this.modalService.show(template, {class: 'delete-dialog'});
     }
 
@@ -38,18 +39,18 @@ export class LocationsComponent implements OnInit {
               );
     }
 
-    private closeModal(): void {
+    public closeModal(): void {
         this.modalRef.hide();
         this.selectedLocatins = [];
     }
 
-    private confirmLocations(): void {
+    public confirmLocations(): void {
         const result = this.selectedLocatins.join('+');
         this.closeModal();
         this.router.navigateByUrl(`${result}/groups`);
     }
 
-    private addLocation($event, location): void {
+    public toggleLocation($event, location): void {
         const index = this.selectedLocatins.indexOf(location);
 
         if (index === -1) {
@@ -61,7 +62,7 @@ export class LocationsComponent implements OnInit {
         }
     }
 
-    private addAndConfirmLocation(location) {
+    public addAndConfirmLocation(location) {
         this.selectedLocatins = [];
         this.selectedLocatins.push(location);
         this.confirmLocations();

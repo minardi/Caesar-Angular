@@ -11,11 +11,11 @@ export class MenuComponent {
 
     constructor() { }
 
-    private hideMenu(): void {
+    public hideMenu(): void {
         this.isHidden = true;
     }
 
-    private onOpenModal() {
+    public onOpenModal() {
         this.hideMenu();
     }
 }

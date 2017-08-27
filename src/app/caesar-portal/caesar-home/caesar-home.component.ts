@@ -35,7 +35,7 @@ export class CaesarHomeComponent implements OnInit {
         }
     }
 
-    private showMenu($event) {
+    public showMenu($event) {
         if ($event.clientX < this.distanceX) {
             this.menuComponent.isHidden = false;
         }
