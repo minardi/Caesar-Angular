@@ -38,3 +38,21 @@ input{
   list-style: none;
   display: inline;
 }
+.btn-datepicker {
+  border: none;
+  background: none;
+}
+.datepicker-popup {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  z-index: 1;
+}
+.selected-date {
+  border: 1px solid $astral;
+  padding: 5px;
+  height: 30px;
+}
+.glyphicon {
+  color: $astral;
+}

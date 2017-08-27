@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Location } from '../models/location';
 import { environment } from '../../../../environments/environment';
 import { Direction } from '../models/direction';
 import { BudgetOwner } from '../models/budgetOwner';
+import { Stage } from '../models/stage';
 
 @Injectable()
 export class UpdateGroupService {
@@ -24,7 +25,11 @@ export class UpdateGroupService {
     },
     {
       id: 4,
-      name: 'testing_ISTQB'
+      name: 'ISTQB'
+    },
+    {
+      id: 5,
+      name: 'MQC'
     }
   ];
 
@@ -37,7 +42,38 @@ export class UpdateGroupService {
       id: 2,
       name: 'Open Group'
     }
-  ]
+  ];
+
+  private mockStage = [
+    {
+      id: 1,
+      name: 'Planned'
+    },
+    {
+      id: 2,
+      name: 'Boarding'
+    },
+    {
+      id: 3,
+      name: 'Before start'
+    },
+    {
+      id: 4,
+      name: 'In process'
+    },
+    {
+      id: 5,
+      name: 'Offering'
+    },
+    {
+      id: 6,
+      name: 'Graduated'
+    },
+    {
+      id: 7,
+      name: 'Cancelled'
+    }
+  ];
 
   constructor(private http: Http) { }
 
@@ -58,5 +94,17 @@ export class UpdateGroupService {
 
   public getBudgetOwners(): Observable<BudgetOwner[]> {
     return Observable.of(this.mockBudgetOwner);
+  }
+
+  public getStages(): Observable<Stage[]> {
+    return Observable.of(this.mockStage);
+  }
+
+  public update(group: any) {
+    const groupJSON = JSON.stringify(group),
+      headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post(environment.serviceApi.groupsUrl, groupJSON, { headers: headers });
   }
 }

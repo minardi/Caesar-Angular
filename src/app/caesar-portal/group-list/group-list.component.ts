@@ -71,8 +71,10 @@ export class GroupListComponent implements OnInit {
     this.bsModalRef.content.onGroupDeleted.subscribe((groupId) => this.deleteGroupItem(groupId));
   }
 
-  public openCreateEditDialog(event: Event) {
+  public openCreateDialog(event: Event) {
     this.bsModalRef = this.modalService.show(CreateEditDialogComponent);
+    this.bsModalRef.content.isEditMode = false;
+    this.bsModalRef.content.onGroupUpdated.subscribe(() => this.showUserGroups());
   }
 
   private deleteGroupItem(groupId: number) {

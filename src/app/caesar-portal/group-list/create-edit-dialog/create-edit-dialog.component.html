@@ -4,10 +4,28 @@
        <div class="col-md-6">
          <div class="row">
            <div class="col-md-4">
-             Group name:
+           Group name:
            </div>
            <div class="col-md-8">
              <input type="text" name="groupname">
+           </div>
+         </div>
+         <div class="row" *ngIf="isEditMode">
+           <div class="col-md-4">
+             Current Stage:
+           </div>
+           <div class="col-md-8">
+             <div dropdown>
+               <button dropdownToggle class="btn btn-dropdown dropdown-toggle" type="button">
+                 {{selectedStage?.name}}
+                 <span class="caret"></span>
+               </button>
+               <ul *dropdownMenu class="dropdown-menu" role="menu">
+                 <li role="menuitem" *ngFor="let stage of stages">
+                   <a class="dropdown-item" href="#" (click)="changeSelectedStage(stage)">{{stage.name}}</a>
+                 </li>
+               </ul>
+             </div>
            </div>
          </div>
        </div>
@@ -81,12 +99,11 @@
                   Start date:
                 </div>
                 <div class="col-md-8">
-                  <!--<pre>{{bsValue}}</pre>-->
-                  <!--<input type="text" value="{{ bsValue | date:'yMd'}}" bsDatepicker [(bsValue)]="bsValue">-->
-                  <!--<span style="display: inline-block">-->
-                   <!--<button class="btn btn-success" (click)="dp.toggle()">Date Picker popup</button>-->
-                   <!--<bs-datepicker #dp [(bsValue)]="bsValue" style="display: block"></bs-datepicker>-->
-                  <!--</span>-->
+                  <div class="col-md-9 selected-date">{{dateStart | date: 'MM / dd / y'}}</div>
+                  <button class="btn btn-datepicker" (click)="toggleDatepicker('isShownDatepickerStart')"><i class="glyphicon glyphicon-calendar"></i></button>
+                  <div class="datepicker-popup" [hidden]="!isShownDatepickerStart">
+                    <datepicker [(ngModel)]="dateStart" [startingDay]="1" (selectionDone)="selectionDone('isShownDatepickerStart')" (activeDateChange)="calculateFinishDate()"></datepicker>
+                  </div>
                 </div>
               </div>
             </div>
@@ -96,7 +113,11 @@
                   Finish date:
                 </div>
                 <div class="col-md-8">
-                  <input type="date">
+                  <div class="col-md-9 selected-date">{{dateFinish | date: 'MM / dd / y'}}</div>
+                  <button class="btn btn-datepicker" (click)="toggleDatepicker('isShownDatepickerFinish')"><i class="glyphicon glyphicon-calendar"></i></button>
+                  <div class="datepicker-popup" [hidden]="!isShownDatepickerFinish">
+                    <datepicker [(ngModel)]="dateFinish" [startingDay]="1" [minDate]="dateStart" (selectionDone)="selectionDone('isShownDatepickerFinish')"></datepicker>
+                  </div>
                 </div>
               </div>
             </div>
@@ -140,7 +161,7 @@
     </div>
     <div class="row">
       <div class="col-md-12 text-center">
-        <button type="button" class="btn btn-primary" (click)="bsModalRef.hide()">confirm</button>
+        <button type="button" class="btn btn-primary" (click)="updateGroup()">confirm</button>
         <button type="button" class="btn btn-primary" (click)="bsModalRef.hide()">cancel</button>
       </div>
     </div>

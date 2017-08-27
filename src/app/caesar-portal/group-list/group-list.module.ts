@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { GroupListComponent } from './group-list.component';
 import { GroupItemComponent } from './group-item/group-item.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
@@ -9,10 +9,12 @@ import { MatchesProgressPipe } from '../../caesar-portal/common/pipes/mathces-pr
 import { PagerComponent } from '../common/components/pager/pager.component';
 import { CreateEditDialogComponent } from './create-edit-dialog/create-edit-dialog.component';
 import { BsDropdownModule, DatepickerModule } from 'ngx-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     HttpModule,
     BsDropdownModule.forRoot(),
     DatepickerModule.forRoot()
@@ -22,6 +24,7 @@ import { BsDropdownModule, DatepickerModule } from 'ngx-bootstrap';
     GroupItemComponent,
     DeleteDialogComponent
   ],
+  providers: [DatePipe],
   declarations: [GroupListComponent, GroupItemComponent, PagerComponent, LimitToPipe, MatchesProgressPipe, DeleteDialogComponent, CreateEditDialogComponent],
   entryComponents: [DeleteDialogComponent, CreateEditDialogComponent]
 })
