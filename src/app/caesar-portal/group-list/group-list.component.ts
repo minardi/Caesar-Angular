@@ -7,6 +7,7 @@ import { LocationService } from '../common/services/location.service';
 import { Response } from '@angular/http';
 import { GroupItemComponent } from './group-item/group-item.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { MatchesProgressPipe } from '../../caesar-portal/common/pipes/mathces-progress.pipe';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
@@ -59,12 +60,20 @@ export class GroupListComponent implements OnInit {
         this.groups = data;
         this.onPageChange(1);
 
-        if (this.router.url === '/' && this.groups.length > 0) {
-          this.router.navigate(['/group', this.groups[0].groupId, this.groups[0].name, 'info']);
+        if (this.router.url === '/') {
+          this.navigateToFirstGroup();
         }
       },
       error => console.log(error));
+}
 
+  private navigateToFirstGroup () {
+    const pipe = new MatchesProgressPipe();
+    const groups = pipe.transform(this.groups, this.groupStatus);
+
+    if (groups.length > 0) {
+      this.router.navigate(['/group', groups[0].groupId, groups[0].name, 'info']);
+    }
   }
 
   private getGroupsByLocation(locations: string[]) {

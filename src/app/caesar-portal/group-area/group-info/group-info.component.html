@@ -11,11 +11,23 @@
         	<tbody>
                 <tr>
                     <td>Teacher</td>
-                    <td>Oleg Shvets</td>
+                    <td>
+                        <ul>
+                            <li *ngFor="let teacher of group.teachers">
+                                {{ teacher.firstName }} {{ teacher.lastName }}
+                            </li>
+                        </ul>
+                    </td>
                 </tr>
                 <tr>
                     <td>Expert</td>
-                    <td>Yuriy Osypchuk</td>
+                    <td>
+                        <ul>
+                            <li *ngFor="let expert of group.experts">
+                                {{ expert }}
+                            </li>
+                        </ul>
+                    </td>
                 </tr>
         	</tbody>
         </table>
@@ -32,11 +44,11 @@
             <tbody>
                 <tr>
                     <td>Date start:</td>
-                    <td>03/07/2013</td>
+                    <td>{{ group.startDate }}</td>
                 </tr>
                 <tr>
                     <td>Date finish:</td>
-                    <td>06/21/2013</td>
+                    <td>{{ group.finishDate }}</td>
                 </tr>
             </tbody>
         </table>
