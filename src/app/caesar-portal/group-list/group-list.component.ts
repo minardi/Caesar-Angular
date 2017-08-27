@@ -11,6 +11,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/mergeMap';
 
 @Component({
   selector: 'group-list',
@@ -44,13 +45,12 @@ export class GroupListComponent implements OnInit {
       if (params['location']) {
         this.locations = params['location'].split('+');
       }
+
       this.locations.length > 0
         ? this.getGroupsByLocation(this.locations)
         : this.getCurrentLocationGroups();
     });
   }
-
- 
 
   private getCurrentLocationGroups() {
     this.groupService.getCurrentLocationGroups().subscribe(
@@ -65,7 +65,7 @@ export class GroupListComponent implements OnInit {
     //since rest api does not work with location names we need to find ids by names manually 
     let allLocations = this.locationService.getLocations();
 
-    allLocations.flatMap((data) => {
+    allLocations.mergeMap((data) => {
       let locationsIds = this.getLocationIdsByNames(this.locations, data);
       return this.groupService.getGroupsByLocations(locationsIds)
     }).subscribe(
@@ -98,7 +98,16 @@ export class GroupListComponent implements OnInit {
 
   private showMyGroups() {
     this.myGroupsFilter = !this.myGroupsFilter;
-    this.myGroupsFilter ? this.showUserGroups() : this.getCurrentLocationGroups();
+
+    if (this.myGroupsFilter) {
+      this.showUserGroups()
+    }
+    else {
+      //if location exists render groups by location in url otherwise current location groups 
+      this.locations.length > 0
+        ? this.getGroupsByLocation(this.locations)
+        : this.getCurrentLocationGroups();
+    }
   }
 
   private changeProgressStatus(status) {
