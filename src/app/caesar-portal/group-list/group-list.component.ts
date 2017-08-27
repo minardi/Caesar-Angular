@@ -102,7 +102,7 @@ export class GroupListComponent implements OnInit {
       error => console.log(error));
   }
 
-  private showMyGroups() {
+  showMyGroups() {
     this.myGroupsFilter = !this.myGroupsFilter;
 
     if (this.myGroupsFilter) {
@@ -116,12 +116,12 @@ export class GroupListComponent implements OnInit {
     }
   }
 
-  private changeProgressStatus(status) {
+  changeProgressStatus(status) {
     this.groupStatus = status;
     this.onPageChange(1);
   }
 
-  private openDeleteDialog(event: Event, groupId: number, groupName: string) {
+  openDeleteDialog(event: Event, groupId: number, groupName: string) {
     event.preventDefault();
 
     this.bsModalRef = this.modalService.show(DeleteDialogComponent, { class: 'delete-dialog' });
