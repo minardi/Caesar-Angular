@@ -1,3 +1,4 @@
+import { NgModule } from '@angular/core';  
 import { Routes, RouterModule } from '@angular/router';
  
 import { CaesarHomeComponent } from './caesar-home/caesar-home.component';
@@ -11,5 +12,11 @@ export const appRoutes: Routes = [
     { path: 'log', component: CaesarLoginComponent },
     { path: '**', redirectTo: '' } 
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(appRoutes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {
+}
   
-export const routing = RouterModule.forRoot(appRoutes); 
