@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
         this.isHidden = !this.isHidden;
     }
 
-    public logOut (): void {
+    public logOut(): void {
         localStorage.removeItem('loggedUser');
         this.router.navigate(['/log']);
     }
