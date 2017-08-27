@@ -9,7 +9,6 @@ import 'rxjs/add/operator/toPromise';
 
 export class GroupService {
   group: Group = new Group();
-  groupP: {group: Group} = {group: null};
 
   constructor(private http: Http) { }
 
