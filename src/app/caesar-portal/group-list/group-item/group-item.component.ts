@@ -2,7 +2,7 @@ import { Input, Component, OnInit } from '@angular/core';
 import { Group } from '../../common/models/group';
 
 @Component({
-  selector: 'group-item',
+  selector: 'caesar-group-item',
   templateUrl: './group-item.component.html',
   styleUrls: ['./group-item.component.scss']
 })

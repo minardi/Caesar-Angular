@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/mergeMap';
 
 @Component({
-  selector: 'group-list',
+  selector: 'caesar-group-list',
   templateUrl: './group-list.component.html',
   styleUrls: ['./group-list.component.scss']
 })

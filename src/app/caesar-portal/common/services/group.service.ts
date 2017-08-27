@@ -3,12 +3,7 @@ import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { environment } from '../../../../environments/environment';
 import { Group } from '../../common/models/group';
 import { Observable } from 'rxjs/Observable';
-
 import 'rxjs/add/operator/map';
-// import 'rxjs/add/operator/toPromise';
-// // import 'rxjs/Rx'; this will load all features
-// import { enableProdMode } from '@angular/core';
-// import { Title } from '@angular/platform-browser';
 
 @Injectable()
 export class GroupService {

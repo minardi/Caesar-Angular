@@ -5,7 +5,7 @@ import { GroupService } from '../../common/services/group.service';
 import { HostListener } from '@angular/core';
 
 @Component({
-  selector: 'delete-dialog',
+  selector: 'caesar-delete-dialog',
   templateUrl: './delete-dialog.component.html',
   styleUrls: ['./delete-dialog.component.scss'],
 })
