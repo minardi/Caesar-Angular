@@ -8,10 +8,13 @@ import { LimitToPipe } from '../../caesar-portal/common/pipes/limit-to.pipe';
 import { MatchesProgressPipe } from '../../caesar-portal/common/pipes/mathces-progress.pipe';
 import { PagerComponent } from '../common/components/pager/pager.component';
 
+import { AppRoutingModule } from '../caesar-portal.routing.module';
+
 @NgModule({
   imports: [
     CommonModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
   exports: [
     GroupListComponent,

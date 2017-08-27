@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
+import { Router } from '@angular/router';
 
 import { User } from '../common/models/user';
 import { ProfileService } from './profile.service';
@@ -16,7 +17,10 @@ export class ProfileComponent implements OnInit {
     defaultPhoto = 'http://www.thirann.com/assets/img/newuser.jpeg';
     isHidden = true;
 
-    constructor(private profileService: ProfileService) { }
+    constructor (
+        private profileService: ProfileService,
+        private router: Router) { 
+    }
 
     ngOnInit(): void {
         this.profileService.getCurrentUser()
@@ -31,5 +35,10 @@ export class ProfileComponent implements OnInit {
 
     toggleVisibility(): void {
         this.isHidden = !this.isHidden;
+    }
+
+    logOut (): void {
+        localStorage.removeItem('loggedUser');
+        this.router.navigate(['/log']);
     }
 }

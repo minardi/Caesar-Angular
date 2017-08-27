@@ -6,12 +6,15 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <a href='#'><span class='glyphicon glyphicon-plus search-btn'></span></a>
+      <a 
+        href='#'><span class='glyphicon glyphicon-plus search-btn'></span></a>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6" *ngFor="let item of (groups | mathcesProgress : groupStatus | limitTo : firstItem : lastItem)">
+    <a [routerLink]="['/group', item.groupId, item.name, 'info']" href="#">
       <group-item [group]="item" (contextmenu)="openDeleteDialog($event, item.groupId, item.name)">Group</group-item>
+    </a>   
     </div>
   </div>
   <button type="button" [class.active]="myGroupsFilter" class="btn btn-primary btn-lg my-groups" (click)="showMyGroups()"> My groups</button>
