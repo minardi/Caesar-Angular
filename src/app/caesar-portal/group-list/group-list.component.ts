@@ -8,6 +8,7 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { Router, NavigationEnd } from '@angular/router';
+import { MatchesProgressPipe } from '../../caesar-portal/common/pipes/mathces-progress.pipe';
 
 @Component({
   selector: 'group-list',
@@ -27,28 +28,28 @@ export class GroupListComponent implements OnInit {
   GroupProgressStatus: typeof GroupStatus = GroupStatus;
   groupStatus: GroupStatus = GroupStatus.Current;
 
-  constructor(private router: Router, private groupService: GroupService, private modalService: BsModalService) { }
+  constructor (private router: Router, private groupService: GroupService, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.showAllGroups();
   }
 
-  private showAllGroups() {
+  private showAllGroups () {
     this.groupService.getAll().subscribe(
       (data: Group[]) => {
         this.groups = data;
         this.groupsQuantity = this.groups.length;
         this.onPageChange(1);
 
-        if (this.router.url === '/' && this.groups.length > 0) {
-          this.router.navigate(['/group', this.groups[0].groupId, this.groups[0].name, 'info']);
+        if (this.router.url === '/') {
+          this.navigateToFirstGroup();
         }
       },
       error => console.log(error));
 
   }
 
-  private showUserGroups() {
+  private showUserGroups () {
     this.groupService.getUserGroups().subscribe(
       (data: Group[]) => {
         this.groups = data;
@@ -58,16 +59,26 @@ export class GroupListComponent implements OnInit {
       error => console.log(error));
   }
 
-  public showMyGroups() {
+  public showMyGroups () {
     this.myGroupsFilter = !this.myGroupsFilter;
     this.myGroupsFilter ? this.showUserGroups() : this.showAllGroups();
   }
 
-  changeProgressStatus(status) {
+  changeProgressStatus (status) {
     this.groupStatus = status;
+    this.navigateToFirstGroup();
   }
 
-  public openDeleteDialog(event: Event, groupId: number, groupName: string) {
+  private navigateToFirstGroup () {
+    const pipe = new MatchesProgressPipe();
+    const groups = pipe.transform(this.groups, this.groupStatus);
+
+    if (groups.length > 0) {
+      this.router.navigate(['/group', groups[0].groupId, groups[0].name, 'info']);
+    }
+  }
+
+  public openDeleteDialog (event: Event, groupId: number, groupName: string) {
     event.preventDefault();
 
     this.bsModalRef = this.modalService.show(DeleteDialogComponent);
@@ -82,7 +93,7 @@ export class GroupListComponent implements OnInit {
     });
   }
 
-  onPageChange(page: number) {
+  onPageChange (page: number) {
     this.firstItem = this.itemsPerPage * page - this.itemsPerPage;
     this.lastItem = this.itemsPerPage * page - 1;
   }

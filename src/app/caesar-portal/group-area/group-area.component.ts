@@ -4,6 +4,7 @@ import { GroupService } from "../common/services/group.service";
 import { Response } from '@angular/http';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { Group } from '../common/models/group';
 
 @Component({
     selector: 'group-area',
@@ -13,13 +14,15 @@ import { Subscription } from 'rxjs/Subscription';
 
 export class GroupAreaComponent implements OnInit, OnDestroy {
     activeTab;
-    group: {id: number, name: string} = {id: null, name: null};
+    group: Group = new Group();
     paramsSubscription: Subscription;
 
-    constructor (private router: Router, private route: ActivatedRoute) {
+    constructor (private router: Router, 
+                 private route: ActivatedRoute, 
+                 private groupService: GroupService) {
         router.events.subscribe((e) => {
             if (e instanceof NavigationEnd) {
-                this.activeTab = e.url;
+                this.activeTab = e.url.substr(e.url.lastIndexOf('/'));
             }
         });
     }
@@ -28,15 +31,22 @@ export class GroupAreaComponent implements OnInit, OnDestroy {
         this.paramsSubscription = this.route.params
             .subscribe(
                 (params: Params) => {
-                    this.group.id = params['id'];
-                    this.group.name = params['name'];
+                    this.getGroup(params['id']);
                 }
             );
+    }
+
+    private getGroup (groupId: number) {
+        this.groupService.get(groupId).then(
+            (group: Group) => {
+                this.group = group;
+                this.groupService.setGroup(group);
+            },
+            error => console.log(error)
+        );
     }
 
     ngOnDestroy () {
         this.paramsSubscription.unsubscribe();
     }
 }
-
-  // constructor(private route: ActivatedRoute) { }
