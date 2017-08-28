@@ -1,58 +1,60 @@
-<div class="col-md-6">
-  <div class="row">
-    <div class="col-md-4">
-      Teachers:
-    </div>
-    <div class="col-md-8">
-      
-        <div class="row">
-          <ul class="list-of-selected-teachers" [hidden]=hiddenSelectedTeachers>
-            <li class="selected-teacher" *ngFor="let teacher of selectedTeachers">
-              <div class="col-md-7">
-                {{teacher}}
-              </div>
-
-              <div class="col-md-2">
-                <span class="glyphicon glyphicon-remove-circle remove-teacher"
-                  aria-hidden="true" (click)="deleteTeacher(teacher)">
-                </span>
-              </div>
-            </li>
-          </ul>
-
-        <div class="dropdown" [hidden]=toggleDropdownAndButton>
-          <div class="col-md-7">
-            <select class="form-control" name="teachers" #selectElement>
-              <option  *ngFor="let teacher of teachers" [ngValue]="teacher"
-                [selected]="teacher.role === 'coordinator'">
-                  {{teacher.firstName}} {{teacher.lastName}}
-              </option>
-            </select>
-          </div>
-
-          <div class="col-md-1">
-            <div (click)="saveSelectedTeacher(selectElement.value)">
-                <span class="glyphicon glyphicon-ok-circle save-teacher"
-                  aria-hidden="true">
-                </span>
-            </div>
-          </div>
-
-          <div class="col-md-1">
-            <div class="cancel-teacher"
-              (click)="toggleListAndButton()">
-                <span class="glyphicon glyphicon-remove-circle remove-dropdown"
-                  aria-hidden="true">
-                </span>
-            </div>
-          </div>
-        </div>    
+<div class="row">
+  <ul class="list-of-selected-teachers" [hidden]=hiddenSelectedTeachers>
+    <li class="selected-teacher" *ngFor="let teacher of selectedTeachers">
+      <div class="col-md-7">
+        {{teacher.firstName}} {{teacher.lastName}}
       </div>
 
-      <div class="add-teacher"
-        [hidden]="(!toggleDropdownAndButton || hiddenButton)"  (click)="toggleListAndButton()">
-          + one more teacher
+      <div class="col-md-2">
+        <span class="glyphicon glyphicon-remove-circle remove-teacher"
+          aria-hidden="true" (click)="deleteTeacherFromSelected(teacher)">
+        </span>
+      </div>
+    </li>
+  </ul>
+
+  <div class="dropdown" [hidden]=toggleDropdownAndButton>
+
+    <div class="col-md-7">
+      <div dropdown>
+        <button dropdownToggle class="btn btn-dropdown dropdown-toggle
+          button-dropdown-teacher" type="button">
+            {{defaultTeacher?.firstName}} {{defaultTeacher?.lastName}}
+            <span class="caret"></span>
+        </button>
+        <ul *dropdownMenu class="dropdown-menu dropdown-teacher" role="menu">
+          <li role="menuitem" *ngFor="let teacher of teachers">
+            <a class="dropdown-item" href="#"
+              (click)="changeDefaultTeacher(teacher)">
+                {{teacher.firstName}} {{teacher.lastName}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div> 
+
+    <div class="col-md-1">
+      <div (click)="saveSelectedTeacher()">
+        <span class="glyphicon glyphicon-ok-circle save-teacher"
+          aria-hidden="true">
+        </span>
       </div>
     </div>
-  </div>
+
+    <div class="col-md-1">
+      <div class="cancel-teacher"
+        (click)="cancelTeacher()">
+        <span class="glyphicon glyphicon-remove-circle remove-dropdown"
+          aria-hidden="true">
+        </span>
+      </div>
+    </div>
+          
+  </div>    
 </div>
+
+<div class="add-teacher"
+  [hidden]="(!toggleDropdownAndButton || hiddenButton)"  (click)="addTeacher()">
+    + one more teacher
+</div>
+

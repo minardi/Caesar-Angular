@@ -1,0 +1,22 @@
+@import '~variables.scss';
+
+.add-expert {
+   cursor: pointer;
+   color: $astral;
+}
+
+.list-of-experts {
+	list-style: none;
+	padding: 0;
+}
+
+.save-expert, .remove-expert, .remove-input {
+   font-size: 1.8em;
+   cursor: pointer;
+   color: $astral;
+}
+
+.input-name {
+  width: 130px;
+}
+

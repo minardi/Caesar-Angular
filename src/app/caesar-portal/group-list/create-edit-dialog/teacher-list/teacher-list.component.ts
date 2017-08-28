@@ -1,113 +1,150 @@
-import { Component, OnInit } from '@angular/core';
+import { Input, Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { NgModel } from '@angular/forms';
+import { OnChanges } from '@angular/core';
 
-
-import { usersService } from './users.service';
+import { ProfileService } from '../../../profile/profile.service';
+import { User } from '../../../common/models/user';
 import { USERS } from './mock-users';
-import { UsersInfo } from './model-users';
-
 
 @Component({
     selector: 'teacher-list',
     templateUrl: './teacher-list.component.html',
-    styleUrls: ['./teacher-list.component.css']
+    styleUrls: ['./teacher-list.component.scss']
 })
 export class TeacherListComponent implements OnInit {
-    private toggleDropdownAndButton: boolean = true;
-    private hiddenSelectedTeachers: boolean = true;
-    private hiddenButton: boolean = false;
-    private users: UsersInfo[];
-    private teachers: UsersInfo[];
-    private location: string;
-    private selectedTeachers: string[] = [];
-    private listRemovedTeachers: UsersInfo[] = [];
-    private quantityOfTeachers: number;
+    private users: User[];
+    public teachers: User[];
 
-    constructor (private usersService: usersService) {
+    public selectedTeachers: User[] = [];
+    private quantityOfTeachers: number;
+    private defaultTeacher: User;
+
+    public toggleDropdownAndButton: boolean = true;
+    public hiddenSelectedTeachers: boolean = true;
+    public hiddenButton: boolean = false;
+
+    public IdSelectedTeachers: {id: number}[];
+
+    @Output() onTeachersChanged = new EventEmitter<{id: number}[]>();
+    
+    constructor (private profileService: ProfileService) {
     }
 
     ngOnInit () {
         this.users = USERS;
-        this.usersService.getUser()
+        this.profileService.getCurrentUser()
             .subscribe(
-                (data) => {    
-                    this.location = data.json().location.name;
-                    this.filterTeachers(this.location);
-
+                (data) => {
+                    const currentUser = data.json();    
+                    this.filterTeachers(currentUser);
                 },
-                (error) => { })
+                (error) => {}
+            );
     }
 
-    private filterTeachers(location: string): void {
-        this.teachers = this.users.filter((user) => {
-            return user.location === location && user.role !== 'admin';
-        });
+    private filterTeachers(currentUser: User): void {
+        const location = currentUser.location.name;
 
+        if (currentUser.role.name !== 'admin') {
+            this.teachers = this.users.filter((user) => {
+                return user.location.name === location && user.role.name !== 'admin';
+            });
+        } else {
+            this.teachers = this.users.filter((user) => {
+                return user.role.name !== 'admin';
+            });
+        }
+
+        this.countTeachers();
+        this.findCoordinator();
+    }
+
+    private countTeachers() {
         this.quantityOfTeachers = this.teachers.length;
     }
 
+    private findCoordinator(): void {
+        this.defaultTeacher = this.teachers.find((user) => {
+            return user.role.name === 'coordinator';
+        });
+    }
+
+     public changeDefaultTeacher(teacher: User) {
+        this.defaultTeacher = teacher;
+    }
+
+    public addTeacher(): void {
+        this.toggleListAndButton();
+    }
+
+    public cancelTeacher(): void {
+        this.toggleListAndButton();
+    }
+ 
     private toggleListAndButton(): void {
         this.toggleDropdownAndButton = !this.toggleDropdownAndButton;
     }
 
-    private saveSelectedTeacher(teacher: string): void {
-        this.selectedTeachers.push(teacher);
+    public saveSelectedTeacher(): void {
+        this.selectedTeachers.push(this.defaultTeacher);
 
-        this.hiddenSelectedTeachers = false;
         this.toggleDropdownAndButton = !this.toggleDropdownAndButton;
+        this.hiddenSelectedTeachers = false;
 
-        this.deleteTeacherFromList(teacher);
-
+        this.deleteTeacherFromProposed(this.defaultTeacher);
         this.checkQuantity();
+        this.addNewDefaultTeacher();
+        this.createIdTeachersList();
+
+        this.sendTeachersId(this.IdSelectedTeachers);    
+    }
+
+    public sendTeachersId(id) {
+        this.onTeachersChanged.emit(id);
+    }
+
+    private createIdTeachersList() {
+        this.IdSelectedTeachers = [];
+
+        this.selectedTeachers.forEach((teacher) => {
+            this.IdSelectedTeachers.push({id: teacher.id});
+        });
+    }
+
+    private addNewDefaultTeacher(deletedTeacher?: User) {
+        if (this.defaultTeacher) {
+            this.defaultTeacher = this.teachers.find((user) => {
+                return user.lastName !== this.defaultTeacher.lastName;
+            });
+        } else {
+            this.defaultTeacher = deletedTeacher;
+        }
     }
 
     private checkQuantity() {
-        if (this.selectedTeachers.length === this.quantityOfTeachers) {
-            this.hiddenButton = true;
-        } else {
-            this.hiddenButton = false;
-        }
+        if (!this.selectedTeachers.length) {
+            this.hiddenSelectedTeachers = true;
+        } 
+
+        this.hiddenButton = (this.selectedTeachers.length === this.quantityOfTeachers)?
+            true : false;
     }
 
-    private deleteTeacherFromList(teacher: string) {
-        const teacherName = teacher.split(' ')[0];
+    private deleteTeacherFromProposed(deletedTeacher: User) {
+        const indexOfTeacher = this.teachers.indexOf(deletedTeacher);
 
-        const deletedTeacher = this.teachers.find((user) => {
-            return user.firstName === teacherName;
-        })
-
-        this.listRemovedTeachers.push(deletedTeacher);
-
-        const indexOfList = this.teachers.indexOf(deletedTeacher);
-
-        this.teachers.splice(indexOfList, 1);
-
-        /*this.teachers = this.teachers.filter((user) => {
-            return user.firstName !== teacherName;
-        });*/
+        this.teachers.splice(indexOfTeacher, 1);
     }
 
-
-    private deleteTeacher(removedTeacher: string): void {
-        const teacherName = removedTeacher.split(' ')[0];
-
-        /*this.selectedTeachers = this.selectedTeachers.filter((teacher) => {
-            return teacher !== removedTeacher;
-        });*/
-
-        const indexOfTeacher = this.selectedTeachers.indexOf(removedTeacher);
+    public deleteTeacherFromSelected(deletedTeacher: User): void {
+        const indexOfTeacher = this.selectedTeachers.indexOf(deletedTeacher);
 
         this.selectedTeachers.splice(indexOfTeacher, 1);
 
-        if (!this.selectedTeachers.length) {
-            this.hiddenSelectedTeachers = true;
-        }
-
-        this.teachers.push(this.listRemovedTeachers.find((teacher) => {
-            return teacher.firstName === teacherName;
-        }));
+        this.teachers.push(deletedTeacher);
 
         this.checkQuantity();
+        this.addNewDefaultTeacher(deletedTeacher);
+        this.createIdTeachersList();
     }
-
 }

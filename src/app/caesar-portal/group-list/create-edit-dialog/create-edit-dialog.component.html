@@ -4,10 +4,28 @@
        <div class="col-md-6">
          <div class="row">
            <div class="col-md-4">
-             Group name:
+           Group name:
            </div>
            <div class="col-md-8">
              <input type="text" name="groupname">
+           </div>
+         </div>
+         <div class="row" *ngIf="isEditMode">
+           <div class="col-md-4">
+             Current Stage:
+           </div>
+           <div class="col-md-8">
+             <div dropdown>
+               <button dropdownToggle class="btn btn-dropdown dropdown-toggle" type="button">
+                 {{selectedStage?.name}}
+                 <span class="caret"></span>
+               </button>
+               <ul *dropdownMenu class="dropdown-menu" role="menu">
+                 <li role="menuitem" *ngFor="let stage of stages">
+                   <a class="dropdown-item" href="#" (click)="changeSelectedStage(stage)">{{stage.name}}</a>
+                 </li>
+               </ul>
+             </div>
            </div>
          </div>
        </div>
@@ -17,8 +35,11 @@
              Budget Owner
            </div>
            <div class="col-md-8">
-             <button>SoftServe</button>
-             <button>Open group</button>
+             <ul class="budget-owner-list">
+               <li *ngFor="let budgetOwner of budgetOwners">
+                 <button class="btn btn-primary" (click)="changeSelectedBudgetOwner(budgetOwner)" [ngClass]="{active: isActive(budgetOwner)}">{{budgetOwner.name}}</button>
+               </li>
+             </ul>
            </div>
          </div>
        </div>
@@ -34,13 +55,15 @@
                   Direction:
                 </div>
                 <div class="col-md-8">
-                  <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Example
-                      <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">HTML</a></li>
-                      <li><a href="#">CSS</a></li>
-                      <li><a href="#">JavaScript</a></li>
+                  <div dropdown>
+                    <button dropdownToggle class="btn btn-dropdown dropdown-toggle" type="button">
+                      {{selectedDirection?.name}}
+                      <span class="caret"></span>
+                    </button>
+                    <ul *dropdownMenu class="dropdown-menu" role="menu">
+                      <li role="menuitem" *ngFor="let direction of directions">
+                        <a class="dropdown-item" href="#" (click)="changeSelectedDirection(direction)">{{direction.name}}</a>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -53,10 +76,14 @@
                 </div>
                 <div class="col-md-8">
                   <div dropdown>
-                    <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" >Example
-                      <span class="caret"></span></button>
+                    <button dropdownToggle class="btn btn-dropdown dropdown-toggle" type="button" [disabled]="currentUser?.role?.id === allowedRole">
+                      {{selectedLocation?.name}}
+                      <span class="caret"></span>
+                    </button>
                     <ul *dropdownMenu class="dropdown-menu" role="menu">
-                      <li role="menuitem" *ngFor="let location of locations"><a class="dropdown-item" href="#">{{location.name}}</a></li>
+                      <li role="menuitem" *ngFor="let location of locations">
+                        <a class="dropdown-item" href="#" (click)="changeSelectedLocation(location)">{{location.name}}</a>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -72,7 +99,11 @@
                   Start date:
                 </div>
                 <div class="col-md-8">
-                  <input type="date">
+                  <div class="col-md-9 selected-date">{{dateStart | date: 'MM / dd / y'}}</div>
+                  <button class="btn btn-datepicker" (click)="toggleDatepicker('isShownDatepickerStart')"><i class="glyphicon glyphicon-calendar"></i></button>
+                  <div class="datepicker-popup" [hidden]="!isShownDatepickerStart">
+                    <datepicker [(ngModel)]="dateStart" [startingDay]="1" (selectionDone)="selectionDone('isShownDatepickerStart')" (activeDateChange)="calculateFinishDate()"></datepicker>
+                  </div>
                 </div>
               </div>
             </div>
@@ -82,7 +113,11 @@
                   Finish date:
                 </div>
                 <div class="col-md-8">
-                  <input type="date">
+                  <div class="col-md-9 selected-date">{{dateFinish | date: 'MM / dd / y'}}</div>
+                  <button class="btn btn-datepicker" (click)="toggleDatepicker('isShownDatepickerFinish')"><i class="glyphicon glyphicon-calendar"></i></button>
+                  <div class="datepicker-popup" [hidden]="!isShownDatepickerFinish">
+                    <datepicker [(ngModel)]="dateFinish" [startingDay]="1" [minDate]="dateStart" (selectionDone)="selectionDone('isShownDatepickerFinish')"></datepicker>
+                  </div>
                 </div>
               </div>
             </div>
@@ -92,15 +127,23 @@
     </div>
     <div class="row items-row">
       <div class="col-md-12">
-       <teacher-list></teacher-list> 
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4">
+              Teachers:
+            </div>
+            <div class="col-md-8">
+              <teacher-list (onTeachersChanged)="onTeachersChanged($event)"></teacher-list>
+            </div>
+          </div>
+        </div> 
         <div class="col-md-6">
           <div class="row">
             <div class="col-md-4">
               Experts:
             </div>
             <div class="col-md-8">
-              <input type="text" name="expertname"><br>
-              <button type="button" class="add-btn">+ one more expert</button>
+              <expert-list (onExpertsChanged)="onExpertsChanged($event)"></expert-list>
             </div>
           </div>
         </div>
@@ -108,7 +151,7 @@
     </div>
     <div class="row">
       <div class="col-md-12 text-center">
-        <button type="button" class="btn btn-primary" (click)="bsModalRef.hide()">confirm</button>
+        <button type="button" class="btn btn-primary" (click)="updateGroup()">confirm</button>
         <button type="button" class="btn btn-primary" (click)="bsModalRef.hide()">cancel</button>
       </div>
     </div>

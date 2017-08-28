@@ -1,46 +1,118 @@
-import { UsersInfo } from './model-users';
+import { User } from '../../../common/models/user';
 
-export const USERS: UsersInfo[] = [
+export const USERS: User[] = [
 	{
-		"firstName": "Oleg",
-		"lastName":  "Shvets",
-		"nickName": "OlegShvets",
-		"role": "teacher",
-		"location": "Dnipro"
+    	"id": 1,
+    	"firstName": "Oleg",
+    	"lastName": "Shvets",
+    	"role": {
+        	"id": 3,
+        	"name": "teacher",
+        	"roleCategory": {
+            	"id": 2,
+            	"name": "itacademy"
+        	}
+    	},
+    	"nickName": "OlegShvets",
+    	"image": null,
+    	"location": {
+        	"id": 1,
+        	"name": "Dnipro"
+    	}
 	},
 	{
-		"firstName": "Dmytro",
-		"lastName":  "Petin",
-		"nickName": "DmytroPetin",
-		"role": "coordinator",
-		"location": "Dnipro"
+    	"id": 2,
+    	"firstName": "Dmytro",
+    	"lastName": "Petin",
+    	"role": {
+        	"id": 4,
+        	"name": "coordinator",
+        	"roleCategory": {
+            	"id": 2,
+            	"name": "itacademy"
+        	}
+    	},
+    	"nickName": "DmytroPetin",
+    	"image": null,
+    	"location": {
+        	"id": 1,
+        	"name": "Dnipro"
+    	}
 	},
 	{
-		"firstName": "Lucas",
-		"lastName": "Lukichich",
-		"nickName": "LukasLukichich",
-		"role": "admin",
-		"location": "Dnipro"
+    	"id": 3,
+    	"firstName": "Lucas",
+    	"lastName": "Lukichich",
+    	"role": {
+        	"id": 5,
+        	"name": "admin",
+        	"roleCategory": {
+            	"id": 2,
+            	"name": "itacademy"
+        	}
+    	},
+    	"nickName": "LukasLukichich",
+    	"image": null,
+    	"location": {
+        	"id": 1,
+        	"name": "Dnipro"
+    	}
 	},
 	{
-		"firstName": "Stefan",
-		"lastName": "Vendera",
-		"nickName": "SlavaUkr",
-		"role": "teacher",
-		"location": "Dnipro"
+    	"id": 4,
+    	"firstName": "Stefan",
+    	"lastName": "Vendera",
+    	"role": {
+        	"id": 4,
+        	"name": "coordinator",
+        	"roleCategory": {
+            	"id": 2,
+            	"name": "itacademy"
+        	}
+    	},
+    	"nickName": "SlavaUkr",
+    	"image": null,
+    	"location": {
+        	"id": 1,
+        	"name": "Dnipro"
+    	}
 	},
 	{
-		"firstName": "Kozak",
-		"lastName": "Kozachenko",
-		"nickName": "Kozachok",
-		"role": "teacher",
-		"location": "Chernivtsi"
+    	"id": 5,
+    	"firstName": "Kozak",
+    	"lastName": "Kozachenko",
+    	"role": {
+        	"id": 3,
+        	"name": "teacher",
+        	"roleCategory": {
+            	"id": 2,
+            	"name": "itacademy"
+        	}
+    	},
+    	"nickName": "Kozachok",
+    	"image": null,
+    	"location": {
+        	"id": 1,
+        	"name": "Chernivtsi"
+    	}
 	},
 	{
-		"firstName": "Petro",
-		"lastName": "Poroshenko",
-		"nickName": "Roshenneprodam",
-		"role": "teacher",
-		"location": "Kyiv"
+    	"id": 6,
+    	"firstName": "Petro",
+    	"lastName": "Poroshenko",
+    	"role": {
+        	"id": 3,
+        	"name": "teacher",
+        	"roleCategory": {
+            	"id": 2,
+            	"name": "itacademy"
+        	}
+    	},
+    	"nickName": "Roshenneprodam",
+    	"image": null,
+    	"location": {
+        	"id": 1,
+        	"name": "Kyiv"
+    	}
 	}
 ]
