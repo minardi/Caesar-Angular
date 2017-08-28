@@ -2,36 +2,36 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 
 @Component({
-  	selector: 'expert-list',
-  	templateUrl: './expert-list.component.html',
-  	styleUrls: ['./expert-list.component.scss']
+    selector: 'expert-list',
+    templateUrl: './expert-list.component.html',
+    styleUrls: ['./expert-list.component.scss']
 })
 export class ExpertListComponent implements OnInit {
-	public toggleInputAndButton: boolean = true;
+    public toggleInputAndButton: boolean = true;
     public hiddenExperts: boolean = true;
     public hiddenButton: boolean = false;
     public expertName: string;
     public experts: string[] = [];
 
-  	constructor() { }
+    constructor() { }
 
-  	ngOnInit() {
-  	}
+    ngOnInit() {
+    }
 
-  	@Output() onExpertsChanged = new EventEmitter<string[]>();
+    @Output() onExpertsChanged = new EventEmitter<string[]>();
 
-  	public sendExperts(): void {
+    public sendExperts(): void {
         this.onExpertsChanged.emit(this.experts);
-    }	
+    }    
 
-  	private toggleInputButton (): void {
- 		this.toggleInputAndButton = !this.toggleInputAndButton;
-  	}
+    private toggleInputButton (): void {
+        this.toggleInputAndButton = !this.toggleInputAndButton;
+    }
 
     public cancelExpert(): void {
-    	this.expertName = '';
+        this.expertName = '';
 
-    	this.toggleInputButton();
+        this.toggleInputButton();
     }
 
     public addExpert(): void {
@@ -39,21 +39,21 @@ export class ExpertListComponent implements OnInit {
     }
 
     public saveExpert(): void {
-    	this.experts.push(this.expertName);
-    	this.expertName = '';
-    	this.hiddenExperts = false;
+        this.experts.push(this.expertName);
+        this.expertName = '';
+        this.hiddenExperts = false;
 
-    	this.toggleInputButton();
-    	this.sendExperts();
+        this.toggleInputButton();
+        this.sendExperts();
     }
 
     public deleteExpert(expert: string): void {
-    	const indexOfExpert = this.experts.indexOf(expert);
+        const indexOfExpert = this.experts.indexOf(expert);
 
-    	this.experts.splice(indexOfExpert, 1);
+        this.experts.splice(indexOfExpert, 1);
 
-    	this.sendExperts();
-    	this.checkPresenceOfExperts();
+        this.sendExperts();
+        this.checkPresenceOfExperts();
     }
 
     private checkPresenceOfExperts(): void {
