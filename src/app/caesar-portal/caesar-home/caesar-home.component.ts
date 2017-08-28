@@ -8,10 +8,12 @@ import { ErrorHandlingService } from '../common/services/error-handling.service'
     templateUrl: './caesar-home.component.html',
     styleUrls: ['./caesar-home.component.scss']
 })
+
 export class CaesarHomeComponent implements OnInit {
 
-	constructor (private errorHandlingService: ErrorHandlingService,
-		private http: Http) {
+	constructor (
+        private errorHandlingService: ErrorHandlingService,
+        private http: Http) {
 	}
 
 	ngOnInit () {
@@ -29,4 +31,3 @@ export class CaesarHomeComponent implements OnInit {
     	}
     }
 }
-

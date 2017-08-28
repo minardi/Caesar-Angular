@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AppRoutingModule } from '../caesar-portal.routing.module';
 
 import { GroupAreaComponent } from './group-area.component';
 import { GroupStudentsComponent } from './group-students/group-students.component';
@@ -9,7 +10,8 @@ import { GroupScheduleComponent } from './group-schedule/group-schedule.componen
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    AppRoutingModule
   ],
   exports: [
     GroupAreaComponent,

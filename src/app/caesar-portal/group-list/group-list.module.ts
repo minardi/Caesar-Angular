@@ -16,6 +16,7 @@ import { ExpertListComponent } from './create-edit-dialog/expert-list/expert-lis
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { AppRoutingModule } from '../caesar-portal.routing.module';
 
 @NgModule({
   imports: [

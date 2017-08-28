@@ -17,8 +17,10 @@ export class ProfileComponent implements OnInit {
     defaultPhoto = 'http://www.thirann.com/assets/img/newuser.jpeg';
     isHidden = true;
 
-    constructor(private profileService: ProfileService,
-        private router: Router) { }
+    constructor (
+        private profileService: ProfileService,
+        private router: Router) { 
+    }
 
     ngOnInit(): void {
         this.profileService.getCurrentUser()
