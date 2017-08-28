@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
-
 @Component({
     selector: 'expert-list',
     templateUrl: './expert-list.component.html',

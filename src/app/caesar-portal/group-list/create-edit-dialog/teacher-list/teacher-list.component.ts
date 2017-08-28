@@ -140,7 +140,6 @@ export class TeacherListComponent implements OnInit {
         const indexOfTeacher = this.selectedTeachers.indexOf(deletedTeacher);
 
         this.selectedTeachers.splice(indexOfTeacher, 1);
-
         this.teachers.push(deletedTeacher);
 
         this.checkQuantity();
