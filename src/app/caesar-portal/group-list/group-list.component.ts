@@ -23,7 +23,7 @@ export class GroupListComponent implements OnInit {
   itemsPerPage = 10;
   currentPage = 1;
   groupsQuantity: number;
-  myGroupsFilter: boolean = false;
+  myGroupsFilter = false;
   GroupProgressStatus: typeof GroupStatus = GroupStatus;
   groupStatus: GroupStatus = GroupStatus.Current;
 
@@ -74,6 +74,7 @@ export class GroupListComponent implements OnInit {
   public openCreateDialog(event: Event) {
     this.bsModalRef = this.modalService.show(CreateEditDialogComponent);
     this.bsModalRef.content.isEditMode = false;
+    this.bsModalRef.content.groups = this.groups;
     this.bsModalRef.content.onGroupUpdated.subscribe(() => this.showUserGroups());
   }
 

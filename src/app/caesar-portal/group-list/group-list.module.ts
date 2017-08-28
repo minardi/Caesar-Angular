@@ -32,12 +32,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     GroupItemComponent,
     DeleteDialogComponent
   ],
-  providers: [
-    DatePipe
-    ],
-  declarations: [GroupListComponent, GroupItemComponent, PagerComponent, LimitToPipe, MatchesProgressPipe, DeleteDialogComponent, CreateEditDialogComponent, TeacherListComponent, ExpertListComponent],
-
-  entryComponents: [DeleteDialogComponent, CreateEditDialogComponent]
+  providers: [DatePipe],
+  declarations: [
+    GroupListComponent,
+    GroupItemComponent,
+    PagerComponent,
+    LimitToPipe,
+    MatchesProgressPipe,
+    DeleteDialogComponent,
+    CreateEditDialogComponent,
+    TeacherListComponent, 
+    ExpertListComponent
+  ],
+  entryComponents: [
+    DeleteDialogComponent,
+    CreateEditDialogComponent
+  ]
 })
 export class GroupListModule { }
 

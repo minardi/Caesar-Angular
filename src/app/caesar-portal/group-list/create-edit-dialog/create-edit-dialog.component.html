@@ -7,7 +7,12 @@
            Group name:
            </div>
            <div class="col-md-8">
-             <input type="text" name="groupname">
+             <input type="text" name="groupname" [(ngModel)]="groupName" (ngModelChange)="onNameModelChange()">
+             <div *ngIf="isShownSwitchName">
+               <button type="button" class="add-btn" (click)="switchGroupName()">
+                 <i class="glyphicon glyphicon-refresh"></i> Return '{{tmpGroupName}}'
+               </button>
+             </div>
            </div>
          </div>
          <div class="row" *ngIf="isEditMode">
@@ -76,7 +81,7 @@
                 </div>
                 <div class="col-md-8">
                   <div dropdown>
-                    <button dropdownToggle class="btn btn-dropdown dropdown-toggle" type="button" [disabled]="currentUser?.role?.id === allowedRole">
+                    <button dropdownToggle class="btn btn-dropdown dropdown-toggle" type="button" [attr.disabled]="currentUser?.role?.id === allowedRole">
                       {{selectedLocation?.name}}
                       <span class="caret"></span>
                     </button>
