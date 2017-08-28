@@ -20,8 +20,8 @@
              Current Stage:
            </div>
            <div class="col-md-8">
-             <div dropdown>
-               <button dropdownToggle class="btn btn-dropdown dropdown-toggle" type="button">
+             <div dropdown [isDisabled]="currentUser?.role?.id !== allowedRole">
+                    <button dropdownToggle class="btn btn-dropdown dropdown-toggle" type="button">
                  {{selectedStage?.name}}
                  <span class="caret"></span>
                </button>

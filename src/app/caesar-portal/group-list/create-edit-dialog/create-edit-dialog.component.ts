@@ -18,7 +18,7 @@ import { Group } from '../../common/models/group';
 })
 export class CreateEditDialogComponent implements OnInit, OnChanges {
   isEditMode = true;
-  allowedRole = 4;
+  allowedRole = 5;
   currentUser: User;
   groups: Group[];
   stages: Stage[];
