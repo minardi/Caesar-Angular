@@ -25,7 +25,7 @@ export class LocationsComponent implements OnInit {
 
     @Output() onOpenModal = new EventEmitter();
     public openModal(template: TemplateRef<any>): void {
-        this.modalRef = this.modalService.show(template, {class: 'delete-dialog'});
+        this.modalRef = this.modalService.show(template, {class: 'modal-window'});
     }
 
     ngOnInit() {
