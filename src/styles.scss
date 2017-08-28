@@ -6,9 +6,9 @@ body {
   height: 100%;
 }
 
-/* delete dialog custom styles */
+/* modal-window custom styles */
 .modal .modal-dialog {
-  &.delete-dialog {
+  &.modal-window {
     width: 100%;
     position: absolute;
     left: 0;
@@ -19,7 +19,7 @@ body {
   }
 }
 
-.delete-dialog {
+.modal-window {
   .modal-content {
     color: $white-solid;
     background-color: $navy-blue;
@@ -40,7 +40,7 @@ body {
   }
 }
 
-/* end delete dialog custom styles */
+/* end dmodal-window custom styles */
 
 %sidebar {
     width: 15%;

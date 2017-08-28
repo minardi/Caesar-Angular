@@ -124,7 +124,7 @@ export class GroupListComponent implements OnInit {
   openDeleteDialog(event: Event, groupId: number, groupName: string) {
     event.preventDefault();
 
-    this.bsModalRef = this.modalService.show(DeleteDialogComponent, { class: 'delete-dialog' });
+    this.bsModalRef = this.modalService.show(DeleteDialogComponent, { class: 'modal-window' });
     this.bsModalRef.content.groupId = groupId;
     this.bsModalRef.content.groupName = groupName;
     this.bsModalRef.content.onGroupDeleted.subscribe((groupId) => this.deleteGroupItem(groupId));
