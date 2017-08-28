@@ -80,8 +80,8 @@
                   Location:
                 </div>
                 <div class="col-md-8">
-                  <div dropdown>
-                    <button dropdownToggle class="btn btn-dropdown dropdown-toggle" type="button" [attr.disabled]="currentUser?.role?.id === allowedRole">
+                  <div dropdown [isDisabled]="currentUser?.role?.id !== allowedRole">
+                    <button dropdownToggle class="btn btn-dropdown dropdown-toggle" type="button">
                       {{selectedLocation?.name}}
                       <span class="caret"></span>
                     </button>
@@ -141,7 +141,7 @@
               <teacher-list (onTeachersChanged)="onTeachersChanged($event)"></teacher-list>
             </div>
           </div>
-        </div> 
+        </div>
         <div class="col-md-6">
           <div class="row">
             <div class="col-md-4">
