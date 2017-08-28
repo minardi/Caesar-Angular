@@ -1,3 +1,4 @@
+///<reference path="../../../../../node_modules/@angular/http/src/http.d.ts"/>
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
@@ -13,23 +14,67 @@ export class UpdateGroupService {
   private mockDirection = [
     {
       id: 1,
-      name: 'oop-java-core'
+      name: 'WebUI'
     },
     {
       id: 2,
-      name: 'js-core'
+      name: 'JavaScript (UI)'
     },
     {
       id: 3,
-      name: 'web_C#_.net'
+      name: 'LAMP'
     },
     {
       id: 4,
-      name: 'ISTQB'
+      name: ' .Net'
     },
     {
       id: 5,
+      name: 'Java'
+    },
+    {
+      id: 6,
+      name: 'Go'
+    },
+    {
+      id: 7,
+      name: 'Python'
+    },
+    {
+      id: 8,
+      name: 'iOS'
+    },
+    {
+      id: 9,
+      name: 'C/C++'
+    },
+    {
+      id: 10,
+      name: 'Deplhi'
+    },
+    {
+      id: 11,
+      name: 'RDBMS'
+    },
+    {
+      id: 12,
       name: 'MQC'
+    },
+    {
+      id: 13,
+      name: 'ATQC'
+    },
+    {
+      id: 14,
+      name: 'ISTQB'
+    },
+    {
+      id: 15,
+      name: 'SET'
+    },
+    {
+      id: 16,
+      name: 'DevOps'
     }
   ];
 

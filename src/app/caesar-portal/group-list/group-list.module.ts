@@ -25,8 +25,19 @@ import { FormsModule } from '@angular/forms';
     DeleteDialogComponent
   ],
   providers: [DatePipe],
-  declarations: [GroupListComponent, GroupItemComponent, PagerComponent, LimitToPipe, MatchesProgressPipe, DeleteDialogComponent, CreateEditDialogComponent],
-  entryComponents: [DeleteDialogComponent, CreateEditDialogComponent]
+  declarations: [
+    GroupListComponent,
+    GroupItemComponent,
+    PagerComponent,
+    LimitToPipe,
+    MatchesProgressPipe,
+    DeleteDialogComponent,
+    CreateEditDialogComponent
+  ],
+  entryComponents: [
+    DeleteDialogComponent,
+    CreateEditDialogComponent
+  ]
 })
 export class GroupListModule { }
 
