@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
-
 @Component({
     selector: 'expert-list',
     templateUrl: './expert-list.component.html',
@@ -10,10 +9,12 @@ export class ExpertListComponent implements OnInit {
     public toggleInputAndButton: boolean = true;
     public hiddenExperts: boolean = true;
     public hiddenButton: boolean = false;
+
     public expertName: string;
     public experts: string[] = [];
 
-    constructor() { }
+    constructor() {
+    }
 
     ngOnInit() {
     }
