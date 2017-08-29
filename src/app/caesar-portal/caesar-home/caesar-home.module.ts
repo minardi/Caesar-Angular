@@ -10,7 +10,7 @@ import { GroupAreaModule } from '../group-area/group-area.module';
 import { GroupListModule } from '../group-list/group-list.module';
 import { ProfileModule } from '../profile/profile.module';
 import { MenuModule } from '../menu/menu.module';
-
+import { AboutComponent } from '../about/about.component';
 
 @NgModule({
     imports: [
@@ -19,14 +19,15 @@ import { MenuModule } from '../menu/menu.module';
         GroupAreaModule,
         ProfileModule,
         HttpModule,
-        MenuModule
+        MenuModule,
     ],
     exports: [
-        CaesarHomeComponent
+        CaesarHomeComponent,
+        AboutComponent
     ],
     providers: [GroupService, LocationService, ErrorHandlingService],
     declarations: [
-        CaesarHomeComponent
+        CaesarHomeComponent, AboutComponent
     ]
 })
 export class CaesarHomeModule { }
