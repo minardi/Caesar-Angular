@@ -3,10 +3,6 @@ import { User }     from './user';
 import { Location } from './location';
 
 export class Group {
-  stage: string;
-  location: Location;
-  teachers: User[];
-
   constructor(public groupId: number = 0, 
               public name: string = '', 
               public startDate: string = null, 
