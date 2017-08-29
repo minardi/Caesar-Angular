@@ -140,6 +140,12 @@ export class GroupListComponent implements OnInit {
     this.bsModalRef.content.onGroupUpdated.subscribe(() => this.showUserGroups());
   }
 
+  public openEditDialog(group: Group) {
+    this.bsModalRef = this.modalService.show(CreateEditDialogComponent);
+    this.bsModalRef.content.editingGroup = group;
+    this.bsModalRef.content.onGroupUpdated.subscribe(() => this.showUserGroups());
+  }
+
   private deleteGroupItem(groupId: number) {
     this.groups = this.groups.filter((currentGroup) => {
       return currentGroup.groupId !== groupId;

@@ -152,4 +152,36 @@ export class UpdateGroupService {
     });
     return this.http.post(environment.serviceApi.groupsUrl, groupJSON, { headers: headers });
   }
+
+  // TODO Vlada Check group details
+  public getGroupLocation(url: string): Observable<Location> {
+    return this.http.get(url).
+    map((response: Response) => {
+      return <Location>response.json();
+    }).catch(this.handleError);
+  }
+  public getGroupDirection(url: string): Observable<Direction> {
+    return this.http.get(url).
+    map((response: Response) => {
+      return <Direction>response.json();
+    }).catch(this.handleError);
+  }
+  public getGroupStatus(url: string): Observable<any> {
+    return this.http.get(url).
+    map((response: Response) => {
+      return <any>response.json();
+    }).catch(this.handleError);
+  }
+  public getGroupTeachers(url: string): Observable<any> {
+    return this.http.get(url).
+    map((response: Response) => {
+      return <any>response.json();
+    }).catch(this.handleError);
+  }
+  public getGroupBudgetOwner(url: string): Observable<any> {
+    return this.http.get(url).
+    map((response: Response) => {
+      return <any>response.json();
+    }).catch(this.handleError);
+  }
 }
