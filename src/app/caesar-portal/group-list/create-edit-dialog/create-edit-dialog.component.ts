@@ -2,7 +2,6 @@ import { Component, EventEmitter, HostListener, OnChanges, OnInit, Output, Templ
 import { Response } from '@angular/http';
 import { DatePipe } from '@angular/common';
 import { BsModalRef } from 'ngx-bootstrap';
-import { UpdateGroupService } from '../../common/services/update-group.service';
 import { ProfileService } from '../../profile/profile.service';
 import { Location } from '../../common/models/location';
 import { User } from '../../common/models/user';
@@ -10,6 +9,9 @@ import { Direction } from '../../common/models/direction';
 import { BudgetOwner } from '../../common/models/budgetOwner';
 import { Stage } from '../../common/models/stage';
 import { Group } from '../../common/models/group';
+import { GroupService } from '../../common/services/group.service';
+import { GroupInfoService } from '../../common/services/group-info.service';
+import { ErrorHandlingService } from '../../common/services/error-handling.service';
 
 @Component({
   selector: 'caesar-create-edit-dialog',
@@ -37,8 +39,10 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
   error: any;
   dateStart: any;
   dateFinish: any;
-  isShownDatepickerStart = false;
-  isShownDatepickerFinish = false;
+  datepickerOptions = {
+    isShownDatepickerStart: false,
+    isShownDatepickerFinish: false
+  };
   isShownSwitchName = false;
   locationNamesAlias = {
     1: 'DP',
@@ -61,8 +65,11 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
   constructor(
     public bsModalRef: BsModalRef,
     private profileService: ProfileService,
-    private updateGroupService: UpdateGroupService,
-    private datePipe: DatePipe
+    private groupService: GroupService,
+    private groupInfoService: GroupInfoService,
+    private errorHandlingService: ErrorHandlingService,
+    private datePipe: DatePipe,
+
   ) { }
 
   ngOnInit() {
@@ -74,13 +81,11 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
     this.showAllStages();
     setTimeout(() => {
       if (typeof this.isEditMode !== 'undefined') {
-        if (!this.isEditMode) {
-          this.generateName();
-        } else {
+        if (this.isEditMode) {
           if (this.editingGroup) {
             this.groupName = this.editingGroup.name;
             this.dateStart = new Date(this.editingGroup.startDate);
-            // this.dateFinish = new Date(this.editingGroup.finishDate);
+            this.dateFinish = new Date(this.editingGroup.finishDate);
             this.experts = this.editingGroup.experts;
             console.log(this.experts);
             this.getGroupLinkInfo('location', (foundLink) => {
@@ -111,54 +116,53 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
       .subscribe(
         (data: Response) => {
           this.currentUser = data.json();
-          this.selectedLocation = this.currentUser.location;
+          if (!this.isEditMode) {
+            this.selectedLocation = this.currentUser.location;
+            this.generateName();
+          } else {
+            this.getGroupLinkInfo('location', (foundLink) => {
+              console.log( foundLink.charAt(foundLink.length - 1));
+              this.selectedLocation = {id : foundLink.charAt(foundLink.length - 1)};
+            });
+          }
           this.showAllLocations();
         },
-        (error) => {
-          this.error = error;
-          console.error(error);
-        }
-      );
+        (error) => this.errorHandlingService.check(error.status));
   }
 
   private showAllLocations() {
-    this.updateGroupService.getLocations().subscribe(
+    this.groupInfoService.getLocations().subscribe(
       (data: Location[]) => {
         this.locations = data;
       },
-      error => console.log(error));
+      error => this.errorHandlingService.check(error.status));
   }
 
   private showAllDirections() {
-    this.updateGroupService.getDirections().subscribe(
+    this.groupInfoService.getDirections().subscribe(
       (data: Direction[]) => {
         this.directions = data;
         this.selectedDirection = this.directions[0];
-        if (typeof this.isEditMode !== 'undefined') {
-          if (!this.isEditMode) {
-            this.generateName();
-          }
-        }
       },
-      error => console.log(error));
+      error => this.errorHandlingService.check(error.status));
   }
 
   private showAllBudgetOwners() {
-    this.updateGroupService.getBudgetOwners().subscribe(
+    this.groupInfoService.getBudgetOwners().subscribe(
       (data: BudgetOwner[]) => {
         this.budgetOwners = data;
         this.selectedBudgetOwner = this.budgetOwners[0];
       },
-      error => console.log(error));
+      error => this.errorHandlingService.check(error.status));
   }
 
   private showAllStages() {
-    this.updateGroupService.getStages().subscribe(
+    this.groupInfoService.getStages().subscribe(
       (data: Stage[]) => {
         this.stages = data;
         this.selectedStage = this.stages[0];
       },
-      error => console.log(error));
+      error => this.errorHandlingService.check(error.status));
   }
 
   private getGroupLinkInfo(rel, callback) {
@@ -168,7 +172,7 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
         foundLink = value.href;
       }
     });
-    if (foundLink) {
+    if (foundLink && callback) {
       callback(foundLink);
     }
   }
@@ -176,7 +180,7 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
   private getPathname(href): string {
     const el = document.createElement('a');
     el.href = href;
-    return el.pathname;
+    return `/api${el.pathname}`;
   }
 
   public changeSelectedLocation(location) {
@@ -207,8 +211,8 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
   public generateName () {
     let result = '';
     if (this.selectedLocation) {
-      result += `${this.locationNamesAlias[this.selectedLocation.id]}-`;
-      result += this.findLastInLocation(this.parseGroupsNames());
+      result += `${this.locationNamesAlias[this.selectedLocation.id]}-${this.findLastInLocation(this.parseGroupsNames())}`;
+      // result += this.findLastInLocation(this.parseGroupsNames());
       if (this.selectedDirection) {
         result += `-${this.selectedDirection.name}`;
       }
@@ -263,23 +267,29 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
   // datepicker methods
 
   public toggleDatepicker(shownDatepicker) {
-    this[shownDatepicker] = !this[shownDatepicker];
+    this.datepickerOptions[shownDatepicker] = !this.datepickerOptions[shownDatepicker];
   }
 
   public selectionDone(shownDatepicker) {
-    this[shownDatepicker] = false;
+    this.datepickerOptions[shownDatepicker] = false;
   }
 
   public calculateFinishDate() {
-    if (this.dateStart) {
-      const start = new Date(this.dateStart),
-        shortDuration = 63,
-        longDuration = 84;
-      if (this.selectedDirection.id === 12 || this.selectedDirection.id === 14) {
-        this.dateFinish = new Date(start.setDate(start.getDate() + shortDuration));
-        this.shiftWeekends();
-      } else {
-        this.dateFinish = new Date(start.setDate(start.getDate() + longDuration));
+    // "Finish date" – is calculated by default:
+    // – "Start date" + 9 weeks for groups with "Direction" MQC (id = 12) or ISTQB (id = 14)
+    // 9weeks * 7 days = 63 -> shortDuration
+    // – "Start date" + 12 weeks for groups with any other "Direction"
+    // 12weeks * 7 days = 84 -> longDuration
+    if (!this.isEditMode) {
+      if (this.dateStart) {
+        let duration: number;
+        const start = new Date(this.dateStart),
+          shortDuration = 63,
+          longDuration = 84;
+
+        duration = (this.selectedDirection.id === 12 || this.selectedDirection.id === 14) ? shortDuration : longDuration;
+
+        this.dateFinish = new Date(start.setDate(start.getDate() + duration));
         this.shiftWeekends();
       }
     }
@@ -312,52 +322,67 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
       teachers: this.teachers
     };
 
-    this.updateGroupService.update(group).subscribe(
+    if (!this.isEditMode) {
+      this.createGroup(group);
+    } else {
+      this.editGroup(group);
+    }
+  }
+
+  private createGroup (group) {
+    this.groupService.create(group).subscribe(
       data => {
         this.bsModalRef.hide();
         this.onGroupUpdated.emit();
       },
-      error => console.log(error));
+      error => this.errorHandlingService.check(error.status));
   }
 
-  // TODO Vlada Check the getting details API
-  public getGroupLocation(url: string) {
-    this.updateGroupService.getGroupLocation(url).subscribe(
-      (location: Location) => {
-        this.selectedLocation = location;
+  private editGroup (group) {
+    this.groupService.update(group, this.editingGroup.groupId).subscribe(
+      data => {
+        this.bsModalRef.hide();
+        this.onGroupUpdated.emit();
       },
-      error => console.log(error));
+      error => this.errorHandlingService.check(error.status));
+  }
+
+  // Checking the getting details API
+  public getGroupLocation(url: string) {
+    this.groupInfoService.getGroupLocation(url).subscribe(
+      (location: Location) => {
+        this.selectedLocation['name'] = location.name;
+      },
+      error => this.errorHandlingService.check(error.status));
   }
   public getGroupDirection(url: string) {
-    this.updateGroupService.getGroupDirection(url).subscribe(
+    this.groupInfoService.getGroupDirection(url).subscribe(
       (direction: Direction) => {
         this.selectedDirection = direction;
       },
-      error => console.log(error));
+      error => this.errorHandlingService.check(error.status));
   }
   public getGroupStatus(url: string) {
-    this.updateGroupService.getGroupStatus(url).subscribe(
+    this.groupInfoService.getGroupStatus(url).subscribe(
       (status: any) => {
         this.selectedStage = status;
       },
-      error => console.log(error));
+      error => this.errorHandlingService.check(error.status));
   }
   public getGroupTeachers(url: string) {
-    this.updateGroupService.getGroupTeachers(url).subscribe(
+    this.groupInfoService.getGroupTeachers(url).subscribe(
       (teachers: any) => {
         // TODO Teachers
         this.teachers = teachers;
-        console.log(teachers);
       },
-      error => console.log(error));
+      error => this.errorHandlingService.check(error.status));
   }
   public getGroupBudgetOwner(url: string) {
-    this.updateGroupService.getGroupBudgetOwner(url).subscribe(
+    this.groupInfoService.getGroupBudgetOwner(url).subscribe(
       (budgetOwner: any) => {
         // TODO BudgetOwner
         this.selectedBudgetOwner = budgetOwner;
-        console.log(budgetOwner);
       },
-      error => console.log(error));
+      error => this.errorHandlingService.check(error.status));
   }
 }

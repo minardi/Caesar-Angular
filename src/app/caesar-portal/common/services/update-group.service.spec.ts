@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { UpdateGroupService } from './update-group.service';
+import { UpdateGroupService } from './group-info.service';
 
 describe('UpdateGroupService', () => {
   beforeEach(() => {

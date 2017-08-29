@@ -43,4 +43,20 @@ export class GroupService {
   private extractGroupsData(obj) {
     return new Group(obj.groupId, obj.name, obj.startDate, obj.finishDate, obj.experts, obj.links);
   }
+
+  public create(group: any) {
+    const groupJSON = JSON.stringify(group),
+      headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+    return this.http.post(environment.serviceApi.groupsUrl, groupJSON, { headers: headers });
+  }
+
+  public update(group: any, groupId: number) {
+    const groupJSON = JSON.stringify(group),
+      headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+    return this.http.put(`${environment.serviceApi.groupsUrl}/${groupId}`, groupJSON, { headers: headers });
+  }
 }
