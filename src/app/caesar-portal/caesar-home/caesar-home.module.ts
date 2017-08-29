@@ -10,7 +10,7 @@ import { GroupAreaModule } from '../group-area/group-area.module';
 import { GroupListModule } from '../group-list/group-list.module';
 import { ProfileModule } from '../profile/profile.module';
 
-import { UpdateGroupService } from '../common/services/update-group.service';
+import { GroupInfoService } from '../common/services/group-info.service';
 
 import { MenuModule } from '../menu/menu.module';
 
@@ -29,7 +29,7 @@ import { MenuModule } from '../menu/menu.module';
     providers: [
         GroupService,
         ErrorHandlingService,
-        UpdateGroupService,
+        GroupInfoService,
         LocationService,
         ErrorHandlingService
     ],

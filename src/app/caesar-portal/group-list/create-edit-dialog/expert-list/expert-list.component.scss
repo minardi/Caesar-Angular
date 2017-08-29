@@ -8,6 +8,7 @@
 .list-of-experts {
 	list-style: none;
 	padding: 0;
+  color: $astral;
 }
 
 .save-expert, .remove-expert, .remove-input {
@@ -18,5 +19,8 @@
 
 .input-name {
   width: 130px;
+  padding: 5px;
+  color: $astral;
+  border: 1px solid $astral;
 }
 
