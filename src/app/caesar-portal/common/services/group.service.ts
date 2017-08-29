@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { environment } from '../../../../environments/environment';
 import { Group } from '../../common/models/group';
+import { User } from '../../common/models/user';
 import { Observable } from 'rxjs/Observable';
 import { Location } from '../../common/models/location';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -36,6 +37,28 @@ export class GroupService {
 
   getParametr(url: string): Observable<string[]> {
     return this.getData(url);
+  }
+
+  get (id: number): Observable<Group> {
+    return this.http.get(`${environment.serviceApi.groupsUrl}/${id}`).
+      map(result => this.extractGroupsData(result.json()));
+  }
+
+  getLocation (url: string): Observable<Location> {
+    return this.getData(url);
+  }
+
+  getStage (url: string): Observable<string[]> {
+    return this.getData(url);
+  }
+
+  getTeachers (url: string): Observable<User[]> {
+    return this.getData(url);
+  }
+
+  getData (url: string) {
+    url = url.replace('http://caeser-api.com:8080', '');
+    return this.http.get(url).map(result => result.json());
   }
 
   getData(url: string) {
@@ -74,5 +97,10 @@ export class GroupService {
 
   getIdCurrent(): Observable<number> {
     return this.idCurrent.asObservable();
+    return new Group(obj.groupId, obj.name, obj.startDate, obj.finishDate, obj.experts, obj._links);
+  }
+
+  setGroupCurrent (group: Group) {
+    this.groupCurrent.next(group);
   }
 }

@@ -20,7 +20,6 @@ export class GroupAreaComponent implements OnInit, OnDestroy {
     location: Location = new Location();
     stage: string[];
 
-
     constructor (private router: Router, 
                  private route: ActivatedRoute, 
                  private groupService: GroupService,
@@ -55,6 +54,11 @@ export class GroupAreaComponent implements OnInit, OnDestroy {
 
     changeIdCurrent(id: number): void {
         this.groupService.changeIdCurrent(id);
+                this.getLocation(this.group._links['location'].href);
+                this.getStage(this.group._links['status'].href);
+            },
+            error => console.log(error)
+        );
     }
 
     private getLocation (locationUrl: string) {
@@ -63,6 +67,7 @@ export class GroupAreaComponent implements OnInit, OnDestroy {
                 this.location = location;
             },
             error => this.errorHandlingService.check(error.status)
+            error => console.log(error)
         );
     }
 
