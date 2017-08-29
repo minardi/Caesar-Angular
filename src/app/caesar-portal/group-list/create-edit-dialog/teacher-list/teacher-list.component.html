@@ -23,11 +23,11 @@
             <span class="caret"></span>
         </button>
         <ul *dropdownMenu class="dropdown-menu dropdown-teacher" role="menu">
-          <li role="menuitem" *ngFor="let teacher of teachers">
-            <a class="dropdown-item" href="#"
+          <li role="menuitem" *ngFor="let teacher of teachers" class="dropdown-teacher-menu">
+            <span class="dropdown-item"
               (click)="changeDefaultTeacher(teacher)">
                 {{teacher.firstName}} {{teacher.lastName}}
-            </a>
+            </span>
           </li>
         </ul>
       </div>

@@ -1,7 +1,8 @@
 <div class="bg-primary">Caesar</div>
 <caesar-profile></caesar-profile>
-<div class="app-wrapper">
-  <group-list></group-list>
+<div class="app-wrapper" (mousemove)="showMenu($event)">
+  <caesar-menu></caesar-menu>
+  <caesar-group-list></caesar-group-list>
   <group-area></group-area>
   <div class="col-md-2">
     <!-- Account component implementation -->

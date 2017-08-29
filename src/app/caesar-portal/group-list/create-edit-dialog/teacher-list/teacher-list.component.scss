@@ -36,6 +36,8 @@
   color: $astral;
 }
 
-.dropdown-teacher>li>a {
+.dropdown-item {
+  padding-left: 25px;
+  cursor: pointer;
   color: $astral;
 }

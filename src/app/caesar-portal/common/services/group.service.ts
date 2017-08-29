@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { environment } from '../../../../environments/environment';
 import { Group } from '../../common/models/group';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
 @Injectable()
-
 export class GroupService {
-  constructor(private http: Http) { }
+  private headers: Headers;
+  private options: RequestOptions;
 
-  getAll(): Observable<Group[]> {
-    return this.http.get(environment.serviceApi.groupsUrl).
-      map(result => result.json().map(obj => this.extractGroupsData(obj)));
+  constructor(private http: Http) {
+    this.headers = new Headers({ 'Content-Type': 'application/json' });
+    this.options = new RequestOptions({ headers: this.headers });
   }
 
-  delete(id: number) {
-    return this.http.delete(`${environment.serviceApi.groupsUrl}/${id}`);
+  get(id: number) {
+    return this.http.get(`${environment.serviceApi.groupsUrl}/${id}`);
   }
 
   getUserGroups(): Observable<Group[]> {
@@ -22,9 +24,23 @@ export class GroupService {
       map(result => result.json().map(obj => this.extractGroupsData(obj)));
   }
 
+  getGroupsByLocations(locationIds: number[]): Observable<Group[]> {
+    let data = { locations: locationIds };
+
+    return this.http.post(environment.serviceApi.filterGroupsUrl, data, this.options).
+      map(result => result.json().map(obj => this.extractGroupsData(obj)));
+  }
+
+  getCurrentLocationGroups(): Observable<Group[]> {
+    return this.http.get(environment.serviceApi.groupsMyLocationUrl).
+      map(result => result.json().map(obj => this.extractGroupsData(obj)));
+  }
+
+  delete(id: number) {
+    return this.http.delete(`${environment.serviceApi.groupsUrl}/${id}`);
+  }
+
   private extractGroupsData(obj) {
-    return new Group(obj.groupId, obj.name, obj.startDate, obj.finishDate, obj.experts);
+    return new Group(obj.groupId, obj.name, obj.startDate, obj.finishDate, obj.experts, obj.links);
   }
 }
-
-

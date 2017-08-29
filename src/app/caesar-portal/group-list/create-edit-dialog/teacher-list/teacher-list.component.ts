@@ -3,8 +3,8 @@ import { NgModel } from '@angular/forms';
 import { OnChanges } from '@angular/core';
 
 import { ProfileService } from '../../../profile/profile.service';
+import { UsersService } from './users.service';
 import { User } from '../../../common/models/user';
-import { USERS } from './mock-users';
 
 @Component({
     selector: 'teacher-list',
@@ -27,16 +27,25 @@ export class TeacherListComponent implements OnInit {
 
     @Output() onTeachersChanged = new EventEmitter<{id: number}[]>();
     
-    constructor (private profileService: ProfileService) {
+    constructor (
+        private profileService: ProfileService,
+        private usersService: UsersService) {
     }
 
     ngOnInit () {
-        this.users = USERS;
         this.profileService.getCurrentUser()
             .subscribe(
                 (data) => {
                     const currentUser = data.json();    
                     this.filterTeachers(currentUser);
+                },
+                (error) => {}
+            );
+
+        this.usersService.getUsers()
+            .subscribe(
+                (data: User[]) => {
+                    this.users = data;
                 },
                 (error) => {}
             );
@@ -114,7 +123,7 @@ export class TeacherListComponent implements OnInit {
     private addNewDefaultTeacher(deletedTeacher?: User) {
         if (this.defaultTeacher) {
             this.defaultTeacher = this.teachers.find((user) => {
-                return user.lastName !== this.defaultTeacher.lastName;
+                return user.id !== this.defaultTeacher.id;
             });
         } else {
             this.defaultTeacher = deletedTeacher;

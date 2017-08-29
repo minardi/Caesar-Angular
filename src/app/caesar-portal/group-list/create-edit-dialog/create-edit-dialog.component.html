@@ -67,7 +67,7 @@
                     </button>
                     <ul *dropdownMenu class="dropdown-menu" role="menu">
                       <li role="menuitem" *ngFor="let direction of directions">
-                        <a class="dropdown-item" href="#" (click)="changeSelectedDirection(direction)">{{direction.name}}</a>
+                        <span class="dropdown-item" (click)="changeSelectedDirection(direction)">{{direction.name}}</span>
                       </li>
                     </ul>
                   </div>
@@ -80,14 +80,14 @@
                   Location:
                 </div>
                 <div class="col-md-8">
-                  <div dropdown>
-                    <button dropdownToggle class="btn btn-dropdown dropdown-toggle" type="button" [attr.disabled]="currentUser?.role?.id === allowedRole">
+                  <div dropdown [isDisabled]="currentUser?.role?.id !== allowedRole">
+                    <button dropdownToggle class="btn btn-dropdown dropdown-toggle" type="button">
                       {{selectedLocation?.name}}
                       <span class="caret"></span>
                     </button>
                     <ul *dropdownMenu class="dropdown-menu" role="menu">
                       <li role="menuitem" *ngFor="let location of locations">
-                        <a class="dropdown-item" href="#" (click)="changeSelectedLocation(location)">{{location.name}}</a>
+                        <span class="dropdown-item" (click)="changeSelectedLocation(location)">{{location.name}}</span>
                       </li>
                     </ul>
                   </div>
@@ -141,14 +141,16 @@
               <teacher-list (onTeachersChanged)="onTeachersChanged($event)"></teacher-list>
             </div>
           </div>
-        </div> 
+        </div>
         <div class="col-md-6">
           <div class="row">
             <div class="col-md-4">
               Experts:
             </div>
             <div class="col-md-8">
-              <expert-list (onExpertsChanged)="onExpertsChanged($event)"></expert-list>
+              <expert-list [editState]="isEditMode" [editExperts]="experts"
+               (onExpertsChanged)="onExpertsChanged($event)"> 
+               </expert-list>
             </div>
           </div>
         </div>
