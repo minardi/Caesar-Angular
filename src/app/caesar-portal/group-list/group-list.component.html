@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="row group-list">
-    <div class="col-md-6" *ngFor="let item of (groups | mathcesProgress : groupStatus | limitTo : firstItem : lastItem)">
+    <div class="col-md-6" (click)="openEditDialog(item)" *ngFor="let item of (groups | mathcesProgress : groupStatus | limitTo : firstItem : lastItem)">
       <group-item [group]="item" (contextmenu)="openDeleteDialog($event, item.groupId, item.name)">Group</group-item>
     </div>
   </div>
