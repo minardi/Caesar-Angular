@@ -7,7 +7,7 @@ import { LocationService } from '../common/services/location.service';
 import { Response } from '@angular/http';
 import { GroupItemComponent } from './group-item/group-item.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
-import { MatchesProgressPipe } from '../../caesar-portal/common/pipes/mathces-progress.pipe';
+// import { MatchesProgressPipe } from '../../caesar-portal/common/pipes/mathces-progress.pipe';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
@@ -67,12 +67,9 @@ export class GroupListComponent implements OnInit {
       error => console.log(error));
 }
 
-  private navigateToFirstGroup () {
-    const pipe = new MatchesProgressPipe();
-    const groups = pipe.transform(this.groups, this.groupStatus);
-
-    if (groups.length > 0) {
-      this.router.navigate(['/group', groups[0].groupId, groups[0].name, 'info']);
+  private navigateToFirstGroup() {
+    if (this.filteredGroups.length > 0) {
+      this.router.navigate(['/group', this.filteredGroups[0].groupId, this.filteredGroups[0].name, 'info']);
     }
   }
 
@@ -150,6 +147,7 @@ export class GroupListComponent implements OnInit {
     this.filteredGroups = this.groups.filter((item: Group) => item.status === this.groupStatus);
     this.firstItem = this.itemsPerPage * page - this.itemsPerPage;
     this.lastItem = this.itemsPerPage * page - 1;
+    this.navigateToFirstGroup();
   }
 
   ngOnDestroy() {

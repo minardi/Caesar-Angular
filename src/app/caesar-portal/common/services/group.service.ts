@@ -39,27 +39,6 @@ export class GroupService {
     return this.getData(url);
   }
 
-  get(id: any): Observable<Group> {
-    const search: URLSearchParams = new URLSearchParams();
-    search.set('id', id);
-
-    return this.http.get(`${environment.serviceApi.groupsUrl}/${id}`).
-      map(result => this.extractGroupsData(result.json()));
-  }
-
-  getLocation(url: string): Observable<Location> {
-    return this.getData(url);
-  }
-
-  getParametr(url: string): Observable<string[]> {
-    return this.getData(url);
-  }
-
-  getData(url: string) {
-    url = url.replace('http://caeser-api.com:8080', '');
-    return this.http.get(url).map(result => result.json());
-  }
-
   getData(url: string) {
     url = url.replace('http://caeser-api.com:8080', '');
     return this.http.get(url).map(result => result.json());
@@ -87,15 +66,6 @@ export class GroupService {
   }
 
   private extractGroupsData(obj) {
-    return new Group(obj.groupId, obj.name, obj.startDate, obj.finishDate, obj.experts);
-  }
-
-  changeIdCurrent(id: number) {
-    this.idCurrent.next(id);
-  }
-
-  getIdCurrent(): Observable<number> {
-    return this.idCurrent.asObservable();
     return new Group(obj.groupId, obj.name, obj.startDate, obj.finishDate, obj.experts, obj._links);
   }
 

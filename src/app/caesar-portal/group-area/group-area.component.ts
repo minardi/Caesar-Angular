@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Group } from '../common/models/group';
 import { ActivatedRoute, Params } from '@angular/router';
 import { GroupService } from "../common/services/group.service";
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { Group } from '../common/models/group';
 import { Location } from '../common/models/location';
 import { ErrorHandlingService } from '../common/services/error-handling.service';
 
@@ -33,6 +33,7 @@ export class GroupAreaComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit () {
+        console.log(this.group.name);
         this.paramsSubscription = this.route.params
             .subscribe(
                 (params: Params) => {
