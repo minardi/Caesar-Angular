@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
 
     constructor (
         private profileService: ProfileService,
-        private router: Router) { 
+        private router: Router) {
     }
 
     ngOnInit(): void {
@@ -33,11 +33,11 @@ export class ProfileComponent implements OnInit {
             );
     }
 
-    toggleVisibility(): void {
+    public toggleVisibility(): void {
         this.isHidden = !this.isHidden;
     }
 
-    logOut (): void {
+    public logOut(): void {
         localStorage.removeItem('loggedUser');
         this.router.navigate(['/log']);
     }

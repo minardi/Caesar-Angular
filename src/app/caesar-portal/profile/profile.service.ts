@@ -6,8 +6,6 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 import { environment } from '../../../environments/environment';
-import { User } from './../common/models/user';
-
 
 @Injectable()
 export class ProfileService {

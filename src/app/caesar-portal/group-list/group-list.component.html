@@ -3,18 +3,15 @@
     <div class="col-md-6">
       <button type="button" class="add-group-btn" (click)="openCreateDialog($event)"><i class='glyphicon glyphicon-plus'></i></button>
     </div>
-    <div class="col-md-6" *ngIf="groupsQuantity > itemsPerPage">
-      <caesar-pager [currentPage]="currentPage" [itemsQuantity]="groupsQuantity" [itemsPerPage]="itemsPerPage" (pageChange)="onPageChange($event)"></caesar-pager>
+    <div class="col-md-12" *ngIf="filteredGroups?.length > itemsPerPage">
+      <caesar-pager [currentPage]="currentPage" [itemsQuantity]="filteredGroups.length" [itemsPerPage]="itemsPerPage" (pageChange)="onPageChange($event)"></caesar-pager>
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      <a href='#'><span class='glyphicon glyphicon-plus search-btn'></span></a>
-    </div>
-  </div>
+</div>  
+
   <div class="row group-list">
-    <div class="col-md-6" *ngFor="let item of (groups | mathcesProgress : groupStatus | limitTo : firstItem : lastItem)">
+    <div class="col-md-6" *ngFor="let item of (filteredGroups | limitTo : firstItem : lastItem )">
     <a [routerLink]="['/group', item.groupId, item.name, 'info']" href="#">
-      <group-item [group]="item" (contextmenu)="openDeleteDialog($event, item.groupId, item.name)">Group</group-item>
+      <caesar-group-item [group]="item" (contextmenu)="openDeleteDialog($event, item.groupId, item.name)">Group</caesar-group-item>
     </a>   
     </div>
   </div>
