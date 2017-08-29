@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { GroupService } from "../common/services/group.service";
-import { Response } from '@angular/http';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Group } from '../common/models/group';
+import { Location } from '../common/models/location';
 
 @Component({
     selector: 'group-area',
@@ -14,8 +14,10 @@ import { Group } from '../common/models/group';
 
 export class GroupAreaComponent implements OnInit, OnDestroy {
     activeTab;
-    group: Group = new Group();
     paramsSubscription: Subscription;
+    group: Group = new Group();
+    location: Location = new Location();
+    stage: string[];
 
     constructor (private router: Router, 
                  private route: ActivatedRoute, 
@@ -37,10 +39,30 @@ export class GroupAreaComponent implements OnInit, OnDestroy {
     }
 
     private getGroup (groupId: number) {
-        this.groupService.get(groupId).then(
+        this.groupService.get(groupId).subscribe(
             (group: Group) => {
                 this.group = group;
-                this.groupService.setGroup(group);
+                this.groupService.setGroupCurrent(this.group);
+                this.getLocation(this.group._links['location'].href);
+                this.getStage(this.group._links['status'].href);
+            },
+            error => console.log(error)
+        );
+    }
+
+    private getLocation (locationUrl: string) {
+        this.groupService.getLocation(locationUrl).subscribe(
+            (location: Location) => {
+                this.location = location;
+            },
+            error => console.log(error)
+        );
+    }
+
+    private getStage (stageUrl: string) {
+        this.groupService.getStage(stageUrl).subscribe(
+            (stage: string[]) => {
+                this.stage = stage;
             },
             error => console.log(error)
         );

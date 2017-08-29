@@ -21,7 +21,7 @@ import { ProfileModule } from '../profile/profile.module';
         CaesarHomeComponent
     ],
     providers: [
-        GroupService,
+        // GroupService,
         ErrorHandlingService
     ],
     declarations: [

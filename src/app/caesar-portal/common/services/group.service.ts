@@ -2,59 +2,46 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { environment } from '../../../../environments/environment';
 import { Group } from '../../common/models/group';
+import { User } from '../../common/models/user';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/toPromise';
+import { Location } from '../../common/models/location';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 
 export class GroupService {
   group: Group = new Group();
+  groupCurrent = new Subject<Group>();
 
-  constructor(private http: Http) { }
+  constructor(private http: Http,
+              private subject: Subject<number>) {
+  }
 
   getAll(): Observable<Group[]> {
     return this.http.get(environment.serviceApi.groupsUrl).
       map(result => result.json().map(obj => this.extractGroupsData(obj)));
   }
 
-  get (id: number): Promise<Group> {
+  get (id: number): Observable<Group> {
     return this.http.get(`${environment.serviceApi.groupsUrl}/${id}`).
-      toPromise().then(result => {
-        const groupObj = result.json();
-        const group: Group = this.extractGroupsData(groupObj);
+      map(result => this.extractGroupsData(result.json()));
+  }
 
-        const stagePromise = this.getData(groupObj._links.status.href).
-          then(data => {
-            group.stage = data.name;
-            
-            return group;
-          });
+  getLocation (url: string): Observable<Location> {
+    return this.getData(url);
+  }
 
-        const teachersPromise = this.getData(groupObj._links.teachers.href).
-          then(data => {
-            group.teachers = data._embedded.users;
-            
-            return group;
-          });
+  getStage (url: string): Observable<string[]> {
+    return this.getData(url);
+  }
 
-        const locationsPromise = this.getData(groupObj._links.location.href).
-          then(data => {
-            group.location = data.name;
-            
-            return group;
-          });
-
-        return Promise.all([stagePromise, teachersPromise]).
-          then(() => group);
-      });
+  getTeachers (url: string): Observable<User[]> {
+    return this.getData(url);
   }
 
   getData (url: string) {
     url = url.replace('http://caeser-api.com:8080', '');
-
-    return this.http.get(url).toPromise().then(result => {
-      return result.json();
-    });
+    return this.http.get(url).map(result => result.json());
   }
 
   delete (id: number) {
@@ -67,15 +54,10 @@ export class GroupService {
   }
 
   private extractGroupsData(obj) {
-    return new Group(obj.groupId, obj.name, obj.startDate, obj.finishDate, obj.experts);
+    return new Group(obj.groupId, obj.name, obj.startDate, obj.finishDate, obj.experts, obj._links);
   }
 
-  getGroup () {
-    return this.group;
-  }
-
-  setGroup (group: Group) {
-    this.group = Object.assign(this.group, group);
-    // this.groupP.group = group;
+  setGroupCurrent (group: Group) {
+    this.groupCurrent.next(group);
   }
 }
