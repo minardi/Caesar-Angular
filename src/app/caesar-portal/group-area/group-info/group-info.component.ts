@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { GroupService } from "../../common/services/group.service";
 import { Group } from '../../common/models/group';
 import { User } from '../../common/models/user';
+import { ErrorHandlingService } from '../../common/services/error-handling.service';
 
 @Component({
   selector: 'group-info',
@@ -16,16 +17,27 @@ export class GroupInfoComponent implements OnInit, OnDestroy {
     groupCurrent: Group = new Group();
     teachers: User[];
     subscription: Subscription;
+    groupId: number;
 
-    constructor (private groupService: GroupService) {
-        this.subscription = this.groupService.getGroupCurrent().
-            subscribe(group => { 
-                this.group = group;
-                this.getTeachers(this.group._links['teachers'].href);
+    constructor (private groupService: GroupService,
+                 private errorHandlingService: ErrorHandlingService) {
+        this.subscription = this.groupService.getIdCurrent().
+            subscribe(id => { 
+                this.getGroup(id);
             });
     }
 
     ngOnInit () {
+    }
+
+    private getGroup (id: number) {
+        this.groupService.get(id).subscribe(
+            (group: Group) => {
+                this.group = group;
+                this.getTeachers(this.group.links['teachers'].href);
+            },
+            error => this.errorHandlingService.check(error.status)
+        );
     }
 
     private getTeachers (teachersUrl: string) {
@@ -33,7 +45,7 @@ export class GroupInfoComponent implements OnInit, OnDestroy {
             (data: string[]) => {
                 this.teachers = data['_embedded'].users;
             },
-            error => console.log(error)
+            error => this.errorHandlingService.check(error.status)
         );
     }
 

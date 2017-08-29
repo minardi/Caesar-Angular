@@ -6,7 +6,6 @@ import { AppRoutingModule } from './caesar-portal.routing.module';
 import { CaesarLoginModule } from './caesar-login/caesar-login.module';
 import { CaesarHomeModule } from './caesar-home/caesar-home.module';
 import { CaesarPortalComponent } from './caesar-portal.component';
-import { GroupService } from "./common/services/group.service";
 
 @NgModule({
   imports: [

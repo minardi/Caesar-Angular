@@ -39,20 +39,23 @@ export class GroupService {
     return this.getData(url);
   }
 
-  get (id: number): Observable<Group> {
+  get(id: any): Observable<Group> {
+    const search: URLSearchParams = new URLSearchParams();
+    search.set('id', id);
+
     return this.http.get(`${environment.serviceApi.groupsUrl}/${id}`).
       map(result => this.extractGroupsData(result.json()));
   }
 
-  getLocation (url: string): Observable<Location> {
+  getLocation(url: string): Observable<Location> {
     return this.getData(url);
   }
 
-  getParametr (url: string): Observable<string[]> {
+  getParametr(url: string): Observable<string[]> {
     return this.getData(url);
   }
 
-  getData (url: string) {
+  getData(url: string) {
     url = url.replace('http://caeser-api.com:8080', '');
     return this.http.get(url).map(result => result.json());
   }
@@ -96,11 +99,11 @@ export class GroupService {
     return new Group(obj.groupId, obj.name, obj.startDate, obj.finishDate, obj.experts, obj._links);
   }
 
-  setGroupCurrent(group: Group) {
-    this.groupCurrent.next(group);
+  changeIdCurrent(id: number) {
+    this.idCurrent.next(id);
   }
 
-  getGroupCurrent(): Observable<Group> {
-    return this.groupCurrent.asObservable();
+  getIdCurrent(): Observable<number> {
+    return this.idCurrent.asObservable();
   }
 }

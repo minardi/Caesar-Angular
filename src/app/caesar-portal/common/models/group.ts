@@ -8,7 +8,7 @@ export class Group {
               public startDate: string = null, 
               public finishDate: string = null, 
               public experts: string[] = null,
-              public _links: string[] = null) { }
+              public links: string[] = null) { }
 
   get status(): GroupStatus {
     let currentDate = new Date(),
