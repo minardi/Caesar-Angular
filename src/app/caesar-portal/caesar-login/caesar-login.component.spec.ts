@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { DebugElement } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 import { CaesarLoginComponent } from './caesar-login.component';
 import { CaesarLoginService } from './service/caesar-login.service';

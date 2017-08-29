@@ -1,5 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
-html, body {
-	height: 100%;
+
+@import '~variables.scss';
+html,
+body {
+  height: 100%;
 }
 
+/* modal-window custom styles */
+.modal .modal-dialog {
+  &.modal-window {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 25%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.modal-window {
+  .modal-content {
+    color: $white-solid;
+    background-color: $navy-blue;
+    font-size: 32px;
+    .modal-body {
+      width: 600px;
+      margin: 0 auto;
+    }
+    .dialog-controls {
+      font-size: 32px;
+      text-align: right;
+    }
+    .glyphicon {
+      &:hover {
+        color: $danube;
+      }
+    }
+  }
+}
+
+/* end modal-window custom styles */
+
+%sidebar {
+    width: 15%;
+    height: 100vh;
+    position: fixed;
+    z-index: 9999;
+    background-color: $grey;
+    top: 0;
+}

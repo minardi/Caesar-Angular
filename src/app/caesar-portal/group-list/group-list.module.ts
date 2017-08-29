@@ -5,23 +5,22 @@ import { GroupItemComponent } from './group-item/group-item.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { HttpModule } from '@angular/http';
 import { LimitToPipe } from '../../caesar-portal/common/pipes/limit-to.pipe';
-import { MatchesProgressPipe } from '../../caesar-portal/common/pipes/mathces-progress.pipe';
 import { PagerComponent } from '../common/components/pager/pager.component';
 
-import { routing } from '../caesar-portal.routing.module';
+import { AppRoutingModule } from '../caesar-portal.routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpModule,
-    routing
+    AppRoutingModule
   ],
   exports: [
     GroupListComponent,
     GroupItemComponent,
     DeleteDialogComponent
   ],
-  declarations: [GroupListComponent, GroupItemComponent, PagerComponent, LimitToPipe, MatchesProgressPipe, DeleteDialogComponent],
+  declarations: [GroupListComponent, GroupItemComponent, PagerComponent, LimitToPipe, DeleteDialogComponent],
   entryComponents: [DeleteDialogComponent]
 })
 export class GroupListModule { }

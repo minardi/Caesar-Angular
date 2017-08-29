@@ -4,10 +4,13 @@ import { HttpModule } from '@angular/http';
 
 import { ErrorHandlingService } from '../common/services/error-handling.service';
 import { GroupService } from './../common/services/group.service';
+import { LocationService } from './../common/services/location.service';
 import { CaesarHomeComponent } from './caesar-home.component';
 import { GroupAreaModule } from '../group-area/group-area.module';
 import { GroupListModule } from '../group-list/group-list.module';
 import { ProfileModule } from '../profile/profile.module';
+import { MenuModule } from '../menu/menu.module';
+
 
 @NgModule({
     imports: [
@@ -15,15 +18,13 @@ import { ProfileModule } from '../profile/profile.module';
         GroupListModule,
         GroupAreaModule,
         ProfileModule,
-        HttpModule
+        HttpModule,
+        MenuModule
     ],
     exports: [
         CaesarHomeComponent
     ],
-    providers: [
-        GroupService,
-        ErrorHandlingService
-    ],
+    providers: [GroupService, LocationService, ErrorHandlingService],
     declarations: [
         CaesarHomeComponent
     ]

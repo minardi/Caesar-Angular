@@ -1,23 +1,9 @@
 {
-  "/login": {
+  "/api/": {
     "target": "http://caeser-api.com:8080",
     "changeOrigin": true,
     "secure": false,
-    "logLevel": "debug"
-  },
-
-  "/groups": {
-    "target": "http://caeser-api.com:8080",
-    "changeOrigin": true,
-    "secure": false,
-    "logLevel": "debug"
-  },
-
-  "/user/profile": {
-    "target": "http://caeser-api.com:8080",
-    "changeOrigin": true,
-    "secure": false,
-    "logLevel": "debug"
+    "logLevel": "debug",
+    "pathRewrite": {"^/api" : ""}
   }
-
 }
