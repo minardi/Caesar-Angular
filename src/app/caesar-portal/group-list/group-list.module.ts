@@ -26,7 +26,8 @@ import { AppRoutingModule } from '../caesar-portal.routing.module';
     DatepickerModule.forRoot(),
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   exports: [
     GroupListComponent,
