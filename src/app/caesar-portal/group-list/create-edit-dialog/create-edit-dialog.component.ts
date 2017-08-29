@@ -39,8 +39,10 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
   error: any;
   dateStart: any;
   dateFinish: any;
-  isShownDatepickerStart = false;
-  isShownDatepickerFinish = false;
+  datepickerOptions = {
+    isShownDatepickerStart: false,
+    isShownDatepickerFinish: false
+  };
   isShownSwitchName = false;
   locationNamesAlias = {
     1: 'DP',
@@ -79,13 +81,11 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
     this.showAllStages();
     setTimeout(() => {
       if (typeof this.isEditMode !== 'undefined') {
-        if (!this.isEditMode) {
-          this.generateName();
-        } else {
+        if (this.isEditMode) {
           if (this.editingGroup) {
             this.groupName = this.editingGroup.name;
             this.dateStart = new Date(this.editingGroup.startDate);
-            // this.dateFinish = new Date(this.editingGroup.finishDate);
+            this.dateFinish = new Date(this.editingGroup.finishDate);
             this.experts = this.editingGroup.experts;
             console.log(this.experts);
             this.getGroupLinkInfo('location', (foundLink) => {
@@ -116,7 +116,15 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
       .subscribe(
         (data: Response) => {
           this.currentUser = data.json();
-          this.selectedLocation = this.currentUser.location;
+          if (!this.isEditMode) {
+            this.selectedLocation = this.currentUser.location;
+            this.generateName();
+          } else {
+            this.getGroupLinkInfo('location', (foundLink) => {
+              console.log( foundLink.charAt(foundLink.length - 1));
+              this.selectedLocation = {id : foundLink.charAt(foundLink.length - 1)};
+            });
+          }
           this.showAllLocations();
         },
         (error) => this.errorHandlingService.check(error.status));
@@ -135,11 +143,6 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
       (data: Direction[]) => {
         this.directions = data;
         this.selectedDirection = this.directions[0];
-        if (typeof this.isEditMode !== 'undefined') {
-          if (!this.isEditMode) {
-            this.generateName();
-          }
-        }
       },
       error => this.errorHandlingService.check(error.status));
   }
@@ -169,7 +172,7 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
         foundLink = value.href;
       }
     });
-    if (foundLink) {
+    if (foundLink && callback) {
       callback(foundLink);
     }
   }
@@ -264,11 +267,11 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
   // datepicker methods
 
   public toggleDatepicker(shownDatepicker) {
-    this[shownDatepicker] = !this[shownDatepicker];
+    this.datepickerOptions[shownDatepicker] = !this.datepickerOptions[shownDatepicker];
   }
 
   public selectionDone(shownDatepicker) {
-    this[shownDatepicker] = false;
+    this.datepickerOptions[shownDatepicker] = false;
   }
 
   public calculateFinishDate() {
@@ -277,16 +280,18 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
     // 9weeks * 7 days = 63 -> shortDuration
     // – "Start date" + 12 weeks for groups with any other "Direction"
     // 12weeks * 7 days = 84 -> longDuration
-    if (this.dateStart) {
-      let duration: number;
-      const start = new Date(this.dateStart),
-        shortDuration = 63,
-        longDuration = 84;
+    if (!this.isEditMode) {
+      if (this.dateStart) {
+        let duration: number;
+        const start = new Date(this.dateStart),
+          shortDuration = 63,
+          longDuration = 84;
 
-      duration = (this.selectedDirection.id === 12 || this.selectedDirection.id === 14) ? shortDuration : longDuration;
+        duration = (this.selectedDirection.id === 12 || this.selectedDirection.id === 14) ? shortDuration : longDuration;
 
-      this.dateFinish = new Date(start.setDate(start.getDate() + duration));
-      this.shiftWeekends();
+        this.dateFinish = new Date(start.setDate(start.getDate() + duration));
+        this.shiftWeekends();
+      }
     }
   }
 
@@ -342,11 +347,11 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
       error => this.errorHandlingService.check(error.status));
   }
 
-  // TODO Vlada Check the getting details API
+  // Checking the getting details API
   public getGroupLocation(url: string) {
     this.groupInfoService.getGroupLocation(url).subscribe(
       (location: Location) => {
-        this.selectedLocation = location;
+        this.selectedLocation['name'] = location.name;
       },
       error => this.errorHandlingService.check(error.status));
   }
@@ -369,7 +374,6 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
       (teachers: any) => {
         // TODO Teachers
         this.teachers = teachers;
-        console.log(teachers);
       },
       error => this.errorHandlingService.check(error.status));
   }
@@ -378,7 +382,6 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
       (budgetOwner: any) => {
         // TODO BudgetOwner
         this.selectedBudgetOwner = budgetOwner;
-        console.log(budgetOwner);
       },
       error => this.errorHandlingService.check(error.status));
   }

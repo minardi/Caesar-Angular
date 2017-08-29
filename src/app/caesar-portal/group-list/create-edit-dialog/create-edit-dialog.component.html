@@ -22,7 +22,7 @@
             Current Stage:
           </div>
           <div class="col-md-8">
-            <div dropdown [isDisabled]="currentUser?.role?.id !== allowedRole">
+            <div dropdown>
               <button dropdownToggle class="btn btn-dropdown dropdown-toggle" type="button">
                 {{selectedStage?.name}}
                 <span class="caret"></span>
@@ -119,7 +119,7 @@
                 <button class="btn btn-datepicker" (click)="toggleDatepicker('isShownDatepickerStart')">
                   <i class="glyphicon glyphicon-calendar"></i>
                 </button>
-                <div class="datepicker-popup" [hidden]="!isShownDatepickerStart">
+                <div class="datepicker-popup" [hidden]="!datepickerOptions.isShownDatepickerStart">
                   <datepicker [(ngModel)]="dateStart"
                               [startingDay]="1"
                               (selectionDone)="selectionDone('isShownDatepickerStart')"
@@ -139,7 +139,7 @@
                 <button class="btn btn-datepicker" (click)="toggleDatepicker('isShownDatepickerFinish')">
                   <i class="glyphicon glyphicon-calendar"></i>
                 </button>
-                <div class="datepicker-popup" [hidden]="!isShownDatepickerFinish">
+                <div class="datepicker-popup" [hidden]="!datepickerOptions.isShownDatepickerFinish">
                   <datepicker [(ngModel)]="dateFinish"
                               [startingDay]="1"
                               [minDate]="dateStart"

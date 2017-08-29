@@ -12,6 +12,7 @@
 .list-of-selected-teachers {
 	list-style: none;
 	padding: 0;
+  color: $astral;
 }
 
 .save-teacher, .remove-teacher, .remove-dropdown {
@@ -31,11 +32,20 @@
   color: $astral;
 }
 
-.dropdown-teacher {
+.dropdown-menu {
+  width: 80%;
   border-radius: 0;
   color: $astral;
-}
-
-.dropdown-teacher > .dropdown-teacher-menu > .dropdown-item {
-  color: $astral;
+  >li {
+    cursor: pointer;
+    width: 100%;
+    :hover {
+      background-color: $astral;
+      color: $white-solid;
+    }
+    >span {
+      padding: 0 10px;
+      display: block;
+    }
+  }
 }
