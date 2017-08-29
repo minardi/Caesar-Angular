@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { CaesarLoginService } from './service/caesar-login.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'caesar-login',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class CaesarLoginComponent implements OnInit {
 	data: any = {};
+    loginForm: FormGroup;
 
     constructor (
         private router: Router,
@@ -17,6 +19,17 @@ export class CaesarLoginComponent implements OnInit {
     }
 
     ngOnInit () {
+        this.loginForm = new FormGroup({
+            "username": new FormControl("", [
+                            Validators.required,
+                            Validators.pattern("^[a-zA-Z]{4,15}$")
+                            ]),
+            "password": new FormControl("", [
+                                Validators.required, 
+                                Validators.pattern("[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{4,10}$") 
+                            ]),
+            "userPhone": new FormControl()
+        });
         this.deleteSession();
     }
 
@@ -50,6 +63,7 @@ export class CaesarLoginComponent implements OnInit {
     clearForm (): void {
         this.data.username = '';
         this.data.password = '';
+        this.loginForm.markAsUntouched();
     } 
 }
 

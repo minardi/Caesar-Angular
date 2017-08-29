@@ -67,7 +67,7 @@
                     </button>
                     <ul *dropdownMenu class="dropdown-menu" role="menu">
                       <li role="menuitem" *ngFor="let direction of directions">
-                        <a class="dropdown-item" href="#" (click)="changeSelectedDirection(direction)">{{direction.name}}</a>
+                        <span class="dropdown-item" (click)="changeSelectedDirection(direction)">{{direction.name}}</span>
                       </li>
                     </ul>
                   </div>
@@ -87,7 +87,7 @@
                     </button>
                     <ul *dropdownMenu class="dropdown-menu" role="menu">
                       <li role="menuitem" *ngFor="let location of locations">
-                        <a class="dropdown-item" href="#" (click)="changeSelectedLocation(location)">{{location.name}}</a>
+                        <span class="dropdown-item" (click)="changeSelectedLocation(location)">{{location.name}}</span>
                       </li>
                     </ul>
                   </div>

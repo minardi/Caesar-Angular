@@ -1,0 +1,19 @@
+<p (click)="openModal(template)">Locations<span class="pull-right glyphicon glyphicon-globe"></span></p>
+ 
+<ng-template #template>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-4 " *ngFor="let item of locations">
+                <div class="location" 
+                (click)="toggleLocation($event, item.name.toLowerCase())" 
+                (dblclick)="addAndConfirmLocation(item.name.toLowerCase())">
+                    {{item.name}}
+                </div>
+            </div>
+        </div>
+        <div class="modal-controls">
+            <span class="glyphicon glyphicon-ok-circle" (click)="confirmLocations()"></span>
+            <span class="glyphicon glyphicon-remove-circle" (click)="closeModal()"></span>
+        </div>
+    </div>
+</ng-template>
