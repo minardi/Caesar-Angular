@@ -41,6 +41,6 @@ export class GroupService {
   }
 
   private extractGroupsData(obj) {
-    return new Group(obj.groupId, obj.name, obj.startDate, obj.finishDate, obj.experts);
+    return new Group(obj.groupId, obj.name, obj.startDate, obj.finishDate, obj.experts, obj.links);
   }
 }

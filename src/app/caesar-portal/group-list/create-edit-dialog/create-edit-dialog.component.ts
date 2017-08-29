@@ -20,6 +20,7 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
   isEditMode = true;
   allowedRole = 5;
   currentUser: User;
+  editingGroup: Group;
   groups: Group[];
   stages: Stage[];
   locations: Location[];
@@ -71,6 +72,27 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
     this.showAllDirections();
     this.showAllBudgetOwners();
     this.showAllStages();
+    setTimeout(() => {
+      if (typeof this.isEditMode !== 'undefined') {
+        if (!this.isEditMode) {
+          this.generateName();
+        } else {
+          if (this.editingGroup) {
+            this.groupName = this.editingGroup.name;
+            this.dateStart = new Date(this.editingGroup.startDate);
+            // this.dateFinish = new Date(this.editingGroup.finishDate);
+            this.experts = this.editingGroup.experts;
+            console.log(this.experts);
+            this.getGroupLinkInfo('location', (foundLink) => {
+              this.getGroupLocation(this.getPathname(foundLink));
+            });
+            this.getGroupLinkInfo('teachers', (foundLink) => {
+              this.getGroupTeachers(this.getPathname(foundLink));
+            });
+          }
+        }
+      }
+    }, 0);
   }
 
   ngOnChanges() {
@@ -103,11 +125,6 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
     this.updateGroupService.getLocations().subscribe(
       (data: Location[]) => {
         this.locations = data;
-        if (typeof this.isEditMode !== 'undefined') {
-          if (!this.isEditMode) {
-            this.generateName();
-          }
-        }
       },
       error => console.log(error));
   }
@@ -142,6 +159,24 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
         this.selectedStage = this.stages[0];
       },
       error => console.log(error));
+  }
+
+  private getGroupLinkInfo(rel, callback) {
+    let foundLink;
+    this.editingGroup.links.forEach((value) => {
+      if (value.rel === rel) {
+        foundLink = value.href;
+      }
+    });
+    if (foundLink) {
+      callback(foundLink);
+    }
+  }
+
+  private getPathname(href): string {
+    const el = document.createElement('a');
+    el.href = href;
+    return el.pathname;
   }
 
   public changeSelectedLocation(location) {
@@ -281,6 +316,47 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
       data => {
         this.bsModalRef.hide();
         this.onGroupUpdated.emit();
+      },
+      error => console.log(error));
+  }
+
+  // TODO Vlada Check the getting details API
+  public getGroupLocation(url: string) {
+    this.updateGroupService.getGroupLocation(url).subscribe(
+      (location: Location) => {
+        this.selectedLocation = location;
+      },
+      error => console.log(error));
+  }
+  public getGroupDirection(url: string) {
+    this.updateGroupService.getGroupDirection(url).subscribe(
+      (direction: Direction) => {
+        this.selectedDirection = direction;
+      },
+      error => console.log(error));
+  }
+  public getGroupStatus(url: string) {
+    this.updateGroupService.getGroupStatus(url).subscribe(
+      (status: any) => {
+        this.selectedStage = status;
+      },
+      error => console.log(error));
+  }
+  public getGroupTeachers(url: string) {
+    this.updateGroupService.getGroupTeachers(url).subscribe(
+      (teachers: any) => {
+        // TODO Teachers
+        this.teachers = teachers;
+        console.log(teachers);
+      },
+      error => console.log(error));
+  }
+  public getGroupBudgetOwner(url: string) {
+    this.updateGroupService.getGroupBudgetOwner(url).subscribe(
+      (budgetOwner: any) => {
+        // TODO BudgetOwner
+        this.selectedBudgetOwner = budgetOwner;
+        console.log(budgetOwner);
       },
       error => console.log(error));
   }
