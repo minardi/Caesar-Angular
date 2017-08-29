@@ -54,11 +54,12 @@ export class GroupAreaComponent implements OnInit, OnDestroy {
 
     changeIdCurrent(id: number): void {
         this.groupService.changeIdCurrent(id);
-                this.getLocation(this.group._links['location'].href);
-                this.getStage(this.group._links['status'].href);
-            },
-            error => console.log(error)
-        );
+        this.getLocation(this.group._links['location'].href);
+        this.getStage(this.group._links['status'].href);
+     }
+
+    setGroupCurrent(group: Group): void {
+        this.groupService.setGroupCurrent(group);
     }
 
     private getLocation (locationUrl: string) {

@@ -13,38 +13,31 @@ import { User } from '../../common/models/user';
 
 export class GroupInfoComponent implements OnInit, OnDestroy {
     group: Group = new Group();
-    groupCurrent: Group;
+    groupCurrent: Group = new Group();
     teachers: User[];
-    private subscription: Subscription;
+    subscription: Subscription;
 
     constructor (private groupService: GroupService) {
+        this.subscription = this.groupService.getGroupCurrent().
+            subscribe(group => { 
+                this.group = group;
+                this.getTeachers(this.group._links['teachers'].href);
+            });
     }
 
     ngOnInit () {
-        this.subscription = this.groupService.groupCurrent
-            .subscribe(
-                (group: Group) => {
-                    this.groupCurrent = group;
-                }
-            );
-                    // console.log(this.group);
     }
 
-    private getGroup (groupId: number) {
-        this.groupService.get(groupId).subscribe(
-            (group: Group) => {
-                this.group = group;
-                // console.log(this.group);
-                // this.getLocation(this.group._links['location'].href);
-                // this.getStage(this.group._links['status'].href);
-                // teachersUrl = groupObj._links.teachers.href
+    private getTeachers (teachersUrl: string) {
+        this.groupService.getParametr(teachersUrl).subscribe(
+            (data: string[]) => {
+                this.teachers = data['_embedded'].users;
             },
             error => console.log(error)
         );
     }
 
     ngOnDestroy() {
-        // unsubscribe to ensure no memory leaks
         this.subscription.unsubscribe();
     }
 }

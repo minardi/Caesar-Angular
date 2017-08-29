@@ -48,11 +48,7 @@ export class GroupService {
     return this.getData(url);
   }
 
-  getStage (url: string): Observable<string[]> {
-    return this.getData(url);
-  }
-
-  getTeachers (url: string): Observable<User[]> {
+  getParametr (url: string): Observable<string[]> {
     return this.getData(url);
   }
 
@@ -100,7 +96,11 @@ export class GroupService {
     return new Group(obj.groupId, obj.name, obj.startDate, obj.finishDate, obj.experts, obj._links);
   }
 
-  setGroupCurrent (group: Group) {
+  setGroupCurrent(group: Group) {
     this.groupCurrent.next(group);
+  }
+
+  getGroupCurrent(): Observable<Group> {
+    return this.groupCurrent.asObservable();
   }
 }
