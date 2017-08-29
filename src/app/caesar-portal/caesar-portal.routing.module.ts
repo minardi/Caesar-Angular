@@ -26,7 +26,7 @@ export const appRoutes: Routes = [
             { path: 'notifications', component: GroupNotificationsComponent },
         ]
     },
-    { path: 'log', component: CaesarLoginComponent },
+    { path: 'login', component: CaesarLoginComponent },
     { path: '**', redirectTo: '' }
 ];
 
