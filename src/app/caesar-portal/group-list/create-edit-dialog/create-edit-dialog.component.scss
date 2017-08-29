@@ -1,58 +1,78 @@
 @import '~variables.scss';
 
-.dropdown {
-  display: inline;
-}
-.add-btn {
-  background: none;
-  border: none;
-  color: $astral;
-}
 .items-row {
   padding-top: 10px;
   padding-bottom: 10px;
-}
-input{
-  width: 80%;
-}
-.btn-dropdown {
-  background: none;
-  border: 1px solid $astral;
-  border-radius: 0;
-  color: $astral;
-  width: 80%;
-}
-.dropdown-menu {
-  width: 80%;
-  border-radius: 0;
-  color: $astral;
-}
-.dropdown-menu>li>a {
-  color: $astral;
-}
-.budget-owner-list {
-  margin: 0;
-  padding-left: 0;
-}
-.budget-owner-list li {
-  list-style: none;
-  display: inline;
-}
-.btn-datepicker {
-  border: none;
-  background: none;
-}
-.datepicker-popup {
-  position: absolute;
-  top: 35px;
-  right: 0;
-  z-index: 1;
-}
-.selected-date {
-  border: 1px solid $astral;
-  padding: 5px;
-  height: 30px;
-}
-.glyphicon {
-  color: $astral;
+  .add-btn {
+    background: none;
+    border: none;
+    color: $astral;
+  }
+  input{
+    width: 80%;
+    padding: 5px;
+    color: $astral;
+    border: 1px solid $astral;
+  }
+  .dropdown-menu {
+    width: 80%;
+    border-radius: 0;
+    color: $astral;
+    >li {
+      cursor: pointer;
+      width: 100%;
+      :hover {
+        background-color: $astral;
+        color: $white-solid;
+      }
+      >span {
+        padding: 0 10px;
+        display: block;
+      }
+    }
+  }
+  .btn-dropdown {
+    background: none;
+    border: 1px solid $astral;
+    border-radius: 0;
+    color: $astral;
+    width: 80%;
+  }
+  .budget-owner-list {
+    margin: 0;
+    padding-left: 0;
+    li {
+      list-style: none;
+      display: inline;
+    }
+  }
+  .btn-primary {
+    color: $astral;
+    background-color: $white-solid;
+    border: 1px solid $astral;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .btn-primary.active {
+    color: $white-solid;
+    background-color: $astral;
+  }
+  .datepicker-popup {
+    position: absolute;
+    top: 35px;
+    right: 0;
+    z-index: 1;
+  }
+  .btn-datepicker {
+    background-color: transparent;
+  }
+  .selected-date {
+    border: 1px solid $astral;
+    padding: 5px;
+    height: 30px;
+    color: $astral;
+  }
+  .glyphicon {
+    color: $astral;
+  }
 }
