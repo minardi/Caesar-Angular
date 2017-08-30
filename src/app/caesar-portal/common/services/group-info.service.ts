@@ -145,15 +145,7 @@ export class GroupInfoService {
     return Observable.of(this.mockStage);
   }
 
-  // public update(group: any) {
-  //   const groupJSON = JSON.stringify(group),
-  //     headers = new Headers({
-  //     'Content-Type': 'application/json'
-  //   });
-  //   return this.http.post(environment.serviceApi.groupsUrl, groupJSON, { headers: headers });
-  // }
-
-  // TODO Vlada Check group details
+  // Checking group details
   public getGroupLocation(url: string): Observable<Location> {
     return this.http.get(url).
     map((response: Response) => {
