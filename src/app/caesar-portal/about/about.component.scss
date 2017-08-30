@@ -1,0 +1,40 @@
+@import '~variables.scss';
+
+.bg-primary {
+  padding: 10px;
+  background-color: $navy-blue;
+  font-size: 30px;
+}
+
+.container {
+  min-height: 700px;
+  padding-top: 55px;
+  border: 1px solid $navy-blue;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.item {
+  border: 1px solid $astral;
+  border-radius: 5px;
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  background-color: $astral;
+  text-align: center;
+  color: $white-solid;
+  font-size: 21px;
+  padding: 25px;
+  
+  &:hover {
+    background-color: $danube;
+  }
+}
+
+.middle-aria {
+  width: 54%;
+  margin: 60px 0;
+  min-height: 620px;
+}
+
+

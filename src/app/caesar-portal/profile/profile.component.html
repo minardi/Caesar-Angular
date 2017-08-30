@@ -1,9 +1,9 @@
 <div class="icon" [hidden]="!isHidden" (click)="toggleVisibility()">
-    <img [src]="currentUser.image || defaultPhoto" alt="photo">
+    <img *ngIf="currentUser" [src]="currentUser.image || defaultPhoto" alt="photo">
 </div>
 <aside class="sidebar" [hidden]="isHidden" (mouseleave)="toggleVisibility()">
     <button class="settings-btn"><span class="glyphicon glyphicon-cog"></span></button>
-    <section class="content">
+    <section *ngIf="currentUser" class="content">
         <div class="user-photo">
             <img [src]="currentUser.image || defaultPhoto" alt="photo">
         </div>
