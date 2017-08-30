@@ -39,6 +39,6 @@ export class ProfileComponent implements OnInit {
 
     public logOut(): void {
         localStorage.removeItem('loggedUser');
-        this.router.navigate(['/log']);
+        this.router.navigate(['/login']);
     }
 }

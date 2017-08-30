@@ -19,27 +19,27 @@ export class CaesarLoginComponent implements OnInit {
     }
 
     ngOnInit () {
-        this.loginForm = new FormGroup({
-            "username": new FormControl("", [
-                            Validators.required,
-                            Validators.pattern("^[a-zA-Z]{4,15}$")
-                            ]),
-            "password": new FormControl("", [
-                                Validators.required, 
-                                Validators.pattern("[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{4,10}$") 
-                            ]),
-            "userPhone": new FormControl()
-        });
         this.deleteSession();
+
+        this.loginForm = new FormGroup({
+            'username': new FormControl('', [
+                            Validators.required,
+                            Validators.pattern('^[a-zA-Z]{4,15}$')
+                            ]),
+            'password': new FormControl('', [
+                                Validators.required, 
+                                Validators.pattern('[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{4,10}$') 
+                            ])
+        });
     }
 
-    deleteSession (): void {
+    public deleteSession (): void {
         if (localStorage.getItem('loggedUser')) {
-                localStorage.removeItem('loggedUser');
+            localStorage.removeItem('loggedUser');
         }
     }
 
-    keyPress (event: any): void {
+    public keyPress (event: any): void {
         let escButton: number = 27;
 
         if (event.keyCode === escButton) {
@@ -47,7 +47,7 @@ export class CaesarLoginComponent implements OnInit {
         } 
     }
 
-    login (): void {
+    private login (): void {
         this.caesarLoginService.login(this.data.username, this.data.password)
             .subscribe(
                 data => {
@@ -60,7 +60,7 @@ export class CaesarLoginComponent implements OnInit {
             ); 
     } 
 
-    clearForm (): void {
+    private clearForm (): void {
         this.data.username = '';
         this.data.password = '';
         this.loginForm.markAsUntouched();

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
     selector: 'expert-list',
@@ -11,16 +11,29 @@ export class ExpertListComponent implements OnInit {
     public hiddenButton: boolean = false;
 
     public expertName: string;
-    public experts: string[] = [];
+    public experts: string[];
+
+    @Input() editState: boolean;
+    @Input() editExperts: string[];
+
+    @Output() onExpertsChanged = new EventEmitter<string[]>();
 
     constructor() {
     }
 
     ngOnInit() {
+        setTimeout(() => this.checkState(), 0);
     }
 
-    @Output() onExpertsChanged = new EventEmitter<string[]>();
-
+    private checkState () {
+        if (this.editState) {
+            this.hiddenExperts = false;
+            this.experts = this.editExperts;
+        } else {
+            this.experts = [];
+        }
+     }
+         
     public sendExperts(): void {
         this.onExpertsChanged.emit(this.experts);
     }    

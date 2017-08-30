@@ -87,7 +87,6 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
             this.dateStart = new Date(this.editingGroup.startDate);
             this.dateFinish = new Date(this.editingGroup.finishDate);
             this.experts = this.editingGroup.experts;
-            console.log(this.experts);
             this.getGroupLinkInfo('location', (foundLink) => {
               this.getGroupLocation(this.getPathname(foundLink));
             });
@@ -121,7 +120,6 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
             this.generateName();
           } else {
             this.getGroupLinkInfo('location', (foundLink) => {
-              console.log( foundLink.charAt(foundLink.length - 1));
               this.selectedLocation = {id : foundLink.charAt(foundLink.length - 1)};
             });
           }
@@ -346,7 +344,6 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
       },
       error => this.errorHandlingService.check(error.status));
   }
-
   // Checking the getting details API
   public getGroupLocation(url: string) {
     this.groupInfoService.getGroupLocation(url).subscribe(

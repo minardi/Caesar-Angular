@@ -7,9 +7,9 @@ export class ErrorHandlingService {
     constructor (private router: Router) {
     }
 
-    check (status): void {
+    public check (status): void {
         if (status === 401) {
-            this.router.navigate(['/log']);
+            this.router.navigate(['/login']);
         }
     }
 }

@@ -24,13 +24,13 @@ export class CaesarHomeComponent implements OnInit {
         this.checkEndingSession();
     }
 
-    checkEndingSession() {
+    public checkEndingSession() {
         if (localStorage.getItem('loggedUser')) {
             this.http.get(environment.serviceApi.groupsUrl)
-                .subscribe(data => { },
-                error => {
-                    this.errorHandlingService.check(error.status);
-                }
+                .subscribe(data => {},
+                    error => {
+                        this.errorHandlingService.check(error.status);
+                    }
                 );
         }
     }

@@ -171,7 +171,9 @@
             Experts:
           </div>
           <div class="col-md-8">
-            <expert-list (onExpertsChanged)="onExpertsChanged($event)"></expert-list>
+            <expert-list [editState]="isEditMode" [editExperts]="experts"
+             (onExpertsChanged)="onExpertsChanged($event)"> 
+            </expert-list>
           </div>
         </div>
       </div>

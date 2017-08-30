@@ -2,7 +2,7 @@ import { User } from '../../../common/models/user';
 
 //I had to mock userse 'cause there are some troubles with request to server /users
 export const USERS: User[] = [
-	{
+    {
     	"id": 1,
     	"firstName": "Oleg",
     	"lastName": "Shvets",

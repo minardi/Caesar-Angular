@@ -14,8 +14,7 @@ import { GroupScheduleComponent } from './group-area/group-schedule/group-schedu
 export const appRoutes: Routes = [
     { path: '', canActivate: [LoginGuard], component: CaesarHomeComponent },
     { path: ':location/groups', component: CaesarHomeComponent, canActivate: [LoginGuard] },
-    /*if path '/login' - after reloading the page error: 'This application has
-    no explicit mapping for /error, so you are seeing this as a fallback'*/
+
     {
         path: 'group/:id/:name', canActivate: [LoginGuard], component: CaesarHomeComponent,
         children: [
@@ -26,7 +25,7 @@ export const appRoutes: Routes = [
             { path: 'notifications', component: GroupNotificationsComponent },
         ]
     },
-    { path: 'log', component: CaesarLoginComponent },
+    { path: 'login', component: CaesarLoginComponent },
     { path: '**', redirectTo: '' }
 ];
 

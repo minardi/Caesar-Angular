@@ -33,19 +33,19 @@
 }
 
 .dropdown-menu {
-  width: 80%;
   border-radius: 0;
   color: $astral;
-  >li {
-    cursor: pointer;
-    width: 100%;
-    :hover {
-      background-color: $astral;
-      color: $white-solid;
+    >.dropdown-teacher-menu {
+      cursor: pointer;
+      width: 100%;
+      :hover {
+        background-color: $astral;
+        color: $white-solid;
+      }
+      >.dropdown-item {
+        padding-left: 25px;
+        display: block;
+      }
     }
-    >span {
-      padding: 0 10px;
-      display: block;
-    }
-  }
 }
+
