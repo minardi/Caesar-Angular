@@ -54,7 +54,7 @@
         <router-outlet></router-outlet>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div *ngIf="stage" class="col-md-6">
             <div class="lead status-bar">Stage: <span class="text-info">{{ stage.name }}</span></div>
         </div>
         <div class="col-md-6">
