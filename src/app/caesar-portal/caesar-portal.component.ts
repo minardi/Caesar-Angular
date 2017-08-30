@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'caesar-portal',
-  templateUrl: './caesar-portal.component.html',
-  styleUrls: ['./caesar-portal.component.scss']
+    selector: 'caesar-portal',
+    templateUrl: './caesar-portal.component.html',
+    styleUrls: ['./caesar-portal.component.scss']
 })
-export class CaesarPortalComponent {
-}
+export class CaesarPortalComponent {}

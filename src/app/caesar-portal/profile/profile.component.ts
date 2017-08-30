@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { User } from '../common/models/user';
 import { ProfileService } from './profile.service';
+import { ErrorHandlingService } from '../common/services/error-handling.service';
 
 
 @Component({
@@ -19,17 +20,14 @@ export class ProfileComponent implements OnInit {
 
     constructor (
         private profileService: ProfileService,
-        private router: Router) {
-    }
+        private router: Router,
+        private errorHandlingService: ErrorHandlingService) {}
 
     ngOnInit(): void {
         this.profileService.getCurrentUser()
             .subscribe(
                 (data: Response) => this.currentUser = data.json(),
-                (error) => {
-                    this.error = error;
-                    console.error(error);
-                }
+                (error) => this.errorHandlingService.check(error.status)
             );
     }
 

@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { Response } from '@angular/http';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/mergeMap';
+
+
 import { Group } from '../common/models/group';
 import { GroupStatus } from '../common/models/group-status';
 import { Location } from '../common/models/location';
 import { GroupService } from '../common/services/group.service';
 import { LocationService } from '../common/services/location.service';
-import { Response } from '@angular/http';
 import { GroupItemComponent } from './group-item/group-item.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { CreateEditDialogComponent } from './create-edit-dialog/create-edit-dialog.component';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
 import { ErrorHandlingService } from '../common/services/error-handling.service';
-import 'rxjs/add/operator/mergeMap';
 
 @Component({
     selector: 'caesar-group-list',
@@ -41,8 +43,7 @@ export class GroupListComponent implements OnInit {
         private activateRoute: ActivatedRoute,
         private locationService: LocationService,
         private errorHandlingService: ErrorHandlingService,
-        private router: Router
-    ) { }
+        private router: Router) {}
 
     ngOnInit() {
         this.subscription = this.activateRoute.params.subscribe(params => {

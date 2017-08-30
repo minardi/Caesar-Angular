@@ -14,6 +14,6 @@ export class UsersService {
     }
 
     public getUsers(): Observable<User[]> {
-    	return Observable.of(USERS);
+        return Observable.of(USERS);
     }
 }

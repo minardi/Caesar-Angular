@@ -9,4 +9,4 @@ import { DatepickerModule } from 'ngx-bootstrap';
   ],
   declarations: []
 })
-export class CreateEditDialogModule { }
+export class CreateEditDialogModule {}

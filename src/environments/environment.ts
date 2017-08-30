@@ -4,16 +4,16 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false,
-  serviceApi : {
-    groupsUrl : '/api/groups',
-    profileUrl : '/api/user/profile',
-    myGroupsUrl: '/api/groups/my',
-    groupsMyLocationUrl: '/api/groups/mylocation',
-    filterGroupsUrl : '/api/groups/filter',
-    locationsUrl : '/api/locations',
-    loginUrl : '/api/login',
-    teachersUrl : '/api/teachers',
-    statusesUrl : '/api/statuses'
-  }
+    production: false,
+    serviceApi : {
+        groupsUrl : '/api/groups',
+        profileUrl : '/api/user/profile',
+        myGroupsUrl: '/api/groups/my',
+        groupsMyLocationUrl: '/api/groups/mylocation',
+        filterGroupsUrl : '/api/groups/filter',
+        locationsUrl : '/api/locations',
+        loginUrl : '/api/login',
+        teachersUrl : '/api/teachers',
+        statusesUrl : '/api/statuses'
+    }
 };

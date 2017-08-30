@@ -161,7 +161,7 @@
             Teachers:
           </div>
           <div class="col-md-8">
-            <teacher-list (onTeachersChanged)="onTeachersChanged($event)"></teacher-list>
+            <caesar-teacher-list (onTeachersChanged)="onTeachersChanged($event)"></caesar-teacher-list>
           </div>
         </div>
       </div>
@@ -171,9 +171,9 @@
             Experts:
           </div>
           <div class="col-md-8">
-            <expert-list [editState]="isEditMode" [editExperts]="experts"
+            <caesar-expert-list [editState]="isEditMode" [editExperts]="experts"
              (onExpertsChanged)="onExpertsChanged($event)"> 
-            </expert-list>
+            </caesar-expert-list>
           </div>
         </div>
       </div>

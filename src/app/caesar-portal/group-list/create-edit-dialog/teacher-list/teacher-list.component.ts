@@ -7,7 +7,7 @@ import { UsersService } from './users.service';
 import { User } from '../../../common/models/user';
 
 @Component({
-    selector: 'teacher-list',
+    selector: 'caesar-teacher-list',
     templateUrl: './teacher-list.component.html',
     styleUrls: ['./teacher-list.component.scss']
 })
@@ -19,14 +19,14 @@ export class TeacherListComponent implements OnInit {
     private quantityOfTeachers: number;
     private defaultTeacher: User;
 
-    public toggleDropdownAndButton: boolean = true;
-    public hiddenSelectedTeachers: boolean = true;
-    public hiddenButton: boolean = false;
+    public toggleDropdownAndButton = true;
+    public hiddenSelectedTeachers = true;
+    public hiddenButton = false;
 
     public IdSelectedTeachers: {id: number}[];
 
     @Output() onTeachersChanged = new EventEmitter<{id: number}[]>();
-    
+
     constructor (
         private profileService: ProfileService,
         private usersService: UsersService) {
@@ -36,7 +36,7 @@ export class TeacherListComponent implements OnInit {
         this.profileService.getCurrentUser()
             .subscribe(
                 (data) => {
-                    const currentUser = data.json();    
+                    const currentUser = data.json();
                     this.filterTeachers(currentUser);
                 },
                 (error) => {}
@@ -89,7 +89,7 @@ export class TeacherListComponent implements OnInit {
     public cancelTeacher(): void {
         this.toggleListAndButton();
     }
- 
+
     private toggleListAndButton(): void {
         this.toggleDropdownAndButton = !this.toggleDropdownAndButton;
     }
@@ -105,7 +105,7 @@ export class TeacherListComponent implements OnInit {
         this.addNewDefaultTeacher();
         this.createIdTeachersList();
 
-        this.sendTeachersId(this.IdSelectedTeachers);    
+        this.sendTeachersId(this.IdSelectedTeachers);
     }
 
     public sendTeachersId(id) {
@@ -133,7 +133,7 @@ export class TeacherListComponent implements OnInit {
     private checkQuantity() {
         if (!this.selectedTeachers.length) {
             this.hiddenSelectedTeachers = true;
-        } 
+        }
 
         this.hiddenButton = (this.selectedTeachers.length === this.quantityOfTeachers)?
             true : false;

@@ -1,18 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Group } from '../common/models/group';
 import { ActivatedRoute, Params } from '@angular/router';
-import { GroupService } from "../common/services/group.service";
+import { GroupService } from '../common/services/group.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Location } from '../common/models/location';
 import { ErrorHandlingService } from '../common/services/error-handling.service';
 
 @Component({
-    selector: 'group-area',
+    selector: 'caesar-group-area',
     templateUrl: './group-area.component.html',
     styleUrls: ['./group-area.component.scss']
 })
-
 export class GroupAreaComponent implements OnInit, OnDestroy {
     activeTab;
     paramsSubscription: Subscription;

@@ -1,50 +1,50 @@
 <div class="row">
-  <ul class="list-of-experts" [hidden]=hiddenExperts>
-    <li class="input-expert" *ngFor="let expert of experts">
+    <ul class="list-of-experts" [hidden]=hiddenExperts>
+        <li class="input-expert" *ngFor="let expert of experts">
+            <div class="col-md-7">
+                {{expert}}
+            </div>
+
+            <div class="col-md-2">
+                <span class="glyphicon glyphicon-remove-circle remove-expert"
+                    aria-hidden="true" (click)="deleteExpert(expert)">
+                </span>
+            </div>
+        </li>
+    </ul>
+
+    <div class="input-expert" [hidden]=toggleInputAndButton>
+
       <div class="col-md-7">
-        {{expert}}
+          <input type="text" [(ngModel)]="expertName"
+              class="input-name" #expert="ngModel"
+              required pattern="^[a-zA-Z\s.-]{5,25}$">
+      </div> 
+
+      <div class="col-md-1">
+          <div (click)="expert.valid && saveExpert()">
+              <span class="glyphicon glyphicon-ok-circle save-expert"
+                  aria-hidden="true">
+              </span>
+          </div>
       </div>
 
-      <div class="col-md-2">
-        <span class="glyphicon glyphicon-remove-circle remove-expert"
-          aria-hidden="true" (click)="deleteExpert(expert)">
-        </span>
-      </div>
-    </li>
-  </ul>
-
-  <div class="input-expert" [hidden]=toggleInputAndButton>
-
-    <div class="col-md-7">
-      <input type="text" [(ngModel)]="expertName"
-        class="input-name" #expert="ngModel"
-        required pattern="^[a-zA-Z\s.-]{5,25}$">
-    </div> 
-
-    <div class="col-md-1">
-      <div (click)="expert.valid && saveExpert()">
-        <span class="glyphicon glyphicon-ok-circle save-expert"
-          aria-hidden="true">
-        </span>
-      </div>
-    </div>
-
-    <div class="col-md-1">
-      <div class="cancel-expert"
-        (click)="cancelExpert()">
-        <span class="glyphicon glyphicon-remove-circle remove-input"
-          aria-hidden="true">
-        </span>
-      </div>
-    </div>
-          
-  </div>    
+      <div class="col-md-1">
+          <div class="cancel-expert"
+              (click)="cancelExpert()">
+              <span class="glyphicon glyphicon-remove-circle remove-input"
+                  aria-hidden="true">
+              </span>
+          </div>
+        </div>
+            
+    </div>    
 </div>
 
 <div class="add-expert"
-  [hidden]="(!toggleInputAndButton || hiddenButton)"
-  (click)="addExpert()">
-    + one more expert
+    [hidden]="(!toggleInputAndButton || hiddenButton)"
+    (click)="addExpert()">
+      + one more expert
 </div>
 
 

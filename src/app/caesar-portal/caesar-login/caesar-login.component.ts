@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModel } from '@angular/forms';
-import { CaesarLoginService } from './service/caesar-login.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+import { CaesarLoginService } from './service/caesar-login.service';
 
 @Component({
     selector: 'caesar-login',
@@ -10,7 +11,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
     styleUrls: ['./caesar-login.component.scss']
 })
 export class CaesarLoginComponent implements OnInit {
-	data: any = {};
+    data: any = {};
     loginForm: FormGroup;
 
     constructor (
@@ -27,8 +28,8 @@ export class CaesarLoginComponent implements OnInit {
                             Validators.pattern('^[a-zA-Z]{4,15}$')
                             ]),
             'password': new FormControl('', [
-                                Validators.required, 
-                                Validators.pattern('[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{4,10}$') 
+                                Validators.required,
+                                Validators.pattern('[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{4,10}$')
                             ])
         });
     }
@@ -40,11 +41,11 @@ export class CaesarLoginComponent implements OnInit {
     }
 
     public keyPress (event: any): void {
-        let escButton: number = 27;
+        const escButton = 27;
 
         if (event.keyCode === escButton) {
             this.clearForm();
-        } 
+        }
     }
 
     private login (): void {
@@ -57,14 +58,14 @@ export class CaesarLoginComponent implements OnInit {
                 error => {
                     this.data.password = '';
                 }
-            ); 
-    } 
+            );
+    }
 
     private clearForm (): void {
         this.data.username = '';
         this.data.password = '';
         this.loginForm.markAsUntouched();
-    } 
+    }
 }
 
 
