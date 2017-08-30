@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { GroupService } from "../../common/services/group.service";
+import { GroupService } from '../../common/services/group.service';
 import { Group } from '../../common/models/group';
 import { User } from '../../common/models/user';
 import { ErrorHandlingService } from '../../common/services/error-handling.service';

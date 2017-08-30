@@ -33,10 +33,10 @@ export class GroupAreaComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit () {
-        console.log(this.group.name);
         this.paramsSubscription = this.route.params
             .subscribe(
                 (params: Params) => {
+                this.changeIdCurrent(params['id']);
                     this.getGroup(params['id']);
                 }
             );
@@ -46,7 +46,6 @@ export class GroupAreaComponent implements OnInit, OnDestroy {
         this.groupService.get(groupId).subscribe(
             (group: Group) => {
                 this.group = group;
-                this.changeIdCurrent(groupId);
                 this.getLocation(this.group.links['location'].href);
                 this.getStage(this.group.links['status'].href);
             },

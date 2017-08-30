@@ -7,7 +7,6 @@ import { LocationService } from '../common/services/location.service';
 import { Response } from '@angular/http';
 import { GroupItemComponent } from './group-item/group-item.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
-// import { MatchesProgressPipe } from '../../caesar-portal/common/pipes/mathces-progress.pipe';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
@@ -124,7 +123,7 @@ export class GroupListComponent implements OnInit {
 
   changeProgressStatus(status) {
     this.groupStatus = status;
-    this.onPageChange(1);
+    this.onPageChangeWithNav(1);
   }
 
   openDeleteDialog(event: Event, groupId: number, groupName: string) {
@@ -144,6 +143,12 @@ export class GroupListComponent implements OnInit {
   }
 
   onPageChange(page: number) {
+    this.filteredGroups = this.groups.filter((item: Group) => item.status === this.groupStatus);
+    this.firstItem = this.itemsPerPage * page - this.itemsPerPage;
+    this.lastItem = this.itemsPerPage * page - 1;
+  }
+
+  onPageChangeWithNav(page: number) {
     this.filteredGroups = this.groups.filter((item: Group) => item.status === this.groupStatus);
     this.firstItem = this.itemsPerPage * page - this.itemsPerPage;
     this.lastItem = this.itemsPerPage * page - 1;
