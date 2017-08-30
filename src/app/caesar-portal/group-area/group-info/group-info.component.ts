@@ -14,7 +14,7 @@ import { ErrorHandlingService } from '../../common/services/error-handling.servi
 
 export class GroupInfoComponent implements OnInit, OnDestroy {
     group: Group = new Group();
-    groupCurrent: Group = new Group();
+    groupCurrent: Group[];
     teachers: User[];
     subscription: Subscription;
     groupId: number;
@@ -22,7 +22,7 @@ export class GroupInfoComponent implements OnInit, OnDestroy {
     constructor (private groupService: GroupService,
                  private errorHandlingService: ErrorHandlingService) {
         this.subscription = this.groupService.getIdCurrent().
-            subscribe(id => { 
+            subscribe(id => {
                 this.getGroup(id);
             });
     }

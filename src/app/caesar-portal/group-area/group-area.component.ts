@@ -21,8 +21,8 @@ export class GroupAreaComponent implements OnInit, OnDestroy {
     stage: string[];
 
 
-    constructor (private router: Router, 
-                 private route: ActivatedRoute, 
+    constructor (private router: Router,
+                 private route: ActivatedRoute,
                  private groupService: GroupService,
                  private errorHandlingService: ErrorHandlingService) {
         router.events.subscribe((e) => {

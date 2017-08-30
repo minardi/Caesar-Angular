@@ -15,7 +15,6 @@ export class GroupService {
   private headers: Headers;
   private options: RequestOptions;
 
-  group: Group = new Group();
   idCurrent = new BehaviorSubject<number>(null);
 
   constructor(private http: Http) {
@@ -75,5 +74,21 @@ export class GroupService {
 
   getIdCurrent(): Observable<number> {
     return this.idCurrent.asObservable();
+  }
+
+  public create(group: any) {
+    const groupJSON = JSON.stringify(group),
+      headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+    return this.http.post(environment.serviceApi.groupsUrl, groupJSON, { headers: headers });
+  }
+
+  public update(group: any, groupId: number) {
+    const groupJSON = JSON.stringify(group),
+      headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+    return this.http.put(`${environment.serviceApi.groupsUrl}/${groupId}`, groupJSON, { headers: headers });
   }
 }

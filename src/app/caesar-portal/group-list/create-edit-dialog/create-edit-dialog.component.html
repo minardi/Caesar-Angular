@@ -1,0 +1,189 @@
+<div class="modal-body">
+  <div class="row items-row">
+    <div class="col-md-12">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-4">
+            Group name:
+          </div>
+          <div class="col-md-8">
+            <input type="text" name="groupname"
+                   [(ngModel)]="groupName"
+                   (ngModelChange)="onNameModelChange()">
+            <div *ngIf="isShownSwitchName && !isEditMode">
+              <button type="button" class="add-btn" (click)="switchGroupName()">
+                <i class="glyphicon glyphicon-refresh"></i> Return '{{tmpGroupName}}'
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="isEditMode">
+          <div class="col-md-4">
+            Current Stage:
+          </div>
+          <div class="col-md-8">
+            <div dropdown>
+              <button dropdownToggle class="btn btn-dropdown dropdown-toggle" type="button">
+                {{selectedStage?.name}}
+                <span class="caret"></span>
+              </button>
+              <ul *dropdownMenu class="dropdown-menu" role="menu">
+                <li role="menuitem" *ngFor="let stage of stages">
+                  <a class="dropdown-item" href="#" (click)="changeSelectedStage(stage)">
+                    {{stage.name}}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-4">
+            Budget Owner
+          </div>
+          <div class="col-md-8">
+            <ul class="budget-owner-list">
+              <li *ngFor="let budgetOwner of budgetOwners">
+                <button class="btn btn-primary"
+                        (click)="changeSelectedBudgetOwner(budgetOwner)"
+                        [ngClass]="{active: isActive(budgetOwner)}">{{budgetOwner.name}}
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row items-row">
+    <div class="col-md-12">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-4">
+                Direction:
+              </div>
+              <div class="col-md-8">
+                <div dropdown>
+                  <button dropdownToggle class="btn btn-dropdown dropdown-toggle" type="button">
+                    {{selectedDirection?.name}}
+                    <span class="caret"></span>
+                  </button>
+                  <ul *dropdownMenu class="dropdown-menu" role="menu">
+                    <li role="menuitem" *ngFor="let direction of directions">
+                        <span class="dropdown-item" (click)="changeSelectedDirection(direction)">
+                          {{direction.name}}
+                        </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-4">
+                Location:
+              </div>
+              <div class="col-md-8">
+                <div dropdown [isDisabled]="currentUser?.role?.id !== allowedRole">
+                  <button dropdownToggle class="btn btn-dropdown dropdown-toggle" type="button">
+                    {{selectedLocation?.name}}
+                    <span class="caret"></span>
+                  </button>
+                  <ul *dropdownMenu class="dropdown-menu" role="menu">
+                    <li role="menuitem" *ngFor="let location of locations">
+                        <span class="dropdown-item" (click)="changeSelectedLocation(location)">
+                          {{location.name}}
+                        </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-4">
+                Start date:
+              </div>
+              <div class="col-md-8">
+                <div class="col-md-9 selected-date">{{dateStart | date: 'MM / dd / y'}}</div>
+                <button class="btn btn-datepicker" (click)="toggleDatepicker('isShownDatepickerStart')">
+                  <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+                <div class="datepicker-popup" [hidden]="!datepickerOptions.isShownDatepickerStart">
+                  <datepicker [(ngModel)]="dateStart"
+                              [startingDay]="1"
+                              (selectionDone)="selectionDone('isShownDatepickerStart')"
+                              (activeDateChange)="calculateFinishDate()">
+                  </datepicker>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-4">
+                Finish date:
+              </div>
+              <div class="col-md-8">
+                <div class="col-md-9 selected-date">{{dateFinish | date: 'MM / dd / y'}}</div>
+                <button class="btn btn-datepicker" (click)="toggleDatepicker('isShownDatepickerFinish')">
+                  <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+                <div class="datepicker-popup" [hidden]="!datepickerOptions.isShownDatepickerFinish">
+                  <datepicker [(ngModel)]="dateFinish"
+                              [startingDay]="1"
+                              [minDate]="dateStart"
+                              (selectionDone)="selectionDone('isShownDatepickerFinish')">
+                  </datepicker>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row items-row">
+    <div class="col-md-12">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-4">
+            Teachers:
+          </div>
+          <div class="col-md-8">
+            <teacher-list (onTeachersChanged)="onTeachersChanged($event)"></teacher-list>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-4">
+            Experts:
+          </div>
+          <div class="col-md-8">
+            <expert-list [editState]="isEditMode" [editExperts]="experts"
+             (onExpertsChanged)="onExpertsChanged($event)"> 
+            </expert-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <button type="button" class="btn btn-primary" (click)="updateGroup()">confirm</button>
+      <button type="button" class="btn btn-primary" (click)="bsModalRef.hide()">cancel</button>
+    </div>
+  </div>
+</div>
+

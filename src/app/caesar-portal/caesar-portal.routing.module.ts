@@ -16,8 +16,7 @@ export const appRoutes: Routes = [
     { path: '', canActivate: [LoginGuard], component: CaesarHomeComponent },
     { path: 'about', canActivate: [LoginGuard], component: AboutComponent },
     { path: ':location/groups', component: CaesarHomeComponent, canActivate: [LoginGuard] },
-    /*if path '/login' - after reloading the page error: 'This application has
-    no explicit mapping for /error, so you are seeing this as a fallback'*/
+
     {
         path: 'group/:id/:name', canActivate: [LoginGuard], component: CaesarHomeComponent,
         children: [
@@ -28,9 +27,11 @@ export const appRoutes: Routes = [
             { path: 'notifications', component: GroupNotificationsComponent },
         ]
     },
-    { path: 'log', component: CaesarLoginComponent },
+    { path: 'login', component: CaesarLoginComponent },
     { path: '**', redirectTo: '' }
 ];
+
+
 
 @NgModule({
     imports: [RouterModule.forRoot(appRoutes)],

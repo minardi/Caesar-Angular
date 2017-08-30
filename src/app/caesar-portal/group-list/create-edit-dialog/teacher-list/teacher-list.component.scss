@@ -1,0 +1,51 @@
+@import '~variables.scss';
+
+.teacher {
+   padding-right: 20px;
+}
+
+.add-teacher {
+   cursor: pointer;
+   color: $astral;
+}
+
+.list-of-selected-teachers {
+	list-style: none;
+	padding: 0;
+  color: $astral;
+}
+
+.save-teacher, .remove-teacher, .remove-dropdown {
+   font-size: 1.8em;
+   cursor: pointer;
+   color: $astral;
+}
+
+.save-teacher, .remove-dropdown {
+   padding-top: 5px;
+}
+
+.button-dropdown-teacher {
+  background: none;
+  border: 1px solid $astral;
+  border-radius: 0;
+  color: $astral;
+}
+
+.dropdown-menu {
+  border-radius: 0;
+  color: $astral;
+    >.dropdown-teacher-menu {
+      cursor: pointer;
+      width: 100%;
+      :hover {
+        background-color: $astral;
+        color: $white-solid;
+      }
+      >.dropdown-item {
+        padding-left: 25px;
+        display: block;
+      }
+    }
+}
+

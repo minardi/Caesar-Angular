@@ -1,14 +1,14 @@
-import { GroupStatus } from './group-status';
-import { User }     from './user';
-import { Location } from './location';
+import { GroupStatus } from '../models/group-status';
 
 export class Group {
-  constructor(public groupId: number = 0, 
-              public name: string = '', 
-              public startDate: string = null, 
-              public finishDate: string = null, 
-              public experts: string[] = null,
-              public links: string[] = null) { }
+  constructor(
+    public groupId: number = 0,
+    public name: string = '',
+    public startDate: string = null,
+    public finishDate: string = null,
+    public experts: string[] = null,
+    public links: string[] = null
+  ) { }
 
   get status(): GroupStatus {
     let currentDate = new Date(),

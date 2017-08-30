@@ -19,6 +19,15 @@ body {
   }
 }
 
+
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: fit-content;
+    margin: 30px auto;
+    max-width: 800px;
+  }
+}
+
 .modal-window {
   .modal-content {
     color: $white-solid;
@@ -50,3 +59,4 @@ body {
     background-color: $grey;
     top: 0;
 }
+

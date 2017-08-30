@@ -8,13 +8,14 @@ export class CaesarLoginService {
     constructor (private http: Http) { 
     }
  
-    login (username: string, password: string) {
+    public login (username: string, password: string) {
         const headers = new Headers({
             'Content-Type': 'application/json'
         });
 
-        return this.http.post(environment.serviceApi.loginUrl, JSON.stringify({ username: username, password: password }), 
-        	{ headers: headers });
+        return this.http.post(environment.serviceApi.loginUrl, 
+        	JSON.stringify({username: username, password: password}), 
+        	{headers: headers});
     }
 }
 
