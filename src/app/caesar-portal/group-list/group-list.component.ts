@@ -59,12 +59,17 @@ export class GroupListComponent implements OnInit {
         this.groups = data;
         this.onPageChange(1);
 
-        if (this.router.url === '/' && this.groups.length > 0) {
-          this.router.navigate(['/group', this.groups[0].groupId, this.groups[0].name, 'info']);
+        if (this.router.url === '/') {
+          this.navigateToFirstGroup();
         }
       },
       error => console.log(error));
+}
 
+  private navigateToFirstGroup() {
+    if (this.filteredGroups.length > 0) {
+      this.router.navigate(['/group', this.filteredGroups[0].groupId, this.filteredGroups[0].name, 'info']);
+    }
   }
 
   private getGroupsByLocation(locations: string[]) {
@@ -118,7 +123,7 @@ export class GroupListComponent implements OnInit {
 
   changeProgressStatus(status) {
     this.groupStatus = status;
-    this.onPageChange(1);
+    this.onPageChangeWithNav(1);
   }
 
   openDeleteDialog(event: Event, groupId: number, groupName: string) {
@@ -141,6 +146,13 @@ export class GroupListComponent implements OnInit {
     this.filteredGroups = this.groups.filter((item: Group) => item.status === this.groupStatus);
     this.firstItem = this.itemsPerPage * page - this.itemsPerPage;
     this.lastItem = this.itemsPerPage * page - 1;
+  }
+
+  onPageChangeWithNav(page: number) {
+    this.filteredGroups = this.groups.filter((item: Group) => item.status === this.groupStatus);
+    this.firstItem = this.itemsPerPage * page - this.itemsPerPage;
+    this.lastItem = this.itemsPerPage * page - 1;
+    this.navigateToFirstGroup();
   }
 
   ngOnDestroy() {
