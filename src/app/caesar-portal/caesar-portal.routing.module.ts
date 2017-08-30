@@ -10,9 +10,11 @@ import { GroupStudentsComponent } from './group-area/group-students/group-studen
 import { GroupInfoComponent } from './group-area/group-info/group-info.component';
 import { GroupNotificationsComponent } from './group-area/group-notifications/group-notifications.component';
 import { GroupScheduleComponent } from './group-area/group-schedule/group-schedule.component';
+import { AboutComponent } from './about/about.component';
 
 export const appRoutes: Routes = [
     { path: '', canActivate: [LoginGuard], component: CaesarHomeComponent },
+    { path: 'about', canActivate: [LoginGuard], component: AboutComponent },
     { path: ':location/groups', component: CaesarHomeComponent, canActivate: [LoginGuard] },
     /*if path '/login' - after reloading the page error: 'This application has
     no explicit mapping for /error, so you are seeing this as a fallback'*/
