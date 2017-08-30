@@ -3,52 +3,50 @@
 @import '~variables.scss';
 html,
 body {
-  height: 100%;
+    height: 100%;
 }
 
 /* modal-window custom styles */
 .modal .modal-dialog {
-  &.modal-window {
-    width: 100%;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 25%;
-    margin-left: auto;
-    margin-right: auto;
-  }
+    &.modal-window {
+        width: 100%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 25%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
-
 @media (min-width: 768px) {
-  .modal-dialog {
-    width: fit-content;
-    margin: 30px auto;
-    max-width: 800px;
-  }
+    .modal-dialog {
+        width: fit-content;
+        margin: 30px auto;
+        max-width: 800px;
+    }
 }
 
 .modal-window {
-  .modal-content {
-    color: $white-solid;
-    background-color: $navy-blue;
-    font-size: 32px;
-    .modal-body {
-      width: 600px;
-      margin: 0 auto;
+    .modal-content {
+        color: $white-solid;
+        background-color: $navy-blue;
+        font-size: 32px;
+        .modal-body {
+            width: 600px;
+            margin: 0 auto;
+        }
+        .dialog-controls {
+            font-size: 32px;
+            text-align: right;
+        }
+        .glyphicon {
+            &:hover {
+                color: $danube;
+            }
+        }
     }
-    .dialog-controls {
-      font-size: 32px;
-      text-align: right;
-    }
-    .glyphicon {
-      &:hover {
-        color: $danube;
-      }
-    }
-  }
 }
-
 /* end modal-window custom styles */
 
 %sidebar {

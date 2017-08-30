@@ -10,11 +10,11 @@ import 'rxjs/add/observable/of';
 import { CaesarLoginComponent } from './caesar-login.component';
 import { CaesarLoginService } from './service/caesar-login.service';
 
-let mockRouter = {
+const mockRouter = {
     navigate: jasmine.createSpy('navigate')
-}
+};
 
-let loginSpy = jasmine.createSpy('login').and.returnValue(Observable.of(true));
+const loginSpy = jasmine.createSpy('login').and.returnValue(Observable.of(true));
 
 describe('CaesarLoginComponent', () => {
     let component: CaesarLoginComponent;
@@ -23,11 +23,11 @@ describe('CaesarLoginComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [ 
+            imports: [
                 FormsModule,
                 HttpModule
             ],
-            declarations: [ 
+            declarations: [
                 CaesarLoginComponent
             ],
             providers: [

@@ -4,83 +4,81 @@ $background: #00008B;
 $font: 1.3em;
 
 html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 /* background */
-
 .header {
-  width: 100%;
-  height: 50px;
-  background-color: $background;
-  color: $white-solid;
-  font-size: $font;
-  line-height: 2.5em;
-  padding-left: 16px;
+    width: 100%;
+    height: 50px;
+    background-color: $background;
+    color: $white-solid;
+    font-size: $font;
+    line-height: 2.5em;
+    padding-left: 16px;
 }
 
 .container-background {
-  margin: 20px 0;
-  width: 100%;
-  height: 680px;
-  @include border (40px, $black);
+    margin: 20px 0;
+    width: 100%;
+    height: 680px;
+    @include border (40px, $black);
 }
 
 /* modal */
-
 .container-fluid {
-  width: 100%;
-  height: 100%;
-  padding-right: 0px !important;
-  padding-left: 0px !important;
-  display: table;
+    width: 100%;
+    height: 100%;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    display: table;
 }
 
 .row-fluid {
-  height: 100%;
-  display: table-cell;
-  vertical-align: middle;
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .centering {
-  float: none;
-  margin: 0 auto;
+    float: none;
+    margin: 0 auto;
 }
 
 .modal {
-  display: block !important;
+    display: block !important;
 }
 
 .center-vertical-block {
-  background-color: $background;
-  padding: 30px 0 5px 0;
+    background-color: $background;
+    padding: 30px 0 5px 0;
 }
 
 .control-label {
-  color: $white-solid;
+    color: $white-solid;
 }
 
 .message {
-  font-size: $font;
-  color: $white-solid;
-  padding-left: 30px;
-  padding-bottom: 5px;
+    font-size: $font;
+    color: $white-solid;
+    padding-left: 30px;
+    padding-bottom: 5px;
 }
 
 .button-login {
-  margin-left: 40px;
-  cursor: pointer;
-  background-color: $background;
-  width: 40px;
-  height: 40px;
-  padding: 7px 8px;
-  font-size: $font;
-  line-height: 1.33em;
-  @include border(25px, $white-solid);
+    margin-left: 40px;
+    cursor: pointer;
+    background-color: $background;
+    width: 40px;
+    height: 40px;
+    padding: 7px 8px;
+    font-size: $font;
+    line-height: 1.33em;
+    @include border(25px, $white-solid);
 }
 
 .glyphicon-ok {
-  color: $white-solid;
+    color: $white-solid;
 }

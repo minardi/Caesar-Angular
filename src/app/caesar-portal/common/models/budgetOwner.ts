@@ -1,4 +1,4 @@
 export class BudgetOwner {
-  id: number;
-  name: string;
+    id: number;
+    name: string;
 }

@@ -22,7 +22,7 @@ describe('LoginGuard', () => {
             spyOn(router, 'navigate');
 
             expect(auth.canActivate()).toBeFalsy();
-            expect(router.navigate).toHaveBeenCalled(); 
+            expect(router.navigate).toHaveBeenCalled();
         })
     ));
 });

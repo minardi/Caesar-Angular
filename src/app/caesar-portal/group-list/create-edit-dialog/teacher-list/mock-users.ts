@@ -1,6 +1,6 @@
 import { User } from '../../../common/models/user';
 
-//I had to mock userse 'cause there are some troubles with request to server /users
+// I had to mock userse 'cause there are some troubles with request to server /users
 export const USERS: User[] = [
     {
     	"id": 1,
@@ -81,7 +81,7 @@ export const USERS: User[] = [
 	{
     	"id": 5,
     	"firstName": "Kozak",
-    	"lastName": "Kozachenko",
+    	"lastName": "Kozach",
     	"role": {
         	"id": 3,
         	"name": "teacher",
@@ -100,7 +100,7 @@ export const USERS: User[] = [
 	{
     	"id": 6,
     	"firstName": "Petro",
-    	"lastName": "Poroshenko",
+    	"lastName": "Porosh",
     	"role": {
         	"id": 3,
         	"name": "teacher",
@@ -114,6 +114,6 @@ export const USERS: User[] = [
     	"location": {
         	"id": 1,
         	"name": "Kyiv"
-    	}
+		}
 	}
 ]

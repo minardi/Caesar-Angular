@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
+
 import { ErrorHandlingService } from '../common/services/error-handling.service';
 import { GroupService } from './../common/services/group.service';
 import { LocationService } from './../common/services/location.service';
@@ -36,5 +37,5 @@ import { MenuModule } from '../menu/menu.module';
         CaesarHomeComponent, AboutComponent
     ]
 })
-export class CaesarHomeModule { }
+export class CaesarHomeModule {}
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { Http, Headers } from '@angular/http';
+
+import { environment } from '../../../environments/environment';
 import { MenuComponent } from '../menu/menu.component';
 import { ErrorHandlingService } from '../common/services/error-handling.service';
 

@@ -1,14 +1,14 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
-    selector: 'expert-list',
+    selector: 'caesar-expert-list',
     templateUrl: './expert-list.component.html',
     styleUrls: ['./expert-list.component.scss']
 })
 export class ExpertListComponent implements OnInit {
-    public toggleInputAndButton: boolean = true;
-    public hiddenExperts: boolean = true;
-    public hiddenButton: boolean = false;
+    public toggleInputAndButton = true;
+    public hiddenExperts = true;
+    public hiddenButton = false;
 
     public expertName: string;
     public experts: string[];
@@ -33,10 +33,10 @@ export class ExpertListComponent implements OnInit {
             this.experts = [];
         }
      }
-         
+
     public sendExperts(): void {
         this.onExpertsChanged.emit(this.experts);
-    }    
+    }
 
     private toggleInputButton (): void {
         this.toggleInputAndButton = !this.toggleInputAndButton;
@@ -73,6 +73,6 @@ export class ExpertListComponent implements OnInit {
     private checkPresenceOfExperts(): void {
         if (!this.experts.length) {
             this.hiddenExperts = true;
-        } 
+        }
     }
 }

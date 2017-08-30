@@ -1,26 +1,26 @@
 @import '~variables.scss';
 
 .add-expert {
-   cursor: pointer;
-   color: $astral;
+    cursor: pointer;
+    color: $astral;
 }
 
 .list-of-experts {
-	list-style: none;
-	padding: 0;
-  color: $astral;
+    list-style: none;
+    padding: 0;
+    color: $astral;
 }
 
 .save-expert, .remove-expert, .remove-input {
-   font-size: 1.8em;
-   cursor: pointer;
-   color: $astral;
+    font-size: 1.8em;
+    cursor: pointer;
+    color: $astral;
 }
 
 .input-name {
-  width: 130px;
-  padding: 5px;
-  color: $astral;
-  border: 1px solid $astral;
+    width: 130px;
+    padding: 5px;
+    color: $astral;
+    border: 1px solid $astral;
 }
 

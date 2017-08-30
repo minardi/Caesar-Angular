@@ -19,7 +19,7 @@ describe('CaesarLoginService', () => {
         this.backend = this.injector.get(ConnectionBackend) as MockBackend;
         this.backend.connections.subscribe((connection: any) => this.lastConnection = connection);
     });
- 
+
     it('should url to consist of login', () => {
         this.caesarLoginService.login();
         expect(this.lastConnection).toBeDefined();

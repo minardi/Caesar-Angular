@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { CaesarHomeComponent } from './caesar-home/caesar-home.component';
 import { CaesarLoginComponent } from './caesar-login/caesar-login.component';
 import { LoginGuard } from './caesar-login/guard/caesar-login.guard';
-
 import { GroupAreaComponent } from './group-area/group-area.component';
 import { GroupStudentsComponent } from './group-area/group-students/group-students.component';
 import { GroupInfoComponent } from './group-area/group-info/group-info.component';
@@ -37,5 +36,4 @@ export const appRoutes: Routes = [
     imports: [RouterModule.forRoot(appRoutes)],
     exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}
