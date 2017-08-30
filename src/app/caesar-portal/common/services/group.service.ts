@@ -65,7 +65,7 @@ export class GroupService {
   }
 
   private extractGroupsData(obj) {
-    return new Group(obj.groupId, obj.name, obj.startDate, obj.finishDate, obj.experts, obj.links);
+    return new Group(obj.groupId, obj.name, obj.startDate, obj.finishDate, obj.experts, obj._links);
   }
 
   changeIdCurrent(id: number) {

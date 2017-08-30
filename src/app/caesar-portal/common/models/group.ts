@@ -1,14 +1,13 @@
 import { GroupStatus } from '../models/group-status';
-import { Link } from '../models/link';
 
 export class Group {
   constructor(
-    public groupId: number,
-    public name: string,
-    public startDate: string,
-    public finishDate: string,
-    public experts: string[],
-    public links: Link[]
+    public groupId: number = 0,
+    public name: string = '',
+    public startDate: string = null,
+    public finishDate: string = null,
+    public experts: string[] = null,
+    public links: string[] = null
   ) { }
 
   get status(): GroupStatus {

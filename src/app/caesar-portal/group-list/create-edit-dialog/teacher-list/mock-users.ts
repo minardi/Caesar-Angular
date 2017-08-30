@@ -75,7 +75,7 @@ export const USERS: User[] = [
     	"image": null,
     	"location": {
         	"id": 1,
-        	"name": "Dnipro"
+        	"name": "Lviv"
     	}
 	},
 	{

@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="row group-list">
-        <div class="col-md-6" (click)="openEditDialog(item)" *ngFor="let item of (filteredGroups | limitTo : firstItem : lastItem )">
+        <div class="col-md-6" (dblclick)="openEditDialog(item)" *ngFor="let item of (filteredGroups | limitTo : firstItem : lastItem )">
             <a [routerLink]="['/group', item.groupId, item.name, 'info']" href="#">
                  <caesar-group-item [group]="item" (contextmenu)="openDeleteDialog($event, item.groupId, item.name)">
                      Group
@@ -18,7 +18,7 @@
             </a>
         </div>
     </div>
-    <button type="button" [class.active]="myGroupsFilter" class="btn btn-primary my-groups" (click)="showMyGroups()"> My groups</button>
+    <button type="button" [class.active]="myGroupsFilter" class="btn btn-primary btn-lg my-groups" (click)="showMyGroups()"> My groups</button>
     <div class="filter-group-btn">
         <button type="button" class="btn btn-default btn-circle" (click)="changeProgressStatus(GroupProgressStatus['Finished'])">
             <i class="glyphicon glyphicon-ok"  *ngIf="groupStatus == GroupProgressStatus['Finished']"></i>
