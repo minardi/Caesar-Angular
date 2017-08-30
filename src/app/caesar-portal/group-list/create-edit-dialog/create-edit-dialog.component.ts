@@ -87,12 +87,13 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
             this.dateStart = new Date(this.editingGroup.startDate);
             this.dateFinish = new Date(this.editingGroup.finishDate);
             this.experts = this.editingGroup.experts;
-            this.getGroupLinkInfo('location', (foundLink) => {
-              this.getGroupLocation(this.getPathname(foundLink));
-            });
-            this.getGroupLinkInfo('teachers', (foundLink) => {
-              this.getGroupTeachers(this.getPathname(foundLink));
-            });
+            this.selectedLocation = {id: 1, name: 'Dnipro'};
+            // this.getGroupLinkInfo('location', (foundLink) => {
+            //   this.getGroupLocation(this.getPathname(foundLink));
+            // });
+            // this.getGroupLinkInfo('teachers', (foundLink) => {
+            //   this.getGroupTeachers(this.getPathname(foundLink));
+            // });
           }
         }
       }
@@ -119,9 +120,9 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
             this.selectedLocation = this.currentUser.location;
             this.generateName();
           } else {
-            this.getGroupLinkInfo('location', (foundLink) => {
-              this.selectedLocation = {id : foundLink.charAt(foundLink.length - 1)};
-            });
+            // this.getGroupLinkInfo('location', (foundLink) => {
+            //   this.selectedLocation = {id : foundLink.charAt(foundLink.length - 1)};
+            // });
           }
           this.showAllLocations();
         },
@@ -163,17 +164,17 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
       error => this.errorHandlingService.check(error.status));
   }
 
-  private getGroupLinkInfo(rel, callback) {
-    let foundLink;
-    this.editingGroup.links.forEach((value) => {
-      if (value.rel === rel) {
-        foundLink = value.href;
-      }
-    });
-    if (foundLink && callback) {
-      callback(foundLink);
-    }
-  }
+  // private getGroupLinkInfo(rel, callback) {
+  //   let foundLink;
+  //   this.editingGroup.links.forEach((value) => {
+  //     if (value.rel === rel) {
+  //       foundLink = value.href;
+  //     }
+  //   });
+  //   if (foundLink && callback) {
+  //     callback(foundLink);
+  //   }
+  // }
 
   private getPathname(href): string {
     const el = document.createElement('a');
@@ -210,7 +211,6 @@ export class CreateEditDialogComponent implements OnInit, OnChanges {
     let result = '';
     if (this.selectedLocation) {
       result += `${this.locationNamesAlias[this.selectedLocation.id]}-${this.findLastInLocation(this.parseGroupsNames())}`;
-      // result += this.findLastInLocation(this.parseGroupsNames());
       if (this.selectedDirection) {
         result += `-${this.selectedDirection.name}`;
       }

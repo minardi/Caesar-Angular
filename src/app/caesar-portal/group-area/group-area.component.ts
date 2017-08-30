@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Group } from '../common/models/group';
 import { ActivatedRoute, Params } from '@angular/router';
 import { GroupService } from "../common/services/group.service";
-import { Response } from '@angular/http';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { Location } from '../common/models/location';
+import { ErrorHandlingService } from '../common/services/error-handling.service';
 
 @Component({
     selector: 'group-area',
@@ -13,13 +15,19 @@ import { Subscription } from 'rxjs/Subscription';
 
 export class GroupAreaComponent implements OnInit, OnDestroy {
     activeTab;
-    group: {id: number, name: string} = {id: null, name: null};
     paramsSubscription: Subscription;
+    group: Group = new Group();
+    location: Location = new Location();
+    stage: string[];
 
-    constructor (private router: Router, private route: ActivatedRoute) {
+
+    constructor (private router: Router,
+                 private route: ActivatedRoute,
+                 private groupService: GroupService,
+                 private errorHandlingService: ErrorHandlingService) {
         router.events.subscribe((e) => {
             if (e instanceof NavigationEnd) {
-                this.activeTab = e.url;
+                this.activeTab = e.url.substr(e.url.lastIndexOf('/'));
             }
         });
     }
@@ -28,15 +36,46 @@ export class GroupAreaComponent implements OnInit, OnDestroy {
         this.paramsSubscription = this.route.params
             .subscribe(
                 (params: Params) => {
-                    this.group.id = params['id'];
-                    this.group.name = params['name'];
+                this.changeIdCurrent(params['id']);
+                    this.getGroup(params['id']);
                 }
             );
+    }
+
+    private getGroup (groupId: number) {
+        this.groupService.get(groupId).subscribe(
+            (group: Group) => {
+                this.group = group;
+                this.getLocation(this.group.links['location'].href);
+                this.getStage(this.group.links['status'].href);
+            },
+            error => this.errorHandlingService.check(error.status)
+        );
+    }
+
+    changeIdCurrent(id: number): void {
+        this.groupService.changeIdCurrent(id);
+    }
+
+    private getLocation (locationUrl: string) {
+        this.groupService.getLocation(locationUrl).subscribe(
+            (location: Location) => {
+                this.location = location;
+            },
+            error => this.errorHandlingService.check(error.status)
+        );
+    }
+
+    private getStage (stageUrl: string) {
+        this.groupService.getParametr(stageUrl).subscribe(
+            (stage: string[]) => {
+                this.stage = stage;
+            },
+            error => this.errorHandlingService.check(error.status)
+        );
     }
 
     ngOnDestroy () {
         this.paramsSubscription.unsubscribe();
     }
 }
-
-  // constructor(private route: ActivatedRoute) { }

@@ -9,12 +9,11 @@ import { GroupItemComponent } from './group-item/group-item.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
-
 import { CreateEditDialogComponent } from './create-edit-dialog/create-edit-dialog.component';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/mergeMap';
 import { ErrorHandlingService } from '../common/services/error-handling.service';
+import 'rxjs/add/operator/mergeMap';
 
 @Component({
     selector: 'caesar-group-list',
@@ -50,9 +49,7 @@ export class GroupListComponent implements OnInit {
             if (params['location']) {
                 this.locations = params['location'].split('+');
             }
-            this.locations.length > 0
-                ? this.getGroupsByLocation(this.locations)
-                : this.getCurrentLocationGroups();
+            this.fetchGroupByLocation();
         });
     }
 
@@ -115,16 +112,22 @@ export class GroupListComponent implements OnInit {
         }
     }
 
+    private navigateToFirstGroup() {
+        if (this.filteredGroups.length > 0) {
+            this.router.navigate(['/group', this.filteredGroups[0].groupId, this.filteredGroups[0].name, 'info']);
+        }
+    }
+
     private fetchGroupByLocation() {
-      // if location exists render groups by location in url otherwise current location groups
-      this.locations.length > 0
-        ? this.getGroupsByLocation(this.locations)
-        : this.getCurrentLocationGroups();
+        // if location exists render groups by location in url otherwise current location groups
+        this.locations.length > 0
+            ? this.getGroupsByLocation(this.locations)
+            : this.getCurrentLocationGroups();
     }
 
     changeProgressStatus(status) {
         this.groupStatus = status;
-        this.onPageChange(this.currentPage);
+        this.onPageChangeWithNav(this.currentPage);
     }
 
     openDeleteDialog(event: Event, groupId: number, groupName: string) {
@@ -134,6 +137,13 @@ export class GroupListComponent implements OnInit {
         this.bsModalRef.content.groupId = groupId;
         this.bsModalRef.content.groupName = groupName;
         this.bsModalRef.content.onGroupDeleted.subscribe((groupId) => this.deleteGroupItem(groupId));
+    }
+
+    private deleteGroupItem(groupId: number) {
+        this.groups = this.groups.filter((currentGroup) => {
+            return currentGroup.groupId !== groupId;
+        });
+        this.onPageChange(this.currentPage);
     }
 
     public openCreateDialog(event: Event) {
@@ -153,20 +163,16 @@ export class GroupListComponent implements OnInit {
         });
     }
 
-    private deleteGroupItem(groupId: number) {
-        this.groups = this.groups.filter((currentGroup) => {
-            return currentGroup.groupId !== groupId;
-        });
-        this.onPageChange(this.currentPage);
-    }
-
     onPageChange(page: number) {
         this.filteredGroups = this.groups.filter((item: Group) => item.status === this.groupStatus);
         this.firstItem = this.itemsPerPage * page - this.itemsPerPage;
         this.lastItem = this.itemsPerPage * page - 1;
     }
 
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
+    onPageChangeWithNav(page: number) {
+        this.filteredGroups = this.groups.filter((item: Group) => item.status === this.groupStatus);
+        this.firstItem = this.itemsPerPage * page - this.itemsPerPage;
+        this.lastItem = this.itemsPerPage * page - 1;
+        this.navigateToFirstGroup();
     }
 }
